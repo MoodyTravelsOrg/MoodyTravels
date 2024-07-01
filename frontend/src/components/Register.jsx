@@ -10,6 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Register = () => {
       formData.append('password', password);
       formData.append('confirmPassword', confirmPassword);
       formData.append('recaptchaToken', recaptchaToken);
+      formData.append('profileImage', setProfileImage);
 
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
@@ -104,6 +106,14 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+        </label>
+
+        <label>
+            Profile Image:
+            <input
+                type="file"
+                onChange={(e) => setProfileImage(e.target.files[0])}
+            />
         </label>
         <ReCAPTCHA
           sitekey="6Le33_YpAAAAAJfZFlSijhsa70YWxT2beWXENQq8"
