@@ -35,6 +35,8 @@
 
 // export default App
 
+// ? Did one of you guys create any of those imports above? If not, we can remove the entire comment block above.
+
 import React from 'react'
 import Navbar from './components/Navbar/Navbar'
 import ReCAPTCHA from "react-google-recaptcha";
