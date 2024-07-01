@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
+import defaultProfileImage from '../assets/default-profile.png';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -29,24 +30,40 @@ const Register = () => {
     }
 
     try {
+        const formData = new FormData();
+      formData.append('email', email);
+      formData.append('username', username);
+      formData.append('password', password);
+      formData.append('confirmPassword', confirmPassword);
+      formData.append('recaptchaToken', recaptchaToken);
+
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, username, password }),
+        body: formData,
       });
 
       if (response.ok) {
-        setSuccess("Registration successful. Please login.");
-        navigate("/login");
+        const data = await response.json();
+        const { user, accessToken, refreshToken } = data;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('username', user.username);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userImage', user.profileImage || defaultProfileImage);
+        setIsAuthenticated(true);
+        setUsername(user.username);
+        setUserId(user.id);
+        navigate('/');
       } else {
-        setError("Registration failed");
+        alert('Registration failed');
       }
     } catch (error) {
-      alert("An error occurred. Please try again.");
+      alert('An error occurred');
     }
-  };
+  }
 
   return (
     <div className="container">
@@ -98,7 +115,7 @@ const Register = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Register;
 
