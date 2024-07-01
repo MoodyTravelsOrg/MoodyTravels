@@ -1,0 +1,51 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding: 20px 10%;
+    background: transparent;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.navbar a {
+    position: relative;
+
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+
+    margin-left: 40px;
+}
+
+.navbar a::before {
+    content: "";
+    position: absolute;
+ 
+    top: 100%;
+    left: 0;
+    width: 0; /* ! Set back to 0 because I'm using 100% width in the hover section */
+    height: 2px;
+    background-color: white;
+
+    transition: .3s;
+
+    /* transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s; */
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
