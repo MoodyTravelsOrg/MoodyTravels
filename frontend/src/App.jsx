@@ -8,6 +8,7 @@ import {
 import Login from "./components/Login";
 import Register from "./components/Register";
 import HomePage from "./views/Homepage";
+import Navbar from './components/Navbar/Navbar'
 
 import "./App.css";
 
@@ -18,6 +19,7 @@ const App = () => {
 
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
