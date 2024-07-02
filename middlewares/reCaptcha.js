@@ -13,7 +13,7 @@ async function verifyReCaptcha(req, res, next) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `secret=${process.env.SECRET}&response=${reCaptchaToken}` //  we have to talk on reCaptcha secret key
+      body: `secret=${process.env.RECAPTCHA_SECRET}&response=${reCaptchaToken}` 
     };
 
     const response = await fetch("https://www.google.com/recaptcha/api/siteverify", settings);
