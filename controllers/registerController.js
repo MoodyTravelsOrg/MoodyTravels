@@ -28,8 +28,8 @@ async function registerController(req, res, next) {
       profileImage: profileImage,
     });
 
-    const accessToken = jwt.sign({ id: newUser.id }, process.env.SECRET_KEY, {expiresIn: "20m"});
-    const refreshToken = jwt.sign({ id: newUser.id }, process.env.SECRET_KEY, {expiresIn: "1d"});
+    const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "20m"});
+    const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "1d"});
 
     const cookieOptions = {
       httpOnly: true,
