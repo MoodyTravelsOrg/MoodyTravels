@@ -22,6 +22,11 @@ const App = () => {
        setUserId={setUserId}
        setIsAuthenticated={setIsAuthenticated}
        setUsername={setUsername}/>
+
+       {/* Just added this right now as discussed during our very late Daily Scrum haha */}
+       <Login />
+       {/* ---------------------------------------------------------------------------- */}
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
