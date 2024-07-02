@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
-import defaultProfileImage from '../assets/default-profile.png';
+import defaultProfileImage from '../../assets/default-profile.png';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +14,8 @@ const Register = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const fileInput = useRef(null); 
+  const recaptchaRef = useRef(null);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -36,28 +38,32 @@ const Register = () => {
       formData.append('username', username);
       formData.append('password', password);
       formData.append('confirmPassword', confirmPassword);
+      formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-      formData.append('profileImage', setProfileImage);
+  
 
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-        const { user, accessToken, refreshToken } = data;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+        const { user } = data;
         localStorage.setItem('username', user.username);
         localStorage.setItem('userId', user.id);
         localStorage.setItem('userImage', user.profileImage || defaultProfileImage);
         setIsAuthenticated(true);
         setUsername(user.username);
         setUserId(user.id);
+        fileInput.current.value = ""; 
+        recaptchaRef.current.reset();
+        setSuccess("Registration successful");
+        setRecaptchaToken("");
         navigate('/');
       } else {
         alert('Registration failed');
@@ -113,11 +119,13 @@ const Register = () => {
             <input
                 type="file"
                 onChange={(e) => setProfileImage(e.target.files[0])}
+                ref={fileInput}
             />
         </label>
         <ReCAPTCHA
           sitekey="6Le33_YpAAAAAJfZFlSijhsa70YWxT2beWXENQq8"
           onChange={(token) => setRecaptchaToken(token)}
+          ref={recaptchaRef}
         />
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}

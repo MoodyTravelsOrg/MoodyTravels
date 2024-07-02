@@ -5,12 +5,11 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 import HomePage from "./views/Homepage";
 import Navbar from './components/Navbar/Navbar'
 
-import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,7 +18,10 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar 
+       setUserId={setUserId}
+       setIsAuthenticated={setIsAuthenticated}
+       setUsername={setUsername}/>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
