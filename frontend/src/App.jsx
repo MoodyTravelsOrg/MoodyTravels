@@ -28,7 +28,7 @@ const App = () => {
       <Navbar 
         isAuthenticated={isAuthenticated}
         userImage={userImage}
-        defaultProfileImage={null} // Agrega una imagen de perfil predeterminada aquí
+        defaultProfileImage={null} // Add the default profile image here
         username={username}
         onLogout={handleLogout}
       />
