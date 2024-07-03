@@ -10,13 +10,20 @@
 }
 
 body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat;
+  /* This is a slightly different bg in the same style though. */
 
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
 }
-
 a {
   text-decoration: none;
 }
