@@ -29,6 +29,10 @@
     font-weight: bold;
   }
   
+  .input-box {
+    position: relative;
+  }
+
   input[type="text"],
   input[type="password"] {
     padding: 10px;
@@ -39,7 +43,14 @@
     color: #000;
   }
   
-
+  .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Ok, this one took my some time haha */
+    font-size: 16px;
+}
   
   button {
     margin-top: 20px;
