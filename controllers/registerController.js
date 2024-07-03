@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 async function registerController(req, res, next) {
   const { email, username, password } = req.body;
 
-  /* const profileImage = req.file ? req.file.filename : ""; */
+ 
   try {
     const foundUser = await User.findOne({ $or: [{ email }, { username }] });
 
@@ -21,26 +21,26 @@ async function registerController(req, res, next) {
 
     const hashedPassword = await hash(password, 10);
 
-    const newUser = await User.create({
+    /* const newUser = await User.create({
       email,
       username,
       password: hashedPassword,
-      /* profileImage: profileImage, */
-    });
+      profileImage: profileImage,
+    }); */
 
     // different approach, add the uploaded file later
-    /* let newUser = new User({
+    let newUser = new User({
       email,
       username,
       password: hashedPassword
     });
 
-    newUser.profileImage = req.file.filename;
+    if(req.file) newUser.profileImage = req.file.filename;
 
     await newUser.save();
 
-    newUser = await User.findOne({ email }); */
-    
+/*     newUser = await User.findOne({ email }); 
+ */    
 
     const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "20m"});
     const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "1d"});

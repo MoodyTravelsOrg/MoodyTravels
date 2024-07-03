@@ -6,7 +6,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    minLength: [5, "Username must be at least 5 characters long!"],
     validate: {
       validator: function (value) {
         return validator.isEmail(value);
@@ -17,6 +16,7 @@ const userSchema = new Schema({
 
   username: {
     type: String,
+    minLength: [5, "Username must be at least 5 characters long!"],
     required: true,
   },
   password: {
@@ -30,7 +30,7 @@ const userSchema = new Schema({
     default: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png"
   },
 
-  recommendations: {
+/*   recommendations: {
     type: [
       {
         type: mongoose.ObjectId,
@@ -40,7 +40,7 @@ const userSchema = new Schema({
     ],
     required: true,
     default: [],
-  },
+  }, */
 
   // in the Recommendation or Moods model we will have five different recommendations for each mood; our Recommendation model will look like:
 
