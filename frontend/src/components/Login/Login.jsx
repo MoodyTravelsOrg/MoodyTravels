@@ -34,7 +34,7 @@ const Login = () => {
         <button type="submit">Login</button>
 
         <div className="registered-link">
-            <p>Hast thou not yet a scroll of thine own? <a href="#">Inscribe thyself in our grand tome</a></p>
+            <p>Hast thou not yet a scroll of thine own? <a href="/register">Inscribe thyself in our grand tome</a></p>
             {/* Translated: "Don't have an account?" and "Register"... well, kind of haha */}
         </div>
       </form>

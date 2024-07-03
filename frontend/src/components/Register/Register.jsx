@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
@@ -33,20 +33,16 @@ const Register = () => {
     }
 
     try {
-        const formData = new FormData();
+      const formData = new FormData();
       formData.append('email', email);
       formData.append('username', username);
       formData.append('password', password);
       formData.append('confirmPassword', confirmPassword);
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-  
 
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
         body: formData,
       });
@@ -57,9 +53,6 @@ const Register = () => {
         localStorage.setItem('username', user.username);
         localStorage.setItem('userId', user.id);
         localStorage.setItem('userImage', user.profileImage || defaultProfileImage);
-        setIsAuthenticated(true);
-        setUsername(user.username);
-        setUserId(user.id);
         fileInput.current.value = ""; 
         recaptchaRef.current.reset();
         setSuccess("Registration successful");
@@ -113,7 +106,6 @@ const Register = () => {
             required
           />
         </label>
-
         <label>
             Profile Image:
             <input
@@ -136,4 +128,5 @@ const Register = () => {
 }
 
 export default Register;
+
 
