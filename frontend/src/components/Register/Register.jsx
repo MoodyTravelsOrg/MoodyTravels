@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import defaultProfileImage from '../../assets/default-profile.png';
 
-const Register = () => {
+const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsernameState] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -41,7 +41,7 @@ const Register = () => {
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
 
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch( `${import.meta.env.VITE_API}/register`, {
         method: "POST",
         credentials: "include",
         body: formData,
@@ -53,6 +53,9 @@ const Register = () => {
         localStorage.setItem('username', user.username);
         localStorage.setItem('userId', user.id);
         localStorage.setItem('userImage', user.profileImage || defaultProfileImage);
+        setUserId(user.id);
+        setUsername(user.username);
+        setIsAuthenticated(true);
         fileInput.current.value = ""; 
         recaptchaRef.current.reset();
         setSuccess("Registration successful");
@@ -84,7 +87,7 @@ const Register = () => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsernameState(e.target.value)}
             required
           />
         </label>

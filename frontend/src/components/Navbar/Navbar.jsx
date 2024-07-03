@@ -1,21 +1,38 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, userImage, defaultProfileImage, username, onLogout }) => {
+
+
   return (
-    <header className="header">
-      <a href="/" className="logo">MoodyTravels</a>
+    <div className="header">
+      <Link to="/" className="logo">MoodyTravels</Link>
       <nav className="navbar">
-        <a href="/">Home</a>
-        <a href="/mission">Our Mission</a>
-        <a href="/how-it-works">How it works</a>
-        <a href="/contact">Contact</a>
+        <Link to="/">Home</Link>
+        <Link to="/mission">Our Mission</Link>
+        <Link to="/how-it-works">How it works</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
-      <div className="auth-links">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-      </div>
-    </header>
+      {isAuthenticated ? (
+        <div className="navbar-right">
+          <Link to="/user-profile" className="navbar-profile-link">
+            <img
+              src={userImage || defaultProfileImage}
+              alt="User"
+              className="navbar-profile-image"
+            />
+            <span className="welcome-msg">Welcome {username}</span>
+          </Link>
+          <button className="navbar-button" onClick={onLogout}>Logout</button>
+        </div>
+      ) : (
+        <div className="auth-links">
+          <Link to="/login" className="navbar-button">Login</Link>
+          <Link to="/register" className="navbar-button">Register</Link>
+        </div>
+      )}
+    </div>
   );
 };
 
