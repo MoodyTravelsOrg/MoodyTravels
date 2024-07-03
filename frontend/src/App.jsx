@@ -7,9 +7,8 @@ import {
 } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import HomePage from "./views/Homepage";
-import Navbar from './components/Navbar/Navbar'
-
+import Homepage from "./views/Homepage";
+import Navbar from './components/Navbar/Navbar';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,14 +18,10 @@ const App = () => {
   return (
     <Router>
       <Navbar 
-       setUserId={setUserId}
-       setIsAuthenticated={setIsAuthenticated}
-       setUsername={setUsername}/>
-
-       {/* Just added this right now as discussed during our very late Daily Scrum haha */}
-       <Login />
-       {/* ---------------------------------------------------------------------------- */}
-
+        setUserId={setUserId}
+        setIsAuthenticated={setIsAuthenticated}
+        setUsername={setUsername}
+      />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
@@ -41,7 +36,7 @@ const App = () => {
         />
         <Route
           path="/"
-          element={<HomePage isAuthenticated={isAuthenticated} />}
+          element={<Homepage isAuthenticated={isAuthenticated} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
@@ -50,3 +45,4 @@ const App = () => {
 };
 
 export default App;
+

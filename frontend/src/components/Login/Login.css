@@ -15,12 +15,12 @@ body {
   }
 
 .wrapper {
-  width: 420px;
-  background: transparent;
+  width: 90%;
+  background:rgba(255, 255, 255, 0.056);
   border: 2px solid rgba(255, 255, 255, .2);
-
-  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-  backdrop-filter: blur(30px);
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
   color: #fff;
 
   border-radius: 10px;

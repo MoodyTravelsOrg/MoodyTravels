@@ -1,51 +1,71 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    width: 100%;
-    padding: 20px 10%;
-    background: transparent;
+  width: 100%;
+  padding: 20px 10%;
+  background: transparent;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
 
 .logo {
-    color: white;
-    font-size: 32px;
-    font-weight: 700;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.navbar {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-links {
+  display: flex;
+  gap: 1rem;
+  color: white;
+}
+
+.auth-links a {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
 }
 
 .navbar a {
-    position: relative;
+  position: relative;
 
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
 
-    margin-left: 40px;
+  margin-left: 40px;
 }
 
 .navbar a::before {
-    content: "";
-    position: absolute;
- 
-    top: 100%;
-    left: 0;
-    width: 0; /* ! Set back to 0 because I'm using 100% width in the hover section */
-    height: 2px;
-    background-color: white;
+  content: "";
+  position: absolute;
 
-    transition: .3s;
+  top: 100%;
+  left: 0;
+  width: 0; /* ! Set back to 0 because I'm using 100% width in the hover section */
+  height: 2px;
+  background-color: white;
 
-    /* transform: scaleX(0);
+  transition: 0.3s;
+
+  /* transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.5s; */
 }
 
 .navbar a:hover::before {
-    width: 100%;
+  width: 100%;
 }
