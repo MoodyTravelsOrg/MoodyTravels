@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connect from "./lib/connect.js"
 // import routers
-/* import loginRouter from "./routes/login.js"; */
+import loginRouter from "./routes/login.js";
 import registerRouter from "./routes/register.js";
 import refreshTokenRouter from "./routes/refreshToken.js";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Routes
-/* app.use("/login", loginRouter); */
+app.use("/login", loginRouter);
 
 app.use("/refresh-token", refreshTokenRouter);
 

@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 async function registerController(req, res, next) {
   const { email, username, password } = req.body;
 
-  const profileImage = req.file ? req.file.filename : "";
+  /* const profileImage = req.file ? req.file.filename : ""; */
   try {
     const foundUser = await User.findOne({ $or: [{ email }, { username }] });
 
@@ -25,8 +25,22 @@ async function registerController(req, res, next) {
       email,
       username,
       password: hashedPassword,
-      profileImage: profileImage,
+      /* profileImage: profileImage, */
     });
+
+    // different approach, add the uploaded file later
+    /* let newUser = new User({
+      email,
+      username,
+      password: hashedPassword
+    });
+
+    newUser.profileImage = req.file.filename;
+
+    await newUser.save();
+
+    newUser = await User.findOne({ email }); */
+    
 
     const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "20m"});
     const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "1d"});
@@ -51,9 +65,10 @@ async function registerController(req, res, next) {
     res.cookie("accessCookie", accessToken, accessOptions);
     res.cookie("refreshCookie", refreshToken, refreshOptions);
 
+    // do we need to send more properties here? (e.g. { email, id: newUser._id, avatar: newUser.avatar })
     res.status(201).json({
       id: newUser.id,
-    });
+    }); 
   } catch (err) {
     if (err.name === "ValidationError") {
       const errMsg = Object.values(err.errors)[0].message;
