@@ -45,7 +45,7 @@ async function registerController(req, res, next) {
     const refreshOptions = {
       ...cookieOptions,
       maxAge: 1000 * 60 * 60 * 24,
-      path: "/refresh",
+      path: "/refresh-token",
     };
 
     res.cookie("accessCookie", accessToken, accessOptions);
