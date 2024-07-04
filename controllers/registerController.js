@@ -67,7 +67,13 @@ async function registerController(req, res, next) {
 
     // do we need to send more properties here? (e.g. { email, id: newUser._id, avatar: newUser.avatar })
     res.status(201).json({
-      id: newUser.id,
+      /* id: newUser.id, */
+      /* newUser */
+      id: newUser._id,
+      email: newUser.email,
+      username: newUser.username,
+      password: newUser.password,
+      profileImage: newUser.profileImage
     }); 
   } catch (err) {
     if (err.name === "ValidationError") {

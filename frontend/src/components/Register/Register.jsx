@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import defaultProfileImage from '../../assets/default-profile.png';
 
-const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
+const Register = ({ setUserId, setIsAuthenticated/* , setUsername */ }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsernameState] = useState("");
+  const [username, setUsername/* State */] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -37,15 +37,23 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
       formData.append('email', email);
       formData.append('username', username);
       formData.append('password', password);
-      formData.append('confirmPassword', confirmPassword);
+      /* formData.append('confirmPassword', confirmPassword); */
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-
-      const response = await fetch(`${import.meta.env.VITE_API}/register`, {
+      
+      const settings = {
         method: "POST",
         credentials: "include",
         body: formData,
-      });
+      }
+
+      // ${import.meta.env.VITE_API}
+      /* const response = await fetch("http://localhost:4000/register", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      }); */
+      const response = await fetch("http://localhost:4000/register", settings);
 
       if (response.ok) {
         const data = await response.json();
@@ -90,7 +98,7 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsernameState(e.target.value)}
+            onChange={(e) => setUsername/* State */(e.target.value)}
             required
           />
         </label>

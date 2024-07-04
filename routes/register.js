@@ -6,6 +6,6 @@ import verifyReCaptcha from "../middlewares/reCaptcha.js";
 
 const router = express.Router()
 
-router.post("/", checkValues(["email", "password", "username"]), upload.single("profileImage"), verifyReCaptcha, registerController)
+router.post("/", upload.single("profileImage"), checkValues(["email", "password", "username"]), verifyReCaptcha, registerController);
 
 export default router;
