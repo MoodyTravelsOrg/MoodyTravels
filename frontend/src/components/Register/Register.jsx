@@ -41,7 +41,7 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
 
-      const response = await fetch( `${import.meta.env.VITE_API}/register`, {
+      const response = await fetch(`${import.meta.env.VITE_API}/register`, {
         method: "POST",
         credentials: "include",
         body: formData,
@@ -68,6 +68,9 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
       alert('An error occurred');
     }
   }
+
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  console.log("ReCAPTCHA Site Key:", siteKey); // Debugging line
 
   return (
     <div className="container">
@@ -117,11 +120,13 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
                 ref={fileInput}
             />
         </label>
-        <ReCAPTCHA
-          sitekey={import.meta.env.RECAPTCHA_SITE}
-          onChange={(token) => setRecaptchaToken(token)}
-          ref={recaptchaRef}
-        />
+        {siteKey && (
+          <ReCAPTCHA
+            sitekey={siteKey}
+            onChange={(token) => setRecaptchaToken(token)}
+            ref={recaptchaRef}
+          />
+        )}
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
         <button type="submit">Register</button>
@@ -131,5 +136,8 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
 }
 
 export default Register;
+
+
+
 
 
