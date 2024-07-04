@@ -1,9 +1,9 @@
 import createError from "http-errors";
 
 async function verifyReCaptcha(req, res, next) {
-  const { reCaptchaToken } = req.body;
+  const { recaptchaToken } = req.body;
 
-  if (!reCaptchaToken) {
+  if (!recaptchaToken) {
     return next(createError(500, "server error!"));
   }
 
@@ -13,7 +13,7 @@ async function verifyReCaptcha(req, res, next) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `secret=${process.env.RECAPTCHA_SECRET}&response=${reCaptchaToken}` 
+      body: `secret=${process.env.RECAPTCHA_SECRET}&response=${recaptchaToken}` 
     };
 
     const response = await fetch("https://www.google.com/recaptcha/api/siteverify", settings);

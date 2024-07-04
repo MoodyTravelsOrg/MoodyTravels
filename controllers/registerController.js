@@ -21,14 +21,6 @@ async function registerController(req, res, next) {
 
     const hashedPassword = await hash(password, 10);
 
-    /* const newUser = await User.create({
-      email,
-      username,
-      password: hashedPassword,
-      profileImage: profileImage,
-    }); */
-
-    // different approach, add the uploaded file later
     let newUser = new User({
       email,
       username,
@@ -38,9 +30,6 @@ async function registerController(req, res, next) {
     if(req.file) newUser.profileImage = req.file.filename;
 
     await newUser.save();
-
-/*     newUser = await User.findOne({ email }); 
- */    
 
     const accessToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "20m"});
     const refreshToken = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {expiresIn: "1d"});
@@ -65,9 +54,8 @@ async function registerController(req, res, next) {
     res.cookie("accessCookie", accessToken, accessOptions);
     res.cookie("refreshCookie", refreshToken, refreshOptions);
 
-    // do we need to send more properties here? (e.g. { email, id: newUser._id, avatar: newUser.avatar })
     res.status(201).json({
-      id: newUser.id,
+      newUser
     }); 
   } catch (err) {
     if (err.name === "ValidationError") {

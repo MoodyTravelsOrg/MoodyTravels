@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import defaultProfileImage from '../../assets/default-profile.png';
 
-const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
+const Register = ({ setUserId, setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsernameState] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -37,29 +37,33 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
       formData.append('email', email);
       formData.append('username', username);
       formData.append('password', password);
-      formData.append('confirmPassword', confirmPassword);
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-
-      const response = await fetch(`${import.meta.env.VITE_API}/register`, {
+      // optional: reset inputs here
+      
+      const settings = {
         method: "POST",
         credentials: "include",
         body: formData,
-      });
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_API}/register`, settings);
 
       if (response.ok) {
         const data = await response.json();
-        const { user } = data;
-        localStorage.setItem('username', user.username);
-        localStorage.setItem('userId', user.id);
-        localStorage.setItem('userImage', user.profileImage || defaultProfileImage);
-        setUserId(user.id);
-        setUsername(user.username);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data.id);
+        localStorage.setItem('userImage', data.profileImage || defaultProfileImage);
+        setUserId(data.id);
+        setUsername(data.username);
         setIsAuthenticated(true);
         fileInput.current.value = ""; 
         recaptchaRef.current.reset();
         setSuccess("Registration successful");
         setRecaptchaToken("");
+
+        alert("Registration successful");
+
         navigate('/');
       } else {
         alert('Registration failed');
@@ -90,7 +94,7 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsernameState(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
