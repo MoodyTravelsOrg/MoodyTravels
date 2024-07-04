@@ -56,29 +56,33 @@ const Login = ({ setUserId, setIsAuthenticated, setUsername }) => {
     <div className="container">
       <form onSubmit={handleLogin}>
         <h2>Login</h2>
-        <div className="input-box">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsernameState(e.target.value)}
-          />
-          <FaUserAstronaut className="icon" />
-          {/* I picked the Austronaut as a symbol for travelling... Maybe we can find something more fitting but I like it so far... */}
+        <div className="input-wrapper">
+        <label htmlFor="username">Username</label>
+          <div className="input-box">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsernameState(e.target.value)}
+            />
+            <FaUserAstronaut className="icon" />
+            {/* I picked the Austronaut as a symbol for travelling... Maybe we can find something more fitting but I like it so far... */}
+          </div>
         </div>
-        <div className="input-box">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <GiDialPadlock className="icon" />
-          {/* I picked the Padlock as a symbol for security... Maybe we can find something more fitting but I like it so far... */}
+        <div className="input-wrapper">
+        <label htmlFor="password">Password</label>
+          <div className="input-box">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <GiDialPadlock className="icon" />
+            {/* I picked the Padlock as a symbol for security... Maybe we can find something more fitting but I like it so far... */}
+          </div>
         </div>
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
