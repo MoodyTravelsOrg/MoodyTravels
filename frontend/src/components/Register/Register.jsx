@@ -118,7 +118,7 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
             />
         </label>
         <ReCAPTCHA
-          sitekey="6Le33_YpAAAAAJfZFlSijhsa70YWxT2beWXENQq8"
+          sitekey={import.meta.env.RECAPTCHA_SITE}
           onChange={(token) => setRecaptchaToken(token)}
           ref={recaptchaRef}
         />
