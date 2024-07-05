@@ -18,12 +18,12 @@ const userSchema = new Schema({
     type: String,
     minLength: [5, "Username must be at least 5 characters long!"],
     required: true,
-    validate: {
+   /*  validate: {
       validator: function (value) {
         return value.charAt(0) === value.charAt(0).toUpperCase();
       },
       message: "Username must start with an uppercase letter!",
-    },
+    }, */
   },
   password: {
     type: String,
