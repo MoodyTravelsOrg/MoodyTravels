@@ -2,10 +2,15 @@ import User from "../models/User.js";
 import createError from "http-errors";
 import { hash } from "bcrypt";
 import jwt from "jsonwebtoken";
+import validator from "validator";
+
 
 async function registerController(req, res, next) {
   const { email, username, password } = req.body;
 
+  if (!validator.isStrongPassword(password)) {
+    return next(createError(400, "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"));
+  }
  
   try {
     const foundUser = await User.findOne({ $or: [{ email }, { username }] });
