@@ -60,6 +60,7 @@ async function registerController(req, res, next) {
   } catch (err) {
     if (err.name === "ValidationError") {
       const errMsg = Object.values(err.errors)[0].message;
+      console.log(errMsg)
       return next(createError(400, errMsg));
     }
     next(

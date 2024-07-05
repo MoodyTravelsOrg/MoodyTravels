@@ -8,29 +8,29 @@ try {
     await connect();
 
     await User.deleteMany({});
+   
 
-
-    const hashedPassword = await hash("moody123", 10);
+    const hashedPassword = await hash("Moody123!", 10);
 
     const mockUsers = [
         {
             email: "alexis@moody.travels",
-            username: "moody_alexis",
+            username: "Moody_alexis",
             password: hashedPassword,
         },
         {
             email: "mir@moody.travels",
-            username: "moody_mir",
+            username: "Moody_mir",
             password: hashedPassword,
         },
         {
             email: "og@moody.travels",
-            username: "moody_og",
+            username: "Moody_og",
             password: hashedPassword,
         },
         {
             email: "stefano@moody.travels",
-            username: "moody_stefano",
+            username: "Moody_stefano",
             password: hashedPassword,
         } 
     ];
