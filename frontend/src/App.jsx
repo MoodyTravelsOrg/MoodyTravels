@@ -14,26 +14,27 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
-  const [userImage, setUserImage] = useState(null);
+  const [userAvatar, setUserAvatar] = useState("");
+
+  
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUsername("");
     setUserId(null);
-    setUserImage(null);
+    setUserAvatar(null);
   };
 
   return (
     <Router>
       <Navbar 
         isAuthenticated={isAuthenticated}
-        userImage={userImage}
-        defaultProfileImage={null} // Add the default profile image here
+        userImage={setUserAvatar}
         username={username}
         onLogout={handleLogout}
       />
       <Routes>
-        <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
+        <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} setUserAvatar={setUserAvatar} />} />
         <Route
           path="/register"
           element={
@@ -41,6 +42,7 @@ const App = () => {
               setUserId={setUserId}
               setIsAuthenticated={setIsAuthenticated}
               setUsername={setUsername}
+              setUserAvatar={setUserAvatar} 
             />
           }
         />

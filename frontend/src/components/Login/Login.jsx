@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+
 import { FaUserAstronaut } from "react-icons/fa";
 // Imported this from react-icons/fa. (This is a free icon pack that includes a lot of icons. You can find it here: https://react-icons.github.io/react-icons/ )
 import { GiDialPadlock } from "react-icons/gi";
 // Just FYI: Can't add the additonal import as an enumeration within the first import statement since it's a separate section (gi instead of fa)
 
 // adding the setUserId function to the Login component
-const Login = ({ setUserId, setIsAuthenticated, setUsername }) => {
+const Login = ({ setUserId, setIsAuthenticated, setUsername}) => {
   const [username, setUsernameState] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -36,10 +37,10 @@ const Login = ({ setUserId, setIsAuthenticated, setUsername }) => {
       );
 
       if (response.ok) {
-        const userData = await response.json();
+        const data = await response.json();
 
-        setUserId(userData.id);
-        setUsername(userData.username);
+        setUserId(data.id);
+        setUsername(data.username);
         setIsAuthenticated(true);
         navigate("/"); // This will redirect the user to the home page after successful login
       } else {
