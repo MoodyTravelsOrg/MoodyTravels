@@ -66,7 +66,10 @@ const Register = ({ setUserId, setIsAuthenticated }) => {
 
         navigate('/');
       } else {
-        alert('Registration failed');
+        const errorData = await response.json();
+        console.log(errorData)
+        setError(errorData.message || 'Registration failed');
+        alert(errorData.error.message);
       }
     } catch (error) {
       alert('An error occurred');

@@ -28,7 +28,12 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minLength: [8, "Password must be at least 8 characters long!"],
+    validate: {
+      validator: function(value) {
+        return validator.isStrongPassword(value);
+      },
+      message: "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"
+    }
   },
   profileImage: {
     type: String,
