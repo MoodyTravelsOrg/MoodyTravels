@@ -4,11 +4,13 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation
 } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Homepage from "./views/Homepage";
 import Navbar from './components/Navbar/Navbar';
+import TravelMood from "./views/TravelMood";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,6 +34,22 @@ const App = () => {
         username={username}
         onLogout={handleLogout}
       />
+      <MainRoutes 
+        isAuthenticated={isAuthenticated}
+        setUserId={setUserId}
+        setIsAuthenticated={setIsAuthenticated}
+        setUsername={setUsername}
+      />
+    </Router>
+  );
+};
+
+const MainRoutes = ({ isAuthenticated, setUserId, setIsAuthenticated, setUsername }) => {
+  const location = useLocation();
+  const showTravelMood = location.pathname !== "/login" && location.pathname !== "/register";
+
+  return (
+    <>
       <Routes>
         <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
         <Route
@@ -50,7 +68,8 @@ const App = () => {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Router>
+      {showTravelMood && <TravelMood />}
+    </>
   );
 };
 
