@@ -2,11 +2,9 @@
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   padding: 20px 10%;
   background: transparent;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,6 +16,7 @@
   font-size: 2.5rem;
   font-weight: bold;
 }
+
 .navbar {
   display: flex;
   gap: 1rem;
@@ -36,36 +35,84 @@
 }
 
 .auth-links a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .navbar a {
   position: relative;
-
   color: white;
   font-size: 18px;
   font-weight: 500;
-
   margin-left: 40px;
 }
 
 .navbar a::before {
   content: "";
   position: absolute;
-
   top: 100%;
   left: 0;
-  width: 0; /* ! Set back to 0 because I'm using 100% width in the hover section */
+  width: 0;
   height: 2px;
   background-color: white;
-
   transition: 0.3s;
-
-  /* transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.5s; */
 }
 
 .navbar a:hover::before {
   width: 100%;
 }
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.welcome-msg {
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255);
+}
+
+.navbar-button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.navbar-button:hover {
+  background: white;
+  color: black;
+}
+
+.navbar-button-logout{
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.navbar-button-logout:hover {
+  background: white;
+  color: black;
+}
+

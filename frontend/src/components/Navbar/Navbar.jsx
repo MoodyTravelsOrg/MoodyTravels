@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import './Navbar.css';
+import defaultProfileImage from '../../assets/default-profile.png';
 
-const Navbar = ({ isAuthenticated, userImage, defaultProfileImage, username, onLogout }) => {
+
+const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
 
 
   return (
@@ -19,12 +21,12 @@ const Navbar = ({ isAuthenticated, userImage, defaultProfileImage, username, onL
           <Link to="/user-profile" className="navbar-profile-link">
             <img
               src={userImage || defaultProfileImage}
-              alt="User"
+              alt="User Avatar"
               className="navbar-profile-image"
             />
-            <span className="welcome-msg">Welcome {username}</span>
+            <span className="welcome-msg">Welcome  {username}</span>
           </Link>
-          <button className="navbar-button" onClick={onLogout}>Logout</button>
+          <button className="navbar-button-logout" onClick={onLogout}>Logout</button>
         </div>
       ) : (
         <div className="auth-links">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,11 +18,27 @@ const App = () => {
   const [userId, setUserId] = useState(null);
   const [userImage, setUserImage] = useState(null);
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    const storedUserId = localStorage.getItem('userId');
+    const storedUserImage = localStorage.getItem('userImage');
+
+    if (storedUsername && storedUserId && storedUserImage) {
+      setUsername(storedUsername);
+      setUserId(storedUserId);
+      setUserImage(storedUserImage);
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUsername("");
     setUserId(null);
     setUserImage(null);
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userImage');
   };
 
   return (
@@ -39,6 +55,7 @@ const App = () => {
         setUserId={setUserId}
         setIsAuthenticated={setIsAuthenticated}
         setUsername={setUsername}
+        setUserImage={setUserImage}
       />
     </Router>
   );

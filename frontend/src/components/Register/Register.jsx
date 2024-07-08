@@ -39,8 +39,7 @@ const Register = ({ setUserId, setIsAuthenticated }) => {
       formData.append('password', password);
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-      // optional: reset inputs here
-      
+    
       const settings = {
         method: "POST",
         credentials: "include",
@@ -51,20 +50,26 @@ const Register = ({ setUserId, setIsAuthenticated }) => {
 
       if (response.ok) {
         const data = await response.json();
+
+        
         localStorage.setItem('username', data.username);
         localStorage.setItem('userId', data.id);
         localStorage.setItem('userImage', data.profileImage || defaultProfileImage);
         setUserId(data.id);
-        setUsername(data.username);
         setIsAuthenticated(true);
+        setUsername(data.username);
+        setProfileImage(data.profileImage || defaultProfileImage);
+        
         fileInput.current.value = ""; 
         recaptchaRef.current.reset();
         setSuccess("Registration successful");
         setRecaptchaToken("");
 
-        alert("Registration successful");
+        alert(`Registration successful. Welcome, ${data.username}!`);
+
 
         navigate('/');
+        refreshPage();
       } else {
         const errorData = await response.json();
         console.log(errorData)
@@ -72,6 +77,7 @@ const Register = ({ setUserId, setIsAuthenticated }) => {
         alert(errorData.error.message);
       }
     } catch (error) {
+      setError("An error occurred");
       alert('An error occurred');
     }
   }

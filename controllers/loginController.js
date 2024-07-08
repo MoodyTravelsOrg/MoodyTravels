@@ -59,6 +59,8 @@ async function loginController(req, res, next) {
 
     res.status(201).json({
       id: foundUser.id,
+      username: foundUser.username,
+      profileImage: foundUser.profileImage,
     });
   } catch (err) {
     next(
