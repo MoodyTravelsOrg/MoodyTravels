@@ -40,17 +40,17 @@ const userSchema = new Schema({
     required: true,
   },
 
-/*   recommendations: {
+  moods: {
     type: [
       {
         type: mongoose.ObjectId,
         required: true,
-        ref: "Recommendations",
+        ref: "Mood",
       },
     ],
     required: true,
     default: [],
-  }, */
+  },
 
   // in the Recommendation or Moods model we will have five different recommendations for each mood; our Recommendation model will look like:
 

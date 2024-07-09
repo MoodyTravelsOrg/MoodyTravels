@@ -24,9 +24,7 @@ async function loginController(req, res, next) {
       return next(createError(401, "Incorrect password!"));
     }
 
- /*    await foundUser.populate("recommendation", {
-      // we have to bring in the necessary properties after we decide one our recommendation model!!!
-    }); */
+    await foundUser.populate("moods");
 
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
       expiresIn: "20m",
@@ -61,6 +59,8 @@ async function loginController(req, res, next) {
       id: foundUser.id,
       username: foundUser.username,
       profileImage: foundUser.profileImage,
+      moods: foundUser.moods.filter(mood => mood.deletedAt === null)
+
     });
   } catch (err) {
     next(
