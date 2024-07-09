@@ -38,7 +38,6 @@ const userSchema = new Schema({
   profileImage: {
     type: String,
     required: true,
-    default: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png"
   },
 
 /*   recommendations: {

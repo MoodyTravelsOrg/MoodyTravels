@@ -60,7 +60,9 @@ async function registerController(req, res, next) {
     res.cookie("refreshCookie", refreshToken, refreshOptions);
 
     res.status(201).json({
-      newUser
+      id: newUser.id,
+      username: newUser.username,
+      profileImage: newUser.profileImage
     }); 
   } catch (err) {
     if (err.name === "ValidationError") {
