@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -11,6 +12,7 @@ import Register from "./components/Register/Register";
 import Homepage from "./views/Homepage";
 import Navbar from './components/Navbar/Navbar';
 import TravelMood from "./views/TravelMood";
+import UserDashboard from "./views/UserDashboard";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,12 +48,13 @@ const App = () => {
       <Navbar 
         isAuthenticated={isAuthenticated}
         userImage={userImage}
-        defaultProfileImage={null} // Add the default profile image here
+        defaultProfileImage={null}
         username={username}
         onLogout={handleLogout}
       />
       <MainRoutes 
         isAuthenticated={isAuthenticated}
+        userId={userId}
         setUserId={setUserId}
         setIsAuthenticated={setIsAuthenticated}
         setUsername={setUsername}
@@ -61,7 +64,7 @@ const App = () => {
   );
 };
 
-const MainRoutes = ({ isAuthenticated, setUserId, setIsAuthenticated, setUsername }) => {
+const MainRoutes = ({ isAuthenticated, userId, setUserId, setIsAuthenticated, setUsername, setUserImage }) => {
   const location = useLocation();
   const showTravelMood = location.pathname !== "/login" && location.pathname !== "/register";
 
@@ -83,6 +86,12 @@ const MainRoutes = ({ isAuthenticated, setUserId, setIsAuthenticated, setUsernam
           path="/"
           element={<Homepage isAuthenticated={isAuthenticated} />}
         />
+        {isAuthenticated && (
+          <Route
+            path="/user-profile"
+            element={<UserDashboard userId={userId} setUsername={setUsername} setUserImage={setUserImage} />}
+          />
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {showTravelMood && <TravelMood />}
