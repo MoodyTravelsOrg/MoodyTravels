@@ -38,9 +38,15 @@ const Login = ({ setUserId, setIsAuthenticated, setUsername }) => {
       if (response.ok) {
         const userData = await response.json();
 
+        localStorage.setItem('username', userData.username);
+        localStorage.setItem('userId', userData.id);
+        localStorage.setItem('userImage', userData.profileImage);
+
         setUserId(userData.id);
         setUsername(userData.username);
+        
         setIsAuthenticated(true);
+
         navigate("/"); // This will redirect the user to the home page after successful login
       } else {
         const { error } = await response.json();
