@@ -38,6 +38,7 @@ const userSchema = new Schema({
   profileImage: {
     type: String,
     required: true,
+    default: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png" // this has to stay here, otherwise we get an error message if the user doesn't upload an image
   },
 
 /*   recommendations: {
