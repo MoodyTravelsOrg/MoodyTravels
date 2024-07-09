@@ -62,7 +62,8 @@ async function registerController(req, res, next) {
     res.status(201).json({
       id: newUser.id,
       username: newUser.username,
-      profileImage: newUser.profileImage
+      profileImage: newUser.profileImage,
+      moods: newUser.moods.filter(mood => mood.deletedAt === null)
     }); 
   } catch (err) {
     if (err.name === "ValidationError") {

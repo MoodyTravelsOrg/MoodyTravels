@@ -38,19 +38,20 @@ const userSchema = new Schema({
   profileImage: {
     type: String,
     required: true,
+    default: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png" // this has to stay here, otherwise we get an error message if the user doesn't upload an image
   },
 
-/*   recommendations: {
+  moods: {
     type: [
       {
         type: mongoose.ObjectId,
         required: true,
-        ref: "Recommendations",
+        ref: "Mood",
       },
     ],
     required: true,
     default: [],
-  }, */
+  },
 
   // in the Recommendation or Moods model we will have five different recommendations for each mood; our Recommendation model will look like:
 

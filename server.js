@@ -6,6 +6,7 @@ import connect from "./lib/connect.js"
 import loginRouter from "./routes/login.js";
 import registerRouter from "./routes/register.js";
 import refreshTokenRouter from "./routes/refreshToken.js";
+import travelRouter from "./routes/travel.js";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
 
 await connect(); // connect to database
@@ -26,6 +27,8 @@ app.use("/login", loginRouter);
 app.use("/refresh-token", refreshTokenRouter);
 
 app.use("/register", registerRouter);
+
+app.use("/travel", travelRouter);
 
 // definition of the server address
 const port = process.env.PORT || 4000;
