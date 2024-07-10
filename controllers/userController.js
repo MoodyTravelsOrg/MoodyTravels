@@ -1,41 +1,96 @@
 import User from "../models/User.js";
 import createError from "http-errors";
+import moment from "moment";
 
 export async function getUserData(req, res, next) {
   // right now we don't need this function!!
 }
 
 export async function addMood(req, res, next) {
-  const { moodId } = req.body;
+  const { type } = req.body;
 
   let foundUser;
 
   try {
     foundUser = await User.findById(req.params.id);
   } catch {
-    return next(createError(500, "Server error"));
+    return next(
+      createError(500, "An unexpected error occurred. Please try again later!")
+    );
+  }
+
+  console.log(foundUser);
+
+  if (foundUser) {
+    const today = moment().startOf("day");
+
+    const moodExistsToday = foundUser.moods.some((mood) => {
+      return (
+        moment(mood.createdAt).isSame(today, "day") && mood.deletedAt === null
+      );
+    });
+
+    if (moodExistsToday) {
+      return next(createError(400, "You have already logged a mood today."));
+    }
+
+    try {
+      const newMood = {
+        type: type,
+      };
+      foundUser.moods.push(newMood);
+
+      await foundUser.save();
+
+      res.status(201).json({
+        id: foundUser.id,
+        username: foundUser.username,
+        profileImage: foundUser.profileImage,
+        moods: foundUser.moods.filter((mood) => mood.deletedAt === null),
+      });
+    } catch {
+      next(
+        createError(
+          500,
+          "An unexpected error occurred. Please try again later!"
+        )
+      );
+    }
+  } else {
+    next(createError(404, "User not found"));
+  }
+}
+
+export async function deleteMood(req, res, next) {
+  let foundUser;
+
+  try {
+    foundUser = await User.findById(req.params.id);
+  } catch {
+    return next(
+      createError(500, "An unexpected error occurred. Please try again later!")
+    );
   }
 
   if (foundUser) {
     try {
-      const options = {
-        new: true,
-      };
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        { $push: { moods: moodId } },
-        options
-      );
-      updatedUser.populate("moods");
+      const moodToDelete = foundUser.moods.id(req.params.mood_id);
 
-      res.status(201).json({
-        id: updatedUser.id,
-        username: updatedUser.username,
-        profileImage: updatedUser.profileImage,
-        moods: updatedUser.moods.filter((mood) => mood.deletedAt === null),
-      });
+      console.log(moodToDelete);
+      if (!moodToDelete) {
+        return next(createError(404, "Mood not found"));
+      }
+
+      moodToDelete.deletedAt = new Date();
+      await foundUser.save();
+      res.status(200).json("Mood deleted successfully");
     } catch {
-      next(createError(500, "Server error"));
+      next(
+        createError(
+          500,
+          "An unexpected error occurred. Please try again later!"
+        )
+      );
     }
   } else {
     next(createError(404, "User not found"));

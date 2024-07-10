@@ -8,7 +8,7 @@ import registerRouter from "./routes/register.js";
 import refreshTokenRouter from "./routes/refreshToken.js";
 import travelRouter from "./routes/travel.js";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
-
+import userRouter from "./routes/user.js"
 await connect(); // connect to database
 
 const app = express();
@@ -29,6 +29,8 @@ app.use("/refresh-token", refreshTokenRouter);
 app.use("/register", registerRouter);
 
 app.use("/travel", travelRouter);
+
+app.use("/users", userRouter);
 
 // definition of the server address
 const port = process.env.PORT || 4000;
