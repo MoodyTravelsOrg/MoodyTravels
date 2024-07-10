@@ -119,9 +119,13 @@ const categoriesData = {
 // TravelMood component with all the logic for the travel mood selector
 
 const TravelMood = () => {
-  const [data, setData] = ([]);
-  const [selectedEmotion, setSelectedEmotion] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [data, setData] = useState([]);
+  const [selectedEmotion, setSelectedEmotion] = useState({
+    emotion: "",
+    emoji: "",
+    categories: []
+  });
+  const [selectedCategory, setSelectedCategory] = useState({});
   const [showCategories, setShowCategories] = useState(false);
   const [showDestinations, setShowDestinations] = useState(false);
 
@@ -153,6 +157,7 @@ const TravelMood = () => {
     setShowCategories(true);
     setSelectedCategory('');
     setShowDestinations(false);
+    console.log(selectedEmotion);
   };
 
   const handleCategoryClick = (category) => {
