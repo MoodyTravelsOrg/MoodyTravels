@@ -29,15 +29,6 @@ async function loginController(req, res, next) {
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {expiresIn: "20m",});
     const refreshToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
-      expiresIn: "20m",
-    });
-    const refreshToken = jwt.sign(
-      { id: foundUser.id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
-
 
     const cookieOptions = {
       httpOnly: true,
