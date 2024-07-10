@@ -9,6 +9,8 @@ async function loginController(req, res, next) {
   try {
     const foundUser = await User.findOne({ username });
 
+    console.log(foundUser);
+
     if (!foundUser) {
       return next(
         createError(
@@ -24,10 +26,18 @@ async function loginController(req, res, next) {
       return next(createError(401, "Incorrect password!"));
     }
 
-    await foundUser.populate("moods");
-
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {expiresIn: "20m",});
     const refreshToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
+      expiresIn: "20m",
+    });
+    const refreshToken = jwt.sign(
+      { id: foundUser.id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
 
     const cookieOptions = {
       httpOnly: true,
@@ -54,7 +64,6 @@ async function loginController(req, res, next) {
       username: foundUser.username,
       profileImage: foundUser.profileImage,
       moods: foundUser.moods.filter(mood => mood.deletedAt === null)
-
     });
   } catch (err) {
     next(
