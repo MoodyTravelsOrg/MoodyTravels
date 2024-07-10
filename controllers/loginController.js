@@ -24,7 +24,7 @@ async function loginController(req, res, next) {
       return next(createError(401, "Incorrect password!"));
     }
 
-    await foundUser.populate("moods");
+    // await foundUser.populate("moods");
 
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
       expiresIn: "20m",
