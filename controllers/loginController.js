@@ -26,6 +26,9 @@ async function loginController(req, res, next) {
       return next(createError(401, "Incorrect password!"));
     }
 
+    const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {expiresIn: "20m",});
+    const refreshToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
       expiresIn: "20m",
     });
@@ -34,6 +37,7 @@ async function loginController(req, res, next) {
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
+
 
     const cookieOptions = {
       httpOnly: true,
