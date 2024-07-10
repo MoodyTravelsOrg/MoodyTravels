@@ -33,11 +33,7 @@ async function authenticateToken(req, res, next) {
 
         if (foundUser) {
             // add a "user" property to req object containing the found user
-            req.user = {
-            id: foundUser.id,
-            username: foundUser.username,
-            profileImage: foundUser.profileImage,
-            };
+            req.user = foundUser;
         } else {
             return next(createError(404, "User not found"));
         }
