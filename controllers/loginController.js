@@ -9,6 +9,8 @@ async function loginController(req, res, next) {
   try {
     const foundUser = await User.findOne({ username });
 
+    console.log(foundUser);
+
     if (!foundUser) {
       return next(
         createError(
@@ -23,8 +25,6 @@ async function loginController(req, res, next) {
     if (!matchingPass) {
       return next(createError(401, "Incorrect password!"));
     }
-
-    await foundUser.populate("moods");
 
     const accessToken = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET, {
       expiresIn: "20m",
@@ -60,7 +60,6 @@ async function loginController(req, res, next) {
       username: foundUser.username,
       profileImage: foundUser.profileImage,
       moods: foundUser.moods.filter(mood => mood.deletedAt === null)
-
     });
   } catch (err) {
     next(
