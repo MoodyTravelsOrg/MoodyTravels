@@ -9,7 +9,7 @@ const MoodTracker = ({ userId }) => {
   useEffect(() => {
     const fetchMoodLog = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/users/${userId}/moods`, {
+        const response = await fetch(`http://localhost:4000/users/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -22,14 +22,14 @@ const MoodTracker = ({ userId }) => {
         }
 
         const data = await response.json();
-        setMoodLog(data.moods.filter(mood => mood.deletedAt === null));
+        setMoodLog(data.moods);
       } catch (error) {
         console.error('Error fetching mood log:', error);
       }
     };
 
     fetchMoodLog();
-  }, [userId]);
+  }, [moodLog]);
 
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
@@ -37,23 +37,25 @@ const MoodTracker = ({ userId }) => {
 
   const handleLogMood = async () => {
     if (selectedMood) {
-      const newLog = { type: selectedMood };
-      try {
+    /* const newLog = { type: selectedMood };*/   
+
+      
+try {
         const response = await fetch(`http://localhost:4000/users/${userId}/moods`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
-          body: JSON.stringify(newLog),
+          body: JSON.stringify(selectedMood),
         });
 
         if (!response.ok) {
           throw new Error(`Error logging mood: ${response.statusText}`);
         }
-
         const data = await response.json();
-        setMoodLog([data.moods[data.moods.length - 1], ...moodLog.slice(0, 4)]);
+        console.log(data)
+        setMoodLog(data);
       } catch (error) {
         console.error('Error logging mood:', error);
       }
@@ -73,17 +75,19 @@ const MoodTracker = ({ userId }) => {
       if (!response.ok) {
         throw new Error(`Error deleting mood: ${response.statusText}`);
       }
-
-      setMoodLog(moodLog.filter(mood => mood._id !== moodId));
+      const data = await response.json();
+      console.log(data)
+      setMoodLog(data);
+      
     } catch (error) {
       console.error('Error deleting mood:', error);
     }
   };
 
-  const handleSaveMood = () => {
+/*   const handleSaveMood = () => {
     console.log("Saving mood:", selectedMood);
  
-  };
+  }; */
 
   const handleGetRecommendations = async () => {
     try {
@@ -122,18 +126,31 @@ const MoodTracker = ({ userId }) => {
       </div>
       <div>
         <button className="ActionButton" onClick={handleLogMood}>Log Mood</button>
-        <button className="ActionButton" onClick={handleSaveMood}>Save Mood</button>
-        <button className="ActionButton" onClick={handleGetRecommendations}>Get Recommendations</button>
+{/*         <button className="ActionButton" onClick={handleSaveMood}>Save Mood</button>
+ */}        <button className="ActionButton" onClick={handleGetRecommendations}>Get Recommendations</button>
       </div>
+
+
       <div className="MoodLogContainer">
         <h3>Mood Log</h3>
-        {moodLog.map((entry) => (
+       {/*  {moodLog.map((entry) => (
           <div key={entry._id} className="LogEntry">
             {new Date(entry.createdAt).toLocaleDateString()} ---- {entry.type}
             <button onClick={() => handleDeleteMood(entry._id)}>Delete</button>
           </div>
-        ))}
+        ))} */}
+
+        <div>
+          {moodLog.map(mood => {
+            <li>
+              {mood.type}
+              <button onClick={() => handleDeleteMood(mood._id)}>Delete</button>
+            </li>
+          })}
+        </div>
       </div>
+
+      
       <div className="RecommendationsContainer">
         <h3>Recommendations</h3>
         {recommendations.map((rec, index) => (
