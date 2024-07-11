@@ -1,5 +1,5 @@
 import express from "express";
-import { getUserData, addMood, deleteMood } from "../controllers/userController.js";
+import { getUserData, addMood, updateMood, deleteMood } from "../controllers/userController.js";
 import authenticateToken from "../middlewares/authenticateToken.js"
 
 
@@ -13,6 +13,9 @@ router.get("/:id", getUserData)// right now we are not using this route, I creat
 
 // PATCH http://localhost:4000/users/:id/moods
 router.patch("/:id/moods", addMood)
+
+// PATCH http://localhost:4000/users/:id/:mood_id
+router.patch("/:id/:mood_id", updateMood) 
 
 // DELETE http://localhost:4000/users/:id/:mood_id
 router.delete("/:id/:mood_id", deleteMood) 
