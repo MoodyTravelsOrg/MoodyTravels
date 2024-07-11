@@ -26,7 +26,7 @@ try {
         },
         {
             email: "og@moody.travels",
-            username: "Moody_og",
+            username: "Moody_theOG",
             password: hashedPassword,
         },
         {
@@ -40,8 +40,9 @@ try {
         {
             emotion: "happy",
             emoji: "😊",
-            categories: {
-                city: {
+            categories: [
+                {
+                    name: "city",
                     img: "https://wallpapercave.com/wp/wp3594884.jpg",
                     destinations: [
                         { name: "Happy City 1" },
@@ -49,7 +50,8 @@ try {
                         { name: "Happy City 3" }
                     ],
                 },
-                beach: {
+                {
+                    name: "beach",
                     img: "https://th.bing.com/th/id/R.4e8d81070377c62b6f70f19f5dbd29dc?rik=NSSVLX43YmM7dA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2015%2f07%2f4e8d81070377c62b6f70f19f5dbd29dc.jpg&ehk=zPd2CAORkHzF7J%2bglwU5cPkVXjoWrX4tVVKWPaE0z0c%3d&risl=1&pid=ImgRaw&r=0",
                     destinations: [
                         { name: "Happy Beach 1" },
@@ -57,7 +59,8 @@ try {
                         { name: "Happy Beach 3" }
                     ],
                 },
-                nature: {
+                {
+                    name: "nature",
                     img: "https://th.bing.com/th/id/OIP.xHAa7hfT7gXHVAVusTytogHaD-?rs=1&pid=ImgDetMain",
                     destinations: [
                         { name: "Happy Nature 1" },
@@ -65,13 +68,14 @@ try {
                         { name: "Happy Nature 3" }
                     ],
                 },
-            }
+            ]
         },
         {
             emotion: "sad",
             emoji: "😢",
-            categories: {
-                city: {
+            categories: [
+                {
+                    name: "city",
                     img: "https://wallpapercave.com/wp/wp3594884.jpg",
                     destinations: [
                         { name: "Sad City 1" },
@@ -79,7 +83,8 @@ try {
                         { name: "Sad City 3" }
                     ],
                 },
-                beach: {
+                {
+                    name: "beach",
                     img: "https://th.bing.com/th/id/R.4e8d81070377c62b6f70f19f5dbd29dc?rik=NSSVLX43YmM7dA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2015%2f07%2f4e8d81070377c62b6f70f19f5dbd29dc.jpg&ehk=zPd2CAORkHzF7J%2bglwU5cPkVXjoWrX4tVVKWPaE0z0c%3d&risl=1&pid=ImgRaw&r=0",
                     destinations: [
                         { name: "Sad Beach 1" },
@@ -87,7 +92,8 @@ try {
                         { name: "Sad Beach 3" }
                     ],
                 },
-                nature: {
+                {
+                    name: "nature",
                     img: "https://th.bing.com/th/id/OIP.xHAa7hfT7gXHVAVusTytogHaD-?rs=1&pid=ImgDetMain",
                     destinations: [
                         { name: "Sad Nature 1" },
@@ -95,13 +101,14 @@ try {
                         { name: "Sad Nature 3" }
                     ],
                 },
-            }
+            ]
         },
         {
             emotion: "angry",
             emoji: "😡",
-            categories: {
-                city: {
+            categories: [
+                {
+                    name: "city",
                     img: "https://wallpapercave.com/wp/wp3594884.jpg",
                     destinations: [
                         { name: "Angry City 1" },
@@ -109,7 +116,8 @@ try {
                         { name: "Angry City 3" }
                     ],
                 },
-                beach: {
+                {
+                    name: "beach",
                     img: "https://th.bing.com/th/id/R.4e8d81070377c62b6f70f19f5dbd29dc?rik=NSSVLX43YmM7dA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2015%2f07%2f4e8d81070377c62b6f70f19f5dbd29dc.jpg&ehk=zPd2CAORkHzF7J%2bglwU5cPkVXjoWrX4tVVKWPaE0z0c%3d&risl=1&pid=ImgRaw&r=0",
                     destinations: [
                         { name: "Angry Beach 1" },
@@ -117,7 +125,8 @@ try {
                         { name: "Angry Beach 3" }
                     ],
                 },
-                nature: {
+                {
+                    name: "nature",
                     img: "https://th.bing.com/th/id/OIP.xHAa7hfT7gXHVAVusTytogHaD-?rs=1&pid=ImgDetMain",
                     destinations: [
                         { name: "Angry Nature 1" },
@@ -125,13 +134,14 @@ try {
                         { name: "Angry Nature 3" }
                     ],
                 },
-            }
+            ]
         },
         {
             emotion: "anxious",
             emoji: "😟",
-            categories: {
-                city: {
+            categories: [
+                 {
+                    name: "city",
                     img: "https://wallpapercave.com/wp/wp3594884.jpg",
                     destinations: [
                         { name: "Anxious City 1" },
@@ -139,7 +149,8 @@ try {
                         { name: "Anxious City 3" }
                     ],
                 },
-                beach: {
+                {
+                    name: "beach", 
                     img: "https://th.bing.com/th/id/R.4e8d81070377c62b6f70f19f5dbd29dc?rik=NSSVLX43YmM7dA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2015%2f07%2f4e8d81070377c62b6f70f19f5dbd29dc.jpg&ehk=zPd2CAORkHzF7J%2bglwU5cPkVXjoWrX4tVVKWPaE0z0c%3d&risl=1&pid=ImgRaw&r=0",
                     destinations: [
                         { name: "Anxious Beach 1" },
@@ -147,7 +158,8 @@ try {
                         { name: "Anxious Beach 3" }
                     ],
                 },
-                nature: {
+                {
+                    name: "nature",
                     img: "https://th.bing.com/th/id/OIP.xHAa7hfT7gXHVAVusTytogHaD-?rs=1&pid=ImgDetMain",
                     destinations: [
                         { name: "Anxious Nature 1" },
@@ -155,7 +167,7 @@ try {
                         { name: "Anxious Nature 3" }
                     ],
                 },
-            }
+            ]
         },
     ]
 
