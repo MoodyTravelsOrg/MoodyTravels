@@ -5,20 +5,20 @@ import Navbar from '../Navbar/Navbar'
 function Layout({ isAuthenticated, userImage, username, onLogout }) {
   return (
     <>
-    <header>
+      <header>
         <Navbar 
-            isAuthenticated={isAuthenticated}
-            userImage={userImage}
-            defaultProfileImage={null} // Add the default profile image here
-            username={username}
-            onLogout={onLogout}
+          isAuthenticated={isAuthenticated}
+          userImage={userImage}
+          defaultProfileImage={null} // Add the default profile image here
+          username={username}
+          onLogout={onLogout}
         />
-    </header>
-    <main>
+      </header>
+      <main>
         <Outlet />
-    </main>
+      </main>
     </>
   )
 }
 
-export default Layout
+export default Layout;

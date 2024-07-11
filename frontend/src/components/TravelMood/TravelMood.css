@@ -145,3 +145,7 @@
 .links a:hover {
   color: #00f;
 }
+
+.destination {
+  cursor: pointer;
+}
