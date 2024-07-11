@@ -1,8 +1,10 @@
 import React from "react";
 import "./Homepage.css";
+import TravelMood from "../components/TravelMood/TravelMood";
 
 const Homepage = () => {
   return (
+    <>
     <div className="homepage-container">
       <div className="glass-effect">
         <h1>Welcome to MoodyTravels</h1>
@@ -11,7 +13,10 @@ const Homepage = () => {
           information and resources you need. Explore and enjoy!
         </p>
       </div>
+      <TravelMood />
     </div>
+    
+    </> 
   );
 };
 

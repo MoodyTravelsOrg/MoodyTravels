@@ -8,7 +8,6 @@ const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
     <div className="header">
       <Link to="/" className="logo">MoodyTravels</Link>
       <nav className="navbar">
-        <Link to="/">Home</Link>
         <Link to="/mission">Our Mission</Link>
         <Link to="/how-it-works">How it works</Link>
         <Link to="/contact">Contact</Link>
