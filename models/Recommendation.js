@@ -10,29 +10,19 @@ const recommendationSchema = new Schema({
         type: String,
         required: true
     },
-    categories: {
-        city: {
+    categories: [
+        {
+            name: {
+                type: String,
+                required: true,
+            },
             img: { 
                 type: String, 
                 required: true 
             },
             destinations: [destinationSchema] // array of subdocuments
-        },
-        beach: {
-            img: { 
-                type: String, 
-                required: true 
-            },
-            destinations: [destinationSchema] 
-        },
-        nature: {
-            img: { 
-                type: String, 
-                required: true 
-            },
-            destinations: [destinationSchema] 
         }
-    }
+    ]
 })
 
 const Recommendation = model("recommendation", recommendationSchema);
