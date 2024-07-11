@@ -1,24 +1,28 @@
-
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
-  useLocation
+  useNavigate,
 } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import Homepage from "./views/Homepage";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import Homepage from "./views/Homepage";
-import Navbar from './components/Navbar/Navbar';
-import TravelMood from "./views/TravelMood";
-import UserDashboard from "./views/UserDashboard";
+import MoodTracker from "./components/MoodTracker/MoodTracker";
+import TravelMood from "./components/TravelMood/TravelMood";
+import DestinationDetail from "./components/DestinationView/DestinationView";
+import PageNotFound from "./views/PageNotFound";
 
-const App = () => {
+
+// App component with all the routing logic for make posible the navigation between the different views handled by the Routes component and keeping the Navbar component always visible at the top of the page 
+const AppContent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
   const [userImage, setUserImage] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -34,70 +38,38 @@ const App = () => {
   }, []);
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUsername("");
-    setUserId(null);
-    setUserImage(null);
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('userImage');
+    setUsername('');
+    setUserId(null);
+    setUserImage(null);
+    setIsAuthenticated(false);
+    navigate('/');
   };
 
   return (
+    <Routes>
+      <Route path="/" element={<Layout isAuthenticated={isAuthenticated} userImage={userImage} username={username} onLogout={handleLogout} />}>
+        <Route index element={<Homepage isAuthenticated={isAuthenticated} />} />
+        <Route path="/mood-tracker" element={<MoodTracker />} />
+        <Route path="/travel-mood" element={<TravelMood />} />
+        <Route path="/destination/:name" element={<DestinationDetail />} />
+        <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
+        <Route path="/register" element={<Register setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
+  );
+};
+
+// App component 
+const App = () => {
+  return (
     <Router>
-      <Navbar 
-        isAuthenticated={isAuthenticated}
-        userImage={userImage}
-        defaultProfileImage={null}
-        username={username}
-        onLogout={handleLogout}
-      />
-      <MainRoutes 
-        isAuthenticated={isAuthenticated}
-        userId={userId}
-        setUserId={setUserId}
-        setIsAuthenticated={setIsAuthenticated}
-        setUsername={setUsername}
-        setUserImage={setUserImage}
-      />
+      <AppContent />
     </Router>
   );
 };
 
-const MainRoutes = ({ isAuthenticated, userId, setUserId, setIsAuthenticated, setUsername, setUserImage }) => {
-  const location = useLocation();
-  const showTravelMood = location.pathname !== "/login" && location.pathname !== "/register";
-
-  return (
-    <>
-      <Routes>
-        <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
-        <Route
-          path="/register"
-          element={
-            <Register
-              setUserId={setUserId}
-              setIsAuthenticated={setIsAuthenticated}
-              setUsername={setUsername}
-            />
-          }
-        />
-        <Route
-          path="/"
-          element={<Homepage isAuthenticated={isAuthenticated} />}
-        />
-        {isAuthenticated && (
-          <Route
-            path="/user-profile"
-            element={<UserDashboard userId={userId} setUsername={setUsername} setUserImage={setUserImage} />}
-          />
-        )}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      {showTravelMood && <TravelMood />}
-    </>
-  );
-};
-
 export default App;
-

@@ -14,7 +14,7 @@
   margin-top: 60px;
 }
 
-.travel-tittle {
+.travel-title {
   font-size: 3.5rem;
   color: white;
   text-align: center;
@@ -144,4 +144,8 @@
 
 .links a:hover {
   color: #00f;
+}
+
+.destination {
+  cursor: pointer;
 }

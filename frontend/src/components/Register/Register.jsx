@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import defaultProfileImage from '../../assets/default-profile.png';
 
-const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
+const Register = ({ setUserId, setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsernameState] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-  const fileInput = useRef(null);
+  const fileInput = useRef(null); 
   const recaptchaRef = useRef(null);
 
   const handleRegister = async (e) => {
@@ -39,41 +39,51 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
       formData.append('password', password);
       formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
-
+    
       const settings = {
         method: "POST",
         credentials: "include",
         body: formData,
-      };
+      }
 
       const response = await fetch(`${import.meta.env.VITE_API}/register`, settings);
 
       if (response.ok) {
         const data = await response.json();
 
+        
         localStorage.setItem('username', data.username);
         localStorage.setItem('userId', data.id);
         localStorage.setItem('userImage', data.profileImage || defaultProfileImage);
         setUserId(data.id);
         setIsAuthenticated(true);
         setUsername(data.username);
-        setSuccess("Registration successful");
-
-        fileInput.current.value = "";
+        setProfileImage(data.profileImage || defaultProfileImage);
+        
+        fileInput.current.value = ""; 
         recaptchaRef.current.reset();
+        setSuccess("Registration successful");
         setRecaptchaToken("");
 
+        alert(`Registration successful. Welcome, ${data.username}!`);
+
+
         navigate('/');
+        refreshPage();
       } else {
-        const { message } = await response.json();
-        setError(message || "Registration failed");
+        const errorData = await response.json();
+        console.log(errorData)
+        setError(errorData.message || 'Registration failed');
+        alert(errorData.error.message);
       }
     } catch (error) {
-      setError("An error occurred. Please try again later.");
+      setError("An error occurred");
+      alert('An error occurred');
     }
   }
 
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  console.log("ReCAPTCHA Site Key:", siteKey); // Debugging line
 
   return (
     <div className="container">
@@ -93,7 +103,7 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
           <input
             type="text"
             value={username}
-            onChange={(e) => setUsernameState(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
@@ -116,12 +126,12 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
           />
         </label>
         <label>
-          Profile Image:
-          <input
-            type="file"
-            onChange={(e) => setProfileImage(e.target.files[0])}
-            ref={fileInput}
-          />
+            Profile Image:
+            <input
+                type="file"
+                onChange={(e) => setProfileImage(e.target.files[0])}
+                ref={fileInput}
+            />
         </label>
         {siteKey && (
           <ReCAPTCHA
@@ -139,7 +149,6 @@ const Register = ({ setUserId, setIsAuthenticated, setUsername }) => {
 }
 
 export default Register;
-
 
 
 
