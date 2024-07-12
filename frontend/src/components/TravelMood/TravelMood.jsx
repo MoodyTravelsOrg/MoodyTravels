@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TravelMood.css';
 
 // TravelMood component with all the logic for the travel mood selector
@@ -14,6 +15,8 @@ const TravelMood = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [showDestinations, setShowDestinations] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     handleGetRecommendations();
   }, []);
@@ -21,13 +24,9 @@ const TravelMood = () => {
   async function handleGetRecommendations() {
     try {
       const response = await fetch(`${import.meta.env.VITE_API}/travel`);
-      console.log(response);
-
       if (response.ok) {
         const recommendations = await response.json();
-
         setData(recommendations);
-        console.log(data);
       } else {
         const { error } = await response.json();
         throw new Error(error.message);
@@ -42,12 +41,15 @@ const TravelMood = () => {
     setShowCategories(true);
     setSelectedCategory('');
     setShowDestinations(false);
-    console.log(selectedEmotion);
   };
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setShowDestinations(true);
+  };
+
+  const handleDestinationClick = (destination) => {
+    navigate(`/destination/${destination.name}`, { state: { destination } });
   };
 
   const handleBackClick = () => {
@@ -61,7 +63,6 @@ const TravelMood = () => {
   };
 
   return (
-    <>
     <div className="travel-mood">
       {!showCategories && (
         <div className="emotions-input">
@@ -70,7 +71,7 @@ const TravelMood = () => {
             {data.map(item => (
               <button 
                 key={item.emotion} 
-                className={`emotion-button ${selectedEmotion === item.emotion ? 'selected' : ''}`} 
+                className={`emotion-button ${selectedEmotion.emotion === item.emotion ? 'selected' : ''}`} 
                 onClick={() => handleEmotionClick(item)}
               >
                 <span className="emoji">{item.emoji}</span>
@@ -85,7 +86,7 @@ const TravelMood = () => {
           {selectedEmotion.categories.map(category => (
             <div 
               key={category.name}
-              className={`category ${selectedCategory === category.name ? 'selected' : ''}`} 
+              className={`category ${selectedCategory.name === category.name ? 'selected' : ''}`} 
               onClick={() => handleCategoryClick(category)}
             >
               <img src={category.img} alt={category.name} />
@@ -97,7 +98,11 @@ const TravelMood = () => {
       {showDestinations && (
         <div className="destinations">
           {selectedCategory.destinations.map(destination => (
-            <div key={destination.name} className="destination">
+            <div 
+              key={destination.name} 
+              className="destination" 
+              onClick={() => handleDestinationClick(destination)}
+            >
               <img src={destination.img} alt={destination.name} />
               <p>{destination.name}</p>
               <div className="links">
@@ -115,11 +120,11 @@ const TravelMood = () => {
         <button className="back-button" onClick={handleBackClick}>Go Back</button>
       )}
     </div>
-    </>
   );
 };
 
 export default TravelMood;
+
 
 
 
