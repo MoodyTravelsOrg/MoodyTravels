@@ -68,7 +68,8 @@ const MoodTracker = ({ userId }) => {
           throw new Error(errorData.error.message);
         }
         await fetchMoodLog();
-        setSelectedMood(null)
+        setSelectedMood(null);
+        setEdit(false);
       } catch (err) {
         alert(err.message);
       }
