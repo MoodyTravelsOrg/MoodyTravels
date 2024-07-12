@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/" element={<Layout isAuthenticated={isAuthenticated} userImage={userImage} username={username} onLogout={handleLogout}/>}>
           {/* child routes */}
           <Route index element={<Homepage isAuthenticated={isAuthenticated} />} />
-          <Route path="/mood-tracker" element={<MoodTracker />}></Route>
+          <Route path="/mood-tracker" element={<MoodTracker userId={userId} />}></Route>
           <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
           <Route path="/register" element={<Register setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
           <Route path="*" element={<PageNotFound />} /> 
