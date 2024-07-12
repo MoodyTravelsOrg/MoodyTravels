@@ -1,9 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import defaultProfileImage from '../../assets/default-profile.png';
 
 const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout(); // Ejecuta la función de logout pasada desde props
+    navigate('/'); // Redirige al usuario a la página de inicio
+  };
+
   return (
     <div className="header">
       <Link to="/" className="logo">MoodyTravels</Link>
@@ -23,7 +30,7 @@ const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
             />
             <span className="welcome-msg">Welcome {username}</span>
           </Link>
-          <button className="navbar-button-logout" onClick={onLogout}>Logout</button>
+          <button className="navbar-button-logout" onClick={handleLogout}>Logout</button>
         </div>
       ) : (
         <div className="auth-links">
@@ -36,5 +43,8 @@ const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
 };
 
 export default Navbar;
+
+
+
 
 
