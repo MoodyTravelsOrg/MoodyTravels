@@ -71,6 +71,7 @@ const MoodTracker = ({ userId }) => {
         setSelectedMood(null);
         setEdit(false);
       } catch (err) {
+        setSelectedMood(null);
         alert(err.message);
       }
     }
