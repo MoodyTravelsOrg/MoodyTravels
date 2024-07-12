@@ -52,7 +52,7 @@ const AppContent = () => {
     <Routes>
       <Route path="/" element={<Layout isAuthenticated={isAuthenticated} userImage={userImage} username={username} onLogout={handleLogout} />}>
         <Route index element={<Homepage isAuthenticated={isAuthenticated} />} />
-        <Route path="/mood-tracker" element={<MoodTracker />} />
+        <Route path="/mood-tracker" element={<MoodTracker userId={userId} />} />
         <Route path="/travel-mood" element={<TravelMood />} />
         <Route path="/destination/:name" element={<DestinationDetail />} />
         <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />

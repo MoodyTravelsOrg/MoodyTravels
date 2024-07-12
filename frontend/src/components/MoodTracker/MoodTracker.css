@@ -1,57 +1,80 @@
 .MoodTrackerContainer {
-    padding: 20px;
-    margin: 20px;
-  }
-  
-  .MoodListContainer {
+  padding: 20px;
+  margin: 20px;
+}
 
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px 0;
-    background: rgba(255, 255, 255, 0.057);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  
-  .MoodButton {
-    background: rgba(255, 255, 255, 0.37);
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .MoodButton:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-  
-  .MoodLogContainer {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px 0;
-  }
-  
-  .LogEntry {
-    margin: 10px 0;
-  }
-  
-  .ActionButton {
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .ActionButton:hover {
-    background: #aaaaaa;
-  }
-  
+.MoodListContainer {
+
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.057);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.MoodButton {
+  background: rgba(255, 255, 255, 0.37);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.MoodButton:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.MoodLogContainer {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.LogEntry {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.ActionButton {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ActionButton:hover {
+  background: #aaaaaa;
+}
+
+.selected {
+  scale: 1.2;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+.editBtn {
+
+  margin: 0;
+  height: 1.5rem;
+  padding: 0;
+  font-size: 0.8rem;
+  min-width: 5rem;
+}
+
+.editBtn:hover {
+  background-color: red;
+}
