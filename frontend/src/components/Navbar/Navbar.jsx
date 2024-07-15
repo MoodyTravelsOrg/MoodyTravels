@@ -1,28 +1,24 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 import defaultProfileImage from '../../assets/default-profile.png';
+import { Context } from '../../context/Context.jsx';
+const Navbar = () => {
 
-const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    onLogout(); // Ejecuta la función de logout pasada desde props
-    navigate('/'); // Redirige al usuario a la página de inicio
-  };
+  const { isAuthenticated, userImage, username, handleLogout, resetInputs } = useContext(Context)
 
   return (
     <div className="header">
-      <Link to="/" className="logo">MoodyTravels</Link>
+      <Link to="/" className="logo" onClick={resetInputs}>MoodyTravels</Link>
       <nav className="navbar">
-        <Link to="/mission">Our Mission</Link>
-        <Link to="/how-it-works">How it works</Link>
-        <Link to="/contact">Contact</Link>
-        {isAuthenticated && <Link to="/mood-tracker">MoodTracker</Link>}
+        <Link to="/mission" onClick={resetInputs}>Our Mission</Link>
+        <Link to="/how-it-works" onClick={resetInputs}>How it works</Link>
+        <Link to="/contact" onClick={resetInputs}>Contact</Link>
+        {isAuthenticated && <Link to="/mood-tracker" onClick={resetInputs}>MoodTracker</Link>}
       </nav>
       {isAuthenticated ? (
         <div className="navbar-right">
-          <Link to="/user-profile" className="navbar-profile-link">
+          <Link to="/user-profile" className="navbar-profile-link" onClick={resetInputs}>
             <img
               src={userImage || defaultProfileImage}
               alt="User Avatar"
@@ -34,8 +30,8 @@ const Navbar = ({ isAuthenticated, userImage, username, onLogout }) => {
         </div>
       ) : (
         <div className="auth-links">
-          <Link to="/login" className="navbar-button">Login</Link>
-          <Link to="/register" className="navbar-button">Register</Link>
+          <Link to="/login" className="navbar-button" onClick={resetInputs}>Login</Link>
+          <Link to="/register" className="navbar-button" onClick={resetInputs}>Register</Link>
         </div>
       )}
     </div>

@@ -1,74 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import './TravelMood.css';
-
+import { Context } from '../../context/Context.jsx';
 // TravelMood component with all the logic for the travel mood selector
 
 const TravelMood = () => {
-  const [data, setData] = useState([]);
-  const [selectedEmotion, setSelectedEmotion] = useState({
-    emotion: "",
-    emoji: "",
-    categories: []
-  });
-  const [selectedCategory, setSelectedCategory] = useState({});
-  const [showCategories, setShowCategories] = useState(false);
-  const [showDestinations, setShowDestinations] = useState(false);
 
-  const navigate = useNavigate();
+  const {recommendations, selectedEmotion, selectedCategory, showCategories, showDestinations, 
+         handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick, 
+         handleBackClick} = useContext(Context)
 
+
+         
   useEffect(() => {
     handleGetRecommendations();
   }, []);
 
-  async function handleGetRecommendations() {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API}/travel`);
-      if (response.ok) {
-        const recommendations = await response.json();
-        setData(recommendations);
-      } else {
-        const { error } = await response.json();
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  const handleEmotionClick = (emotion) => {
-    setSelectedEmotion(emotion);
-    setShowCategories(true);
-    setSelectedCategory('');
-    setShowDestinations(false);
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setShowDestinations(true);
-  };
-
-  const handleDestinationClick = (destination) => {
-    navigate(`/destination/${destination.name}`, { state: { destination } });
-  };
-
-  const handleBackClick = () => {
-    if (showDestinations) {
-      setShowDestinations(false);
-      setSelectedCategory('');
-    } else if (showCategories) {
-      setShowCategories(false);
-      setSelectedEmotion('');
-    }
-  };
-
+  
   return (
     <div className="travel-mood">
       {!showCategories && (
         <div className="emotions-input">
           <label className='travel-title' htmlFor="emotions">How are you feeling today?</label>
           <div className="emotions-buttons">
-            {data.map(item => (
+            {recommendations.map(item => (
               <button 
                 key={item.emotion} 
                 className={`emotion-button ${selectedEmotion.emotion === item.emotion ? 'selected' : ''}`} 

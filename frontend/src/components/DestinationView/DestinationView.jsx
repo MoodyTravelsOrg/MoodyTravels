@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './DestinationView.css';
 
 const DestinationDetail = () => {
+
   const location = useLocation();
   const { destination } = location.state;
 
