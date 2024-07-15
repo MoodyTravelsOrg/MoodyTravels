@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
   useNavigate,
@@ -16,8 +15,8 @@ import DestinationDetail from "./components/DestinationView/DestinationView";
 import PageNotFound from "./views/PageNotFound";
 
 
-// App component with all the routing logic for make posible the navigation between the different views handled by the Routes component and keeping the Navbar component always visible at the top of the page 
-const AppContent = () => {
+// App component with all the routing logic for make posible the navigation between the different views and keeping the Navbar component always visible at the top of the page 
+const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
@@ -52,7 +51,7 @@ const AppContent = () => {
     <Routes>
       <Route path="/" element={<Layout isAuthenticated={isAuthenticated} userImage={userImage} username={username} onLogout={handleLogout} />}>
         <Route index element={<Homepage isAuthenticated={isAuthenticated} />} />
-        <Route path="/mood-tracker" element={<MoodTracker />} />
+        <Route path="/mood-tracker" element={<MoodTracker userId={userId} />} />
         <Route path="/travel-mood" element={<TravelMood />} />
         <Route path="/destination/:name" element={<DestinationDetail />} />
         <Route path="/login" element={<Login setUserId={setUserId} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
@@ -60,15 +59,6 @@ const AppContent = () => {
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
-  );
-};
-
-// App component 
-const App = () => {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
   );
 };
 

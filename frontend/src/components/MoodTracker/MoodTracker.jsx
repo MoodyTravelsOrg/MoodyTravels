@@ -5,63 +5,79 @@ const MoodTracker = ({ userId }) => {
   const [selectedMood, setSelectedMood] = useState(null);
   const [moodLog, setMoodLog] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+  const [edit, setEdit] = useState(false);
 
-  useEffect(() => {
-    const fetchMoodLog = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/users/${userId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        });
 
-        if (!response.ok) {
-          throw new Error(`Error fetching mood log: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        setMoodLog(data.moods);
-      } catch (error) {
-        console.error('Error fetching mood log:', error);
+  // function to get user Mood:
+  const fetchMoodLog = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error.message);
       }
-    };
-
-    fetchMoodLog();
-  }, [moodLog]);
-
-  const handleMoodSelect = (mood) => {
-    setSelectedMood(mood);
+      const data = await response.json();
+      setMoodLog(data.moods);
+      localStorage.setItem('userMood', JSON.stringify(data.moods));
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
-  const handleLogMood = async () => {
-    if (selectedMood) {
-    /* const newLog = { type: selectedMood };*/   
+  // useEffect to fetch users mood every time a new user logs in:
+  useEffect(() => {
+    fetchMoodLog();
+  }, [userId]);
 
-      
-try {
+
+
+  // function to select a mood:
+  const handleMoodSelect = (mood) => {
+    if (selectedMood === mood) {
+      setSelectedMood(null);
+    } else {
+      setSelectedMood(mood)
+    }
+
+  };
+
+  // function to log the mood:
+  const handleLogMood = async () => {
+    if (!selectedMood) {
+      alert("Please select a mood before logging")
+    } else {
+
+      try {
         const response = await fetch(`http://localhost:4000/users/${userId}/moods`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           credentials: 'include',
-          body: JSON.stringify(selectedMood),
+          body: JSON.stringify({ selectedMood }),
         });
 
         if (!response.ok) {
-          throw new Error(`Error logging mood: ${response.statusText}`);
+          const errorData = await response.json();
+          throw new Error(errorData.error.message);
         }
-        const data = await response.json();
-        console.log(data)
-        setMoodLog(data);
-      } catch (error) {
-        console.error('Error logging mood:', error);
+        await fetchMoodLog();
+        setSelectedMood(null);
+        setEdit(false);
+      } catch (err) {
+        setSelectedMood(null);
+        alert(err.message);
       }
     }
   };
 
+  // funtion to delete mood:
   const handleDeleteMood = async (moodId) => {
     try {
       const response = await fetch(`http://localhost:4000/users/${userId}/${moodId}`, {
@@ -73,22 +89,47 @@ try {
       });
 
       if (!response.ok) {
-        throw new Error(`Error deleting mood: ${response.statusText}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error.message);
       }
-      const data = await response.json();
-      console.log(data)
-      setMoodLog(data);
-      
-    } catch (error) {
-      console.error('Error deleting mood:', error);
+      await fetchMoodLog();
+      setSelectedMood(null)
+    } catch (err) {
+      alert(err.message);
     }
   };
 
-/*   const handleSaveMood = () => {
-    console.log("Saving mood:", selectedMood);
- 
-  }; */
+  // function to replace mood:
+  const handleReplaceMood = async (moodId) => {
+    try {
+      if (!selectedMood) {
+        alert("Please select a mood to Replace with")
+      } else {
+        const response = await fetch(`http://localhost:4000/users/${userId}/${moodId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ selectedMood }),
+        });
 
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error.message);
+        }
+        await fetchMoodLog();
+        setSelectedMood(null)
+        
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+
+  
+ 
   const handleGetRecommendations = async () => {
     try {
       const response = await fetch('http://localhost:4000/travel', {
@@ -126,31 +167,31 @@ try {
       </div>
       <div>
         <button className="ActionButton" onClick={handleLogMood}>Log Mood</button>
-{/*         <button className="ActionButton" onClick={handleSaveMood}>Save Mood</button>
- */}        <button className="ActionButton" onClick={handleGetRecommendations}>Get Recommendations</button>
+        {(!edit && moodLog.length > 0) && <button className="ActionButton" onClick={() => setEdit(!edit)}>Edit Log</button>}
+        {(edit && moodLog.length > 0) && <button className="ActionButton" onClick={() => setEdit(!edit)}>End Edit</button>}
+        <button className="ActionButton" onClick={handleGetRecommendations}>Get Recommendations</button>
       </div>
 
 
       <div className="MoodLogContainer">
         <h3>Mood Log</h3>
-       {/*  {moodLog.map((entry) => (
-          <div key={entry._id} className="LogEntry">
-            {new Date(entry.createdAt).toLocaleDateString()} ---- {entry.type}
-            <button onClick={() => handleDeleteMood(entry._id)}>Delete</button>
-          </div>
-        ))} */}
+        {moodLog.length > 0 && moodLog.map((entry) => {
+          const date = new Date(entry.createdAt);
+          const formattedDate = date.toLocaleDateString();
+          const formattedTime = date.toLocaleTimeString();
+          return (
+            <div key={entry._id} className="LogEntry">
+              <p><span>{formattedDate} at {formattedTime}</span> </p>
+              <h4>{entry.type}</h4>
+              {edit && <button onClick={() => handleDeleteMood(entry._id)} className='editBtn'>Delete</button>}
+              {edit && <button onClick={() => handleReplaceMood(entry._id)} className='editBtn'>Replace</button>}
 
-        <div>
-          {moodLog.map(mood => {
-            <li>
-              {mood.type}
-              <button onClick={() => handleDeleteMood(mood._id)}>Delete</button>
-            </li>
-          })}
-        </div>
+            </div>
+          )
+        })}
       </div>
 
-      
+
       <div className="RecommendationsContainer">
         <h3>Recommendations</h3>
         {recommendations.map((rec, index) => (
