@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "./UserProfile.css";
 import defaultProfileImage from "../../assets/default-profile.png";
 
-const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
+const UserProfile = ({ userId, setUserImage, setUsername }) => {
   const [userData, setUserData] = useState({});
   const [username, setUsernameState] = useState("");
-  const [email, setEmailState] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profileImage, setProfileImage] = useState(null);
+  const [lastLogin, setLastLogin] = useState("");
   const [editField, setEditField] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -20,15 +21,18 @@ const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
         const response = await fetch(`${import.meta.env.VITE_API}/users/${userId}`, {
           credentials: "include"
         });
+
         if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-          setUsernameState(data.username);
-          setEmailState(data.email);
-          setProfileImage(data.profileImage);
+          const userData = await response.json();
+
+          setUserData(userData);
+          setUsernameState(userData.username);
+          setEmail(userData.email);
+          setProfileImage(userData.profileImage || defaultProfileImage);
+          setLastLogin(userData.lastLogin);
         } else {
           const errorData = await response.json();
-          setError(errorData.message);
+          throw new Error(errorData.message);
         }
       } catch (error) {
         setError("An error occurred while fetching user data");
@@ -64,7 +68,7 @@ const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
         navigate("/");
       } else {
         const errorData = await response.json();
-        setError(errorData.message);
+        throw new Error(errorData.message);
       }
     } catch (error) {
       setError("An error occurred while updating profile");
@@ -90,7 +94,7 @@ const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
         window.location.reload();
       } else {
         const errorData = await response.json();
-        setError(errorData.message);
+        throw new Error(errorData.message);
       }
     } catch (error) {
       setError("An error occurred while deleting account");
@@ -116,6 +120,9 @@ const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
           <span>Profile Image:</span>
           <img src={profileImage} alt="Profile" className="profile-image" />
           <button onClick={() => setEditField("profileImage")}>Edit</button>
+        </div>
+        <div className="profile-field">
+          <span>Last Login: {lastLogin}</span>
         </div>
         <div className="profile-field">
           <button onClick={() => setEditField("password")}>Change Password</button>
@@ -160,5 +167,8 @@ const UserProfile = ({ userId, setUserImage, setEmail, setUsername }) => {
 };
 
 export default UserProfile;
+
+
+
 
 
