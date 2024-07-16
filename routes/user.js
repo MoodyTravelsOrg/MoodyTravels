@@ -6,8 +6,8 @@ import authenticateToken from "../middlewares/authenticateToken.js"
 
 const router = express.Router();
 
-router.use(authenticateToken); 
-
+/* router.use(authenticateToken); 
+ */
 router.get("/:id", getUserData)// right now we are not using this route, I created because we might need this route later.
 
 

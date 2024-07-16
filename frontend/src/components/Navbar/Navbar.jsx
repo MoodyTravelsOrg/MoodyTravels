@@ -5,7 +5,7 @@ import defaultProfileImage from '../../assets/default-profile.png';
 import { Context } from '../../context/Context.jsx';
 const Navbar = () => {
 
-  const { isAuthenticated, userImage, username, handleLogout, resetInputs } = useContext(Context)
+  const { isLoggedIn, userImage, handleLogout, resetInputs, loggedInUserData } = useContext(Context)
 
   return (
     <div className="header">
@@ -14,9 +14,9 @@ const Navbar = () => {
         <Link to="/mission" onClick={resetInputs}>Our Mission</Link>
         <Link to="/how-it-works" onClick={resetInputs}>How it works</Link>
         <Link to="/contact" onClick={resetInputs}>Contact</Link>
-        {isAuthenticated && <Link to="/mood-tracker" onClick={resetInputs}>MoodTracker</Link>}
+        {isLoggedIn && <Link to="/mood-tracker" onClick={resetInputs}>MoodTracker</Link>}
       </nav>
-      {isAuthenticated ? (
+      {isLoggedIn ? (
         <div className="navbar-right">
           <Link to="/user-profile" className="navbar-profile-link" onClick={resetInputs}>
             <img
@@ -24,7 +24,7 @@ const Navbar = () => {
               alt="User Avatar"
               className="navbar-profile-image"
             />
-            <span className="welcome-msg">Welcome {username}</span>
+            <span className="welcome-msg">Welcome {loggedInUserData.username}</span>
           </Link>
           <button className="navbar-button-logout" onClick={handleLogout}>Logout</button>
         </div>
