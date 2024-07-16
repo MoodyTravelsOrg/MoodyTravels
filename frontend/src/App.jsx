@@ -15,7 +15,7 @@ import { Context } from './context/Context.jsx';
 // App component with all the routing logic for make posible the navigation between the different views and keeping the Navbar component always visible at the top of the page 
 const App = () => {
 
-  const {  setUsername, setUserId, setUserImage, setIsAuthenticated} = useContext(Context)
+  const {  setUsername, setUserId, setUserImage, setIsAuthenticated, userId } = useContext(Context)
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');

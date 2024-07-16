@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import createError from "http-errors";
 import moment from "moment";
+import validator from "validator";
 
 
 // function to send users Data to frontend:
@@ -17,6 +18,7 @@ export async function getUserData(req, res, next) {
     try {
       res.status(201).json({
         id: foundUser.id,
+        email: foundUser.email,
         username: foundUser.username,
         profileImage: foundUser.profileImage,
         moods: foundUser.moods.filter(mood => mood.deletedAt === null)
@@ -29,6 +31,64 @@ export async function getUserData(req, res, next) {
   }
 }
 
+// function to update user data
+export async function updateUserData(req, res, next) {
+  const { username, password } = req.body;
+
+  let foundUser;
+
+  // check if new password is strong
+  if (!validator.isStrongPassword(password)) {
+    return next(createError(400, "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"));
+  }
+
+  try {
+    foundUser = await User.findById(req.params.id);
+  } catch (error) {
+    return next(createError(500, "Server error"));
+  }
+
+  if (foundUser) {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id, // id
+        {$set: {username: username, password: password}}, // update
+        {new: true} // options
+      );
+
+      // add profile image if there is a
+      if(req.file) {
+        updatedUser.profileImage = req.file.filename;
+      }
+
+      await updatedUser.save();
+  
+      res.status(201).json(updatedUser);
+    } catch (error) {
+      next(createError(500, "Server error"));
+    }
+    
+  } else {
+    next(createError(404, "User not found"));
+  }
+}
+
+// function to hard delet user account
+export async function deleteUser(req, res, next) {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (deletedUser) {
+      res.json({
+        message: "Account deleted successfully"
+      })
+    } else {
+      next(createError(404, "User not found"));
+    }
+  } catch (error) {
+    return next(createError(500, "Server error"));
+  }
+}
 
 // Function to log/add mood:
 export async function addMood(req, res, next) {
