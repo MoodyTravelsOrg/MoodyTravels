@@ -57,6 +57,7 @@ function ContextProvider({ children }) {
         throw new Error(errorData.error.message);
       }
       const data = await response.json();
+      setLoggedInUserData(data)
       localStorage.setItem('loggedInUserData', JSON.stringify(data));
       localStorage.setItem('userId', data.id);
       localStorage.setItem('userImage', data.profileImage);
