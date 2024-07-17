@@ -7,7 +7,7 @@ import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
-/* router.use(authenticateToken); */ //! not working right now 
+router.use(authenticateToken); //! not working right now 
 
 // GET http://localhost:4000/users/:id
 router.get("/:id", getUserData);
