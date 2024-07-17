@@ -42,10 +42,39 @@ function ContextProvider({ children }) {
   //---------------------------------------------------------------------------------------------
 
   // ? All Section 2: functions to pass to the children: 
+
+// helper function to get tokens:
+
+
+
+async function fetchWithToken(url, settings) {
+  const firstAccessResponse = await fetch(url, settings);
+
+  if (firstAccessResponse.ok) {
+    return firstAccessResponse;
+  } else {
+
+    console.log("Token expired!")
+    const refreshSettings = {
+      credentials: "include"
+    }
+    const refreshResponse = await fetch("http://localhost:4000/refresh-token", refreshSettings);
+    if (refreshResponse.ok) {
+      console.log("New cookies received!")
+      const secondAccessResponse = await fetch(url, settings);
+      return secondAccessResponse;
+    } else {
+      return refreshResponse;
+    }
+  }
+}
+
+
+
   // function to get loggedIn users data and save the data in local storage:
   const getUserData = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/users/${userId}`, {
+      const response = await fetchWithToken(`http://localhost:4000/users/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +172,7 @@ function ContextProvider({ children }) {
     } else {
       try {
         
-        const response = await fetch(`http://localhost:4000/users/${userId}/moods`, {
+        const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -170,7 +199,7 @@ function ContextProvider({ children }) {
   const handleDeleteMood = async (moodId) => {
     try {
       
-      const response = await fetch(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
+      const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -195,7 +224,7 @@ function ContextProvider({ children }) {
       if (!selectedMood) {
         alert("Please select a mood to Replace with")
       } else {
-        const response = await fetch(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
+        const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -324,7 +353,7 @@ function ContextProvider({ children }) {
       if (password) formData.append("password", password);
       if (profileImage !== defaultProfileImage) formData.append("profileImage", profileImage);
 
-      const response = await fetch(`${import.meta.env.VITE_API}/users/${userId}`, {
+      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
         credentials: "include",
         body: formData,
@@ -349,7 +378,7 @@ function ContextProvider({ children }) {
       return;
     }
     try {
-      const response = await fetch(`${import.meta.env.VITE_API}/users/${userId}`, {
+      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "DELETE",
         credentials: "include"
       });
@@ -377,6 +406,12 @@ function resetInputs(){
   setConfirmPassword("")
 }
   
+
+
+
+
+
+
 
   return (
     <Context.Provider value={{
