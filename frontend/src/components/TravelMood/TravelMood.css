@@ -27,12 +27,12 @@
   gap: 10px;
 }
 
-.emotions-input label {
+.emotions-input h2, h2 {
   font-size: 1.2em;
   color: white;
 }
 
-.emotions-buttons {
+.emotion-buttons, .categories-wrapper {
   display: flex;
   gap: 10px;
 }
@@ -75,7 +75,13 @@
   }
 }
 
-.travel-categories, .destinations {
+.travel-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+} 
+
+.destinations {
   display: flex;
   gap: 20px;
 }

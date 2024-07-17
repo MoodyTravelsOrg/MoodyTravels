@@ -321,9 +321,12 @@ async function fetchWithToken(url, settings) {
     setShowDestinations(false);
   };
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setShowDestinations(true);
+  const handleCategoryClick = () => {
+    if (!selectedCategory) {
+      alert("Please select a category first")
+    } else {
+      setShowDestinations(true);
+    }
   };
 
   const handleDestinationClick = (destination) => {
@@ -331,13 +334,8 @@ async function fetchWithToken(url, settings) {
   };
 
   const handleBackClick = () => {
-    if (showDestinations) {
-      setShowDestinations(false);
-      setSelectedCategory('');
-    } else if (showCategories) {
-      setShowCategories(false);
-      setSelectedEmotion('');
-    }
+    setShowDestinations(false);
+    setSelectedCategory('');
   };
 
   // userProfile:
@@ -404,6 +402,10 @@ function resetInputs(){
   setPassword("");
   setError("")
   setConfirmPassword("")
+  setSelectedEmotion("");
+  setSelectedCategory("");
+  setShowCategories(false);
+  setShowDestinations(false);
 }
   
 
