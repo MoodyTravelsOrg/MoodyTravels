@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import './TravelMood.css';
 import { Context } from '../../context/Context.jsx';
+import TravelCategories from '../TravelCategories.jsx';
 
 
 // TravelMood component with all the logic for the travel mood selector
@@ -34,7 +35,8 @@ const TravelMood = () => {
         </div>
       )}
       {showCategories && !showDestinations && (
-        <div className="travel-categories">
+        <>
+        {/* <div className="travel-categories">
           {selectedEmotion.categories.map(category => (
             <div 
               key={category.name}
@@ -45,7 +47,9 @@ const TravelMood = () => {
               <p>{category.name}</p>
             </div>
           ))}
-        </div>
+        </div> */}
+        <TravelCategories />
+        </>
       )}
       {showDestinations && (
         <div className="destinations">
