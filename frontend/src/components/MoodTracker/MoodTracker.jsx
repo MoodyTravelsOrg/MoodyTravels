@@ -1,17 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import './MoodTracker.css';
 import { Context } from '../../context/Context.jsx';
+
 const MoodTracker = () => {
-
   const {
-    userId, selectedMood, moodLog, recommendations, edit, setEdit,
+    selectedMood, recommendations, edit, setEdit,
     handleLogMood, handleDeleteMood, handleMoodSelect, handleReplaceMood,
-    fetchMoodLog, handleGetRecommendations} = useContext(Context)
+    handleGetRecommendations, loggedInUserData
+  } = useContext(Context);
 
-  // useEffect to fetch users mood every time a new user logs in:
-  useEffect(() => {
-    fetchMoodLog();
-  }, [userId]);
+  
 
   return (
     <div className="MoodTrackerContainer">
@@ -29,27 +27,38 @@ const MoodTracker = () => {
       </div>
       <div>
         <button className="ActionButton" onClick={handleLogMood}>Log Mood</button>
-        {(!edit && moodLog.length > 0) && <button className="ActionButton" onClick={() => setEdit(!edit)}>Edit Log</button>}
-        {(edit && moodLog.length > 0) && <button className="ActionButton" onClick={() => setEdit(!edit)}>End Edit</button>}
+        {(!edit && loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0) && (
+          <button className="ActionButton" onClick={() => setEdit(!edit)}>Edit Log</button>
+        )}
+        {(edit && loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0) && (
+          <button className="ActionButton" onClick={() => setEdit(!edit)}>End Edit</button>
+        )}
         <button className="ActionButton" onClick={handleGetRecommendations}>Get Recommendations</button>
       </div>
 
       <div className="MoodLogContainer">
         <h3>Mood Log</h3>
-        {moodLog.length > 0 && moodLog.map((entry) => {
-          const date = new Date(entry.createdAt);
-          const formattedDate = date.toLocaleDateString();
-          const formattedTime = date.toLocaleTimeString();
-          return (
-            <div key={entry._id} className="LogEntry">
-              <p><span>{formattedDate} at {formattedTime}</span> </p>
-              <h4>{entry.type}</h4>
-              {edit && <button onClick={() => handleDeleteMood(entry._id)} className='editBtn'>Delete</button>}
-              {edit && <button onClick={() => handleReplaceMood(entry._id)} className='editBtn'>Replace</button>}
-
-            </div>
-          )
-        })}
+        {loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0 ? (
+          loggedInUserData.moods.map((entry) => {
+            const date = new Date(entry.createdAt);
+            const formattedDate = date.toLocaleDateString();
+            const formattedTime = date.toLocaleTimeString();
+            return (
+              <div key={entry._id} className="LogEntry">
+                <p><span>{formattedDate} at {formattedTime}</span></p>
+                <h4>{entry.type}</h4>
+                {edit && (
+                  <>
+                    <button onClick={() => handleDeleteMood(entry._id)} className='editBtn'>Delete</button>
+                    <button onClick={() => handleReplaceMood(entry._id)} className='editBtn'>Replace</button>
+                  </>
+                )}
+              </div>
+            );
+          })
+        ) : (
+          <p>No moods logged yet.</p>
+        )}
       </div>
 
       <h3>Recommendations</h3>
@@ -79,8 +88,3 @@ const MoodTracker = () => {
 };
 
 export default MoodTracker;
-
-
-
-
-
