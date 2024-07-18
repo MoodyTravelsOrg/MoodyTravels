@@ -1,103 +1,137 @@
 .profile-container {
-    max-width: 1200px;
-    padding: 20px;
-    width: 100%;
-   margin-top: 100px;
-   margin-bottom: 100px;
-    background: rgba(255, 255, 255, 0.056);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-  }
-  
-  .profile-container h2 {
-    margin-bottom: 20px;
-    color: #ffffff;
-  }
-  
-  .profile-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    margin-bottom: 20px;
-  }
-  
-  .profile-field {
-    margin-bottom: 15px;
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .profile-field span {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 10px 5px;
-    border: none;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    color: #333;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-  }
-  
-  button:hover {
-    background: rgba(255, 255, 255, 0.5);
-    color: #000;
-  }
-  
-  .delete-button {
-    background: rgba(255, 0, 0, 0.2);
-  }
-  
-  .delete-button:hover {
-    background: rgba(255, 0, 0, 0.4);
-    color: #fff;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .success {
-    color: green;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"],
-  form input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.3);
-    color: #333;
-  }
+  max-width: 1200px;
+  padding: 20px;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  background: rgba(255, 255, 255, 0.056);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.profile-container h2 {
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.profile-field {
+  margin-bottom: 15px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-field span {
+  font-size: 18px;
+  flex: 1;
+}
+
+.edit-icon {
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #ffffff;
+}
+
+.edit-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #4CAF50;
+}
+
+.cancel-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #F44336;
+}
+
+.edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="password"],
+.edit-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: #000;
+}
+
+.delete-button {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.delete-button:hover {
+  background: rgba(255, 0, 0, 0.4);
+  color: #fff;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: green;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
