@@ -1,7 +1,6 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
-import defaultProfileImage from '../assets/default-profile.png';
 
 export const Context = createContext()
 
@@ -12,7 +11,7 @@ function ContextProvider({ children }) {
   // login/register inputs
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState(null); //! the same as profileImage, check all the functions
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -21,7 +20,7 @@ function ContextProvider({ children }) {
   const recaptchaRef = useRef(null);
 
   const [loggedInUserData, setLoggedInUserData] = useState({})
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // change the to isLoggedIn
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const [error, setError] = useState("");

@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import defaultProfileImage from '../../assets/default-profile.png';
 import { Context } from '../../context/Context.jsx';
 const Navbar = () => {
 
-  const { isLoggedIn, userImage, handleLogout, resetInputs, loggedInUserData } = useContext(Context)
+  const { isLoggedIn, handleLogout, resetInputs, loggedInUserData } = useContext(Context)
 
   return (
     <div className="header">
@@ -20,7 +19,7 @@ const Navbar = () => {
         <div className="navbar-right">
           <Link to="/user-profile" className="navbar-profile-link" onClick={resetInputs}>
             <img
-              src={loggedInUserData.profileImage/*  || defaultProfileImage */}
+              src={loggedInUserData.profileImage}
               alt="User Avatar"
               className="navbar-profile-image"
             />
