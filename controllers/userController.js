@@ -38,7 +38,7 @@ export async function updateUserData(req, res, next) {
   let foundUser;
 
   // check if new password is strong
-  if (!validator.isStrongPassword(password)) {
+  if (password && !validator.isStrongPassword(password)) {
     return next(createError(400, "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"));
   }
 
@@ -48,15 +48,35 @@ export async function updateUserData(req, res, next) {
     return next(createError(500, "Server error"));
   }
 
+  /* console.log(foundUser); */
+
   if (foundUser) {
     try {
-      const updatedUser = await User.findByIdAndUpdate(
+      let updatedUser;
+
+      if (username) {
+        updatedUser = await User.findByIdAndUpdate(
+          req.params.id, // id
+          {$set: {username: username}}, // update
+          {new: true} // options
+        );
+      }
+
+      if (password) {
+        updatedUser = await User.findByIdAndUpdate(
+          req.params.id, // id
+          {$set: {password: password}}, // update
+          {new: true} // options
+        );
+      }
+
+      /* updatedUser = await User.findByIdAndUpdate(
         req.params.id, // id
         {$set: {username: username, password: password}}, // update
         {new: true} // options
-      );
+      ); */
 
-      // add profile image if there is a
+      // add profile image if there is an image file
       if(req.file) {
         updatedUser.profileImage = req.file.filename;
       }

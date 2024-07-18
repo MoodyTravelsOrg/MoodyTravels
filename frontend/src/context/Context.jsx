@@ -37,7 +37,7 @@ function ContextProvider({ children }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showDestinations, setShowDestinations] = useState(false);
 
-  const [editField, setEditField] = useState(null);
+  const [editField, setEditField] = useState("");
 
   //---------------------------------------------------------------------------------------------
 
@@ -343,7 +343,38 @@ async function fetchWithToken(url, settings) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
+
+    try {
+      const formData = new FormData();
+      if (username) formData.append("username", username);
+      if (password) formData.append("password", password);
+      if (profileImage/*  !== defaultProfileImage */) formData.append("profileImage", profileImage);
+
+      const response = await /* fetchWithToken */fetch(`${import.meta.env.VITE_API}/users/update/${userId}`, {
+        method: "PATCH",
+        credentials: "include",
+        body: formData,
+      });
+
+      if (response.ok) {
+        /* const updatedUser = await response.json();
+        console.log(updatedUser); */
+        await getUserData();
+        setEditField("");
+        fileInput.current.value = "";
+        navigate("/");
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error.message);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  /* const handleUpdate = async (e) => {
+    e.preventDefault();
+    setError("");
 
     try {
       const formData = new FormData();
@@ -369,7 +400,7 @@ async function fetchWithToken(url, settings) {
     } catch (error) {
       setError(error.message);
     }
-  };
+  }; */
 
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
@@ -413,7 +444,7 @@ function resetInputs(){
 
 
 
-
+console.log(profileImage);
 
   return (
     <Context.Provider value={{

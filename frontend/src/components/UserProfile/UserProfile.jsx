@@ -6,7 +6,7 @@ const UserProfile = () => {
   const {
     navigate, username, password, error, setUsername, setPassword,
     setProfileImage, fileInput, loggedInUserData, editField,
-    setEditField, handleUpdate, handleDelete, success
+    setEditField, handleUpdate, handleDelete, /* success */
   } = useContext(Context);
 
   const renderEditField = () => {
@@ -19,7 +19,7 @@ const UserProfile = () => {
               <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} ref={fileInput} />
             </label>
             <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField(null)}>Cancel</button>
+            <button type="button" onClick={() => setEditField("")}>Cancel</button>
           </form>
         );
       case "username":
@@ -27,10 +27,10 @@ const UserProfile = () => {
           <form onSubmit={handleUpdate}>
             <label>
               New Username:
-              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
             </label>
             <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField(null)}>Cancel</button>
+            <button type="button" onClick={() => setEditField("")}>Cancel</button>
           </form>
         );
       case "password":
@@ -38,14 +38,14 @@ const UserProfile = () => {
           <form onSubmit={handleUpdate}>
             <label>
               New Password:
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" value={password || ""} onChange={(e) => setPassword(e.target.value)} />
             </label>
             <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField(null)}>Cancel</button>
+            <button type="button" onClick={() => setEditField("")}>Cancel</button>
           </form>
         );
-      default:
-        return null;
+      /* default:
+        return null; */
     }
   };
 
@@ -73,7 +73,7 @@ const UserProfile = () => {
           </div>
           <div className="profile-field">
             {error && <p className="error">{error}</p>}
-            {success && <p className="success">{success}</p>}
+            {/* {success && <p className="success">{success}</p>} */}
             <button className="delete-button" onClick={handleDelete}>Delete Account</button>
             <button onClick={() => navigate("/")}>Back to Homepage</button>
           </div>
