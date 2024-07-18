@@ -376,7 +376,7 @@ function ContextProvider({ children }) {
       const formData = new FormData();
       if (username) formData.append("username", username);
       if (password) formData.append("password", password);
-      if (profileImage !== defaultProfileImage) formData.append("profileImage", profileImage);
+      if (profileImage) formData.append("profileImage", profileImage);
   
       const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
@@ -387,8 +387,7 @@ function ContextProvider({ children }) {
       if (response.ok) {
         await getUserData();
         setEditField(null);
-        fileInput.current.value = "";
-        navigate("/");
+        if (fileInput.current) fileInput.current.value = "";
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
