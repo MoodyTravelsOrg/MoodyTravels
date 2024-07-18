@@ -20,7 +20,7 @@ const Navbar = () => {
         <div className="navbar-right">
           <Link to="/user-profile" className="navbar-profile-link" onClick={resetInputs}>
             <img
-              src={userImage || defaultProfileImage}
+              src={loggedInUserData.profileImage/*  || defaultProfileImage */}
               alt="User Avatar"
               className="navbar-profile-image"
             />
