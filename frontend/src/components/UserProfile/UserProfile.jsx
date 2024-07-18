@@ -7,7 +7,7 @@ const UserProfile = () => {
   const {
     navigate, username, password, error, setUsername, setPassword,
     setProfileImage, fileInput, loggedInUserData, handleUpdate,
-    handleDelete, editField, setEditField
+    handleDelete, editField, setEditField, resetInputs
   } = useContext(Context);
 
   const handleSave = (event) => {
@@ -17,7 +17,13 @@ const UserProfile = () => {
   };
 
   const handleCancel = () => {
+    resetInputs();  // Reset inputs when cancel is clicked
     setEditField(null);
+  };
+
+  const handleEditFieldChange = (field) => {
+    resetInputs();  // Reset inputs when a new field is selected for editing
+    setEditField(field);
   };
 
   const renderEditField = (field) => {
@@ -69,17 +75,17 @@ const UserProfile = () => {
       <div className="profile-dashboard">
         <div className="profile-field">
           <span>Profile Image:</span>
-          <img src={loggedInUserData.profileImage} alt="Profile" className="profile-image" onClick={() => setEditField("profileImage")} />
+          <img src={loggedInUserData.profileImage} alt="Profile" className="profile-image" onClick={() => handleEditFieldChange("profileImage")} />
           {editField === "profileImage" && renderEditField("profileImage")}
         </div>
         <div className="profile-field">
           <span>Username: {loggedInUserData.username}</span>
-          {editField !== "username" && <FaUserEdit className="edit-icon" onClick={() => setEditField("username")} />}
+          {editField !== "username" && <FaUserEdit className="edit-icon" onClick={() => handleEditFieldChange("username")} />}
           {editField === "username" && renderEditField("username")}
         </div>
         <div className="profile-field">
           <span>Password: *****</span>
-          {editField !== "password" && <FaKey className="edit-icon" onClick={() => setEditField("password")} />}
+          {editField !== "password" && <FaKey className="edit-icon" onClick={() => handleEditFieldChange("password")} />}
           {editField === "password" && renderEditField("password")}
         </div>
         {error && <p className="error">{error}</p>}
