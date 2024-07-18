@@ -370,22 +370,22 @@ function ContextProvider({ children }) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
-
+    // setSuccess("");
+  
     try {
       const formData = new FormData();
-      if (email) formData.append("email", email);
+      if (username) formData.append("username", username);
       if (password) formData.append("password", password);
       if (profileImage !== defaultProfileImage) formData.append("profileImage", profileImage);
-
+  
       const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
         credentials: "include",
         body: formData,
       });
-
+  
       if (response.ok) {
-        await getUserData()
+        await getUserData();
         setEditField(null);
         fileInput.current.value = "";
         navigate("/");
@@ -397,7 +397,7 @@ function ContextProvider({ children }) {
       setError(error.message);
     }
   };
-
+  
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
@@ -407,12 +407,12 @@ function ContextProvider({ children }) {
         method: "DELETE",
         credentials: "include"
       });
-
+  
       if (response.ok) {
-        localStorage.clear()
-        clearCookies()
-        const message = await response.json()
-        alert(message.message)
+        localStorage.clear();
+        clearCookies();
+        const message = await response.json();
+        alert(message.message);
         navigate("/");
         /* window.location.reload(); */
       } else {
@@ -423,6 +423,7 @@ function ContextProvider({ children }) {
       setError(error.message);
     }
   };
+  
 
   // function to reset all inputs when navigating to other components:
   function resetInputs() {
