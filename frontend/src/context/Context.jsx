@@ -1,5 +1,5 @@
 import React from 'react'
-import { createContext, useState, useRef, useEffect} from 'react'
+import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
 import defaultProfileImage from '../assets/default-profile.png';
 
@@ -43,32 +43,58 @@ function ContextProvider({ children }) {
 
   // ? All Section 2: functions to pass to the children: 
 
-// helper function to get tokens:
+  // helper function to get tokens:
 
 
 
-async function fetchWithToken(url, settings) {
-  const firstAccessResponse = await fetch(url, settings);
 
-  if (firstAccessResponse.ok) {
-    return firstAccessResponse;
-  } else {
 
-    console.log("Token expired!")
-    const refreshSettings = {
-      credentials: "include"
-    }
-    const refreshResponse = await fetch("http://localhost:4000/refresh-token", refreshSettings);
-    if (refreshResponse.ok) {
-      console.log("New cookies received!")
-      const secondAccessResponse = await fetch(url, settings);
-      return secondAccessResponse;
+  async function fetchWithToken(url, settings) {
+    const firstAccessResponse = await fetch(url, settings);
+
+    if (firstAccessResponse.ok) {
+      return firstAccessResponse;
     } else {
-      return refreshResponse;
+
+      console.log("Token expired!")
+      const refreshSettings = {
+        credentials: "include"
+      }
+      const refreshResponse = await fetch("http://localhost:4000/refresh-token", refreshSettings);
+      if (refreshResponse.ok) {
+        console.log("New cookies received!")
+        const secondAccessResponse = await fetch(url, settings);
+        return secondAccessResponse;
+      } else {
+        return refreshResponse;
+      }
     }
   }
-}
 
+
+  // function to clear the cookies:
+
+  async function clearCookies() {
+
+    try {
+      const response = await fetch("http://localhost:4000/resetCookies", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/JSON",
+        },
+        credentials: "include"
+      })
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error.message);
+      }
+      const message = await response.json()
+      console.log(message.message)
+    } catch (err) {
+      alert(err.message)
+      console.log(err.message)
+    }
+  }
 
 
   // function to get loggedIn users data and save the data in local storage:
@@ -104,7 +130,7 @@ async function fetchWithToken(url, settings) {
     const storedUserData = localStorage.getItem('loggedInUserData');
     const storedUserId = localStorage.getItem('userId');
     const storedUserImage = localStorage.getItem('userImage');
-  
+
     if (storedUserId && storedUserImage && storedUserData) {
       setUserId(storedUserId);
       setUserImage(storedUserImage);
@@ -114,12 +140,13 @@ async function fetchWithToken(url, settings) {
   }, [userId]);
 
 
-// logout.jsx:
+  // logout.jsx:
   const handleLogout = () => {
     localStorage.clear()
     setUserId(null);
     setIsLoggedIn(false);
     setError("");
+    clearCookies()
     navigate('/');
   };
 
@@ -171,7 +198,7 @@ async function fetchWithToken(url, settings) {
       alert("Please select a mood before logging")
     } else {
       try {
-        
+
         const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods`, {
           method: 'PATCH',
           headers: {
@@ -198,7 +225,7 @@ async function fetchWithToken(url, settings) {
   // function to delete mood:
   const handleDeleteMood = async (moodId) => {
     try {
-      
+
       const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
         method: 'DELETE',
         headers: {
@@ -254,7 +281,7 @@ async function fetchWithToken(url, settings) {
         setRecommendations(recommendations);
 
       } else {
-        const  errorData  = await response.json();
+        const errorData = await response.json();
         throw new Error(errorData.error.message);
       }
     } catch (error) {
@@ -266,7 +293,7 @@ async function fetchWithToken(url, settings) {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -304,13 +331,13 @@ async function fetchWithToken(url, settings) {
         setConfirmPassword("")
         alert(`Registration successful. Welcome, ${data.username}!`);
         navigate('/');
-        
+
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
       }
     } catch (error) {
-      setError(error.message);  
+      setError(error.message);
     }
   }
   // from TravelMood.jsx:
@@ -343,53 +370,22 @@ async function fetchWithToken(url, settings) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setError("");
-
+    // setSuccess("");
+  
     try {
       const formData = new FormData();
       if (username) formData.append("username", username);
       if (password) formData.append("password", password);
-      if (profileImage/*  !== defaultProfileImage */) formData.append("profileImage", profileImage);
-
-      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
-        method: "PATCH",
-        credentials: "include",
-        body: formData,
-      });
-
-      if (response.ok) {
-        /* const updatedUser = await response.json();
-        console.log(updatedUser); */
-        await getUserData();
-        setEditField("");
-        fileInput.current.value = "";
-        navigate("/");
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error.message);
-      }
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  /* const handleUpdate = async (e) => {
-    e.preventDefault();
-    setError("");
-
-    try {
-      const formData = new FormData();
-      if (email) formData.append("email", email);
-      if (password) formData.append("password", password);
       if (profileImage !== defaultProfileImage) formData.append("profileImage", profileImage);
-
+  
       const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
         credentials: "include",
         body: formData,
       });
-
+  
       if (response.ok) {
-        await getUserData()
+        await getUserData();
         setEditField(null);
         fileInput.current.value = "";
         navigate("/");
@@ -400,8 +396,8 @@ async function fetchWithToken(url, settings) {
     } catch (error) {
       setError(error.message);
     }
-  }; */
-
+  };
+  
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
@@ -411,13 +407,14 @@ async function fetchWithToken(url, settings) {
         method: "DELETE",
         credentials: "include"
       });
-
+  
       if (response.ok) {
-        localStorage.clear()
-        const message = response.json()
-        alert(message)
+        localStorage.clear();
+        clearCookies();
+        const message = await response.json();
+        alert(message.message);
         navigate("/");
-        window.location.reload();
+        /* window.location.reload(); */
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
@@ -426,19 +423,20 @@ async function fetchWithToken(url, settings) {
       setError(error.message);
     }
   };
-
-// function to reset all inputs when navigating to other components:
-function resetInputs(){
-  setUsername("");
-  setPassword("");
-  setError("")
-  setConfirmPassword("")
-  setSelectedEmotion("");
-  setSelectedCategory("");
-  setShowCategories(false);
-  setShowDestinations(false);
-}
   
+
+  // function to reset all inputs when navigating to other components:
+  function resetInputs() {
+    setUsername("");
+    setPassword("");
+    setError("")
+    setConfirmPassword("")
+    setSelectedEmotion("");
+    setSelectedCategory("");
+    setShowCategories(false);
+    setShowDestinations(false);
+  }
+
 
 
 
@@ -448,20 +446,20 @@ console.log(profileImage);
 
   return (
     <Context.Provider value={{
-      isLoggedIn, setIsLoggedIn, username, setUsername, 
+      isLoggedIn, setIsLoggedIn, username, setUsername,
       userId, setUserId, userImage, setUserImage, handleLogout,
       password, setPassword, handleLogin, error, setError, setEmail,
-      selectedMood, setSelectedMood, 
-      recommendations,  setRecommendations, edit, setEdit, handleLogMood, 
+      selectedMood, setSelectedMood,
+      recommendations, setRecommendations, edit, setEdit, handleLogMood,
       handleDeleteMood, handleMoodSelect, handleReplaceMood, getUserData,
-      confirmPassword, setConfirmPassword, recaptchaToken, setRecaptchaToken, 
+      confirmPassword, setConfirmPassword, recaptchaToken, setRecaptchaToken,
       profileImage, setProfileImage, fileInput, recaptchaRef, handleRegister,
-      selectedEmotion, setSelectedEmotion, selectedCategory, setSelectedCategory, 
-      showCategories, setShowCategories, showDestinations, setShowDestinations, 
-      handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick, 
+      selectedEmotion, setSelectedEmotion, selectedCategory, setSelectedCategory,
+      showCategories, setShowCategories, showDestinations, setShowDestinations,
+      handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick,
       handleBackClick, navigate, resetInputs, loggedInUserData, setLoggedInUserData,
       editField, setEditField, handleUpdate, handleDelete
-      }}>
+    }}>
 
       {children}
 

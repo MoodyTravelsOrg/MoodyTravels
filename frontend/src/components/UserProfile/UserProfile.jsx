@@ -1,48 +1,68 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./UserProfile.css";
 import { Context } from "../../context/Context";
+import { FaUserEdit, FaKey, FaSave, FaTimes } from 'react-icons/fa';
 
 const UserProfile = () => {
   const {
     navigate, username, password, error, setUsername, setPassword,
-    setProfileImage, fileInput, loggedInUserData, editField,
-    setEditField, handleUpdate, handleDelete, /* success */
+    setProfileImage, fileInput, loggedInUserData, handleUpdate,
+    handleDelete, editField, setEditField, resetInputs
   } = useContext(Context);
 
-  const renderEditField = () => {
-    switch (editField) {
+  const handleSave = (event) => {
+    event.preventDefault();
+    handleUpdate(event); // event is passed to handleUpdate to prevent default form submission
+    setEditField(null);
+  };
+
+  const handleCancel = () => {
+    resetInputs();  // Reset inputs when cancel is clicked
+    setEditField(null);
+  };
+
+  const handleEditFieldChange = (field) => {
+    resetInputs();  // Reset inputs when a new field is selected for editing
+    setEditField(field);
+  };
+
+  const renderEditField = (field) => {
+    switch (field) {
       case "profileImage":
         return (
-          <form onSubmit={handleUpdate}>
+          <div className="edit-form">
             <label>
-              New Profile Image:
               <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} ref={fileInput} />
             </label>
-            <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField("")}>Cancel</button>
-          </form>
+            <div className="edit-icons">
+              <FaSave className="save-icon" onClick={handleSave} />
+              <FaTimes className="cancel-icon" onClick={handleCancel} />
+            </div>
+          </div>
         );
       case "username":
         return (
-          <form onSubmit={handleUpdate}>
+          <div className="edit-form">
             <label>
-              New Username:
-              <input type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
+              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
-            <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField("")}>Cancel</button>
-          </form>
+            <div className="edit-icons">
+              <FaSave className="save-icon" onClick={handleSave} />
+              <FaTimes className="cancel-icon" onClick={handleCancel} />
+            </div>
+          </div>
         );
       case "password":
         return (
-          <form onSubmit={handleUpdate}>
+          <div className="edit-form">
             <label>
-              New Password:
-              <input type="password" value={password || ""} onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-            <button type="submit">Update</button>
-            <button type="button" onClick={() => setEditField("")}>Cancel</button>
-          </form>
+            <div className="edit-icons">
+              <FaSave className="save-icon" onClick={handleSave} />
+              <FaTimes className="cancel-icon" onClick={handleCancel} />
+            </div>
+          </div>
         );
       /* default:
         return null; */
@@ -52,39 +72,31 @@ const UserProfile = () => {
   return (
     <div className="profile-container">
       <h2>User Profile</h2>
-      {editField ? (
-        <div className="edit-field">
-          {renderEditField()}
+      <div className="profile-dashboard">
+        <div className="profile-field">
+          <span>Profile Image:</span>
+          <img src={loggedInUserData.profileImage} alt="Profile" className="profile-image" onClick={() => handleEditFieldChange("profileImage")} />
+          {editField === "profileImage" && renderEditField("profileImage")}
         </div>
-      ) : (
-        <div className="profile-dashboard">
-          <div className="profile-field">
-            <span>Profile Image:</span>
-            <img src={loggedInUserData.profileImage} alt="Profile" className="profile-image" />
-            <button onClick={() => setEditField("profileImage")}>Edit</button>
-          </div>
-          <div className="profile-field">
-            <span>Username: {loggedInUserData.username}</span>
-            <button onClick={() => setEditField("username")}>Edit</button>
-          </div>
-          <div className="profile-field">
-            <span>Password: ******** </span>
-            <button onClick={() => setEditField("password")}>Change Password</button>
-          </div>
-          <div className="profile-field">
-            {error && <p className="error">{error}</p>}
-            {/* {success && <p className="success">{success}</p>} */}
-            <button className="delete-button" onClick={handleDelete}>Delete Account</button>
-            <button onClick={() => navigate("/")}>Back to Homepage</button>
-          </div>
+        <div className="profile-field">
+          <span>Username: {loggedInUserData.username}</span>
+          {editField !== "username" && <FaUserEdit className="edit-icon" onClick={() => handleEditFieldChange("username")} />}
+          {editField === "username" && renderEditField("username")}
         </div>
-      )}
+        <div className="profile-field">
+          <span>Password: *****</span>
+          {editField !== "password" && <FaKey className="edit-icon" onClick={() => handleEditFieldChange("password")} />}
+          {editField === "password" && renderEditField("password")}
+        </div>
+        {error && <p className="error">{error}</p>}
+        <button className="delete-button" onClick={handleDelete}>Delete Account</button>
+        <button onClick={() => navigate("/")}>Back to Homepage</button>
+      </div>
     </div>
   );
 };
 
 export default UserProfile;
-
 
 
 
