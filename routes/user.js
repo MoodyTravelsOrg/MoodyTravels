@@ -7,13 +7,13 @@ import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
-/* router.use(authenticateToken); */ //! not working right now 
+router.use(authenticateToken); //! not working right now 
 
 // GET http://localhost:4000/users/:id
 router.get("/:id", getUserData);
 
 // PATCH http://localhost:4000/users/:id
-router.patch("/update/:id", upload.single("profileImage"), updateUserData);
+router.patch("/:id", upload.single("profileImage"), updateUserData);
 
 // DELETE http://localhost:4000/users/:id
 router.delete("/:id", deleteUser);

@@ -350,7 +350,7 @@ async function fetchWithToken(url, settings) {
       if (password) formData.append("password", password);
       if (profileImage/*  !== defaultProfileImage */) formData.append("profileImage", profileImage);
 
-      const response = await /* fetchWithToken */fetch(`${import.meta.env.VITE_API}/users/update/${userId}`, {
+      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
         credentials: "include",
         body: formData,
