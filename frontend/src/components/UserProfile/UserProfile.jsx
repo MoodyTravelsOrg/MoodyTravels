@@ -64,8 +64,8 @@ const UserProfile = () => {
             </div>
           </div>
         );
-      default:
-        return null;
+      /* default:
+        return null; */
     }
   };
 

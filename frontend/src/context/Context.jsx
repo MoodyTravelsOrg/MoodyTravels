@@ -1,7 +1,6 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
-import defaultProfileImage from '../assets/default-profile.png';
 
 export const Context = createContext()
 
@@ -12,7 +11,7 @@ function ContextProvider({ children }) {
   // login/register inputs
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState(null); //! the same as profileImage, check all the functions
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -21,7 +20,7 @@ function ContextProvider({ children }) {
   const recaptchaRef = useRef(null);
 
   const [loggedInUserData, setLoggedInUserData] = useState({})
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // change the to isLoggedIn
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -37,7 +36,7 @@ function ContextProvider({ children }) {
   const [showCategories, setShowCategories] = useState(false);
   const [showDestinations, setShowDestinations] = useState(false);
 
-  const [editField, setEditField] = useState(null);
+  const [editField, setEditField] = useState("");
 
   //---------------------------------------------------------------------------------------------
 
@@ -376,7 +375,7 @@ function ContextProvider({ children }) {
       const formData = new FormData();
       if (username) formData.append("username", username);
       if (password) formData.append("password", password);
-      if (profileImage !== defaultProfileImage) formData.append("profileImage", profileImage);
+      if (profileImage) formData.append("profileImage", profileImage);
   
       const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
@@ -387,8 +386,7 @@ function ContextProvider({ children }) {
       if (response.ok) {
         await getUserData();
         setEditField(null);
-        fileInput.current.value = "";
-        navigate("/");
+        if (fileInput.current) fileInput.current.value = "";
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
@@ -442,7 +440,7 @@ function ContextProvider({ children }) {
 
 
 
-
+console.log(profileImage);
 
   return (
     <Context.Provider value={{

@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import createError from "http-errors";
 import moment from "moment";
 import validator from "validator";
+import { hash } from "bcrypt";
 
 
 // function to send users Data to frontend:
@@ -35,12 +36,17 @@ export async function getUserData(req, res, next) {
 export async function updateUserData(req, res, next) {
   const { username, password } = req.body;
 
-  let foundUser;
-
-  // check if new password is strong
-  if (!validator.isStrongPassword(password)) {
+  // if there is a password, check if new password is strong
+  if (password && !validator.isStrongPassword(password)) {
     return next(createError(400, "Password must contain at least 8 characters, including at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol"));
   }
+  // if there is a password, hash the password
+  let hashedPassword;
+  if (password) {
+    hashedPassword = await hash(password, 10);
+  }
+
+  let foundUser;
 
   try {
     foundUser = await User.findById(req.params.id);
@@ -50,17 +56,32 @@ export async function updateUserData(req, res, next) {
 
   if (foundUser) {
     try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id, // id
-        {$set: {username: username, password: password}}, // update
-        {new: true} // options
-      );
+      let updatedUser;
 
-      // add profile image if there is a
-      if(req.file) {
-        updatedUser.profileImage = req.file.filename;
+      if (username) {
+        updatedUser = await User.findByIdAndUpdate(
+          req.params.id, // id
+          {$set: {username: username}}, // update
+          {new: true} // options
+        );
       }
 
+      if (password) {
+        updatedUser = await User.findByIdAndUpdate(
+          req.params.id, // id
+          {$set: {password: hashedPassword}}, // update
+          {new: true} // options
+        );
+      }
+
+      if (req.file) {
+        updatedUser = await User.findByIdAndUpdate(
+          req.params.id, // id
+          {$set: {profileImage: req.file.filename}}, // update
+          {new: true} // options
+        );
+      }
+      
       await updatedUser.save();
   
       res.status(201).json(updatedUser);
