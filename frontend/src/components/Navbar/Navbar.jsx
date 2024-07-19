@@ -30,7 +30,7 @@ const Navbar = () => {
       ) : (
         <div className="auth-links">
           <Link to="/login" className="navbar-button" onClick={resetInputs}>Login</Link>
-          <Link to="/register" className="navbar-button" onClick={resetInputs}>Register</Link>
+         
         </div>
       )}
     </div>
