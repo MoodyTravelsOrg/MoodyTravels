@@ -407,10 +407,9 @@ function ContextProvider({ children }) {
       });
   
       if (response.ok) {
-        localStorage.clear();
-        clearCookies();
         const message = await response.json();
         alert(message.message);
+        handleLogout()
         navigate("/");
         /* window.location.reload(); */
       } else {
