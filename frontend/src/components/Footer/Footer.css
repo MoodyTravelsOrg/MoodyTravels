@@ -1,6 +1,7 @@
 .footer {
   width: 100%;
   position: sticky;
+  /* ! Dunno why you decided to go with sticky, but I got rid of that since the footer (of course) was follwoing the scroll. In case of the Navbar this makes sense though... */
   margin-bottom: ;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);

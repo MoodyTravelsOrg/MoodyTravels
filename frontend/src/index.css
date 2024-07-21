@@ -76,3 +76,7 @@ body {
 .tilted {
   transform: rotate3d(1, 0, 0, 40deg);
 } */
+
+.homepage-container {
+  margin-top: 4rem;
+}

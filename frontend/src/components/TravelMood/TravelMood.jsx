@@ -103,7 +103,7 @@ const TravelMood = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5 p-5 bg-white/5 rounded-3xl shadow-lg backdrop-blur-md border border-white/30 mt-16">
+    <div className="flex flex-col items-center gap-5 ml-96 mr-96 p-5 text-center bg-white/5 rounded-3xl shadow-lg backdrop-blur-md border border-white/30 mb-24">
       {!showDestinations && (
         <div className="flex flex-col items-center gap-2.5">
           <h2 className="text-4xl text-white text-center mb-4">How are you feeling today?</h2>

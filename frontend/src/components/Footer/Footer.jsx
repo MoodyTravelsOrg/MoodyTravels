@@ -39,7 +39,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="w-full sticky bottom-0 bg-white/10 backdrop-blur-md text-white py-5 mx-auto text-center shadow-[0_-2px_10px_rgba(0,0,0,0.2)]">
+    <footer className="w-full bottom-0 bg-white/10 backdrop-blur-md text-white py-5 mx-auto text-center shadow-[0_-2px_10px_rgba(0,0,0,0.2)]">
       <div className="flex flex-wrap justify-around items-start">
         <div className="flex-1 m-2.5">
           <h2 className="mb-2.5 text-xl font-bold">MoodyTravels</h2>
