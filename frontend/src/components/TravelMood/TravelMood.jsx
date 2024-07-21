@@ -85,8 +85,6 @@
 
 // ! Now, the Tailwind CSS:
 
-// TravelMood.jsx
-
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../../context/Context.jsx';
 import TravelCategories from '../TravelCategories.jsx';
