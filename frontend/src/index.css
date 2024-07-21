@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 * {
   margin: 0;
@@ -6,7 +6,6 @@
   box-sizing: border-box;
 
   font-family: "Poppins", sans-serif;
-  /* I'm a fan of that but we can discuss the entire style later on. Just kinda filling the void right now haha */
 }
 
 body {
@@ -19,11 +18,61 @@ body {
   align-items: center;
   min-height: 100vh;
   background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat;
-  /* This is a slightly different bg in the same style though. */
 
   background-size: cover;
   background-position: center;
 }
 a {
   text-decoration: none;
+} */
+
+/* ! I decided to comment out the entire previous code all at once instead of commenting out line by line and leaving hints here and there. This was too chaotic to look at. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
 }
+
+/*  * The following code is only for the special card-effect (the chasing lines) */
+
+.animated_card {
+  display: grid;
+  place-items: center;
+  position: relative;
+  max-width: 1200px; 
+  /* ! Originally I was using "max-w-7xl" tailwind's native utility class (which corresponds to 1280px) but I had to use "hard coded" values in this case 'coz the chasing-lines-effect would not work otherwise.
+    ! Well, finally I decided to get rid of the code for this effect in the UserProfile comp. 'coz it did not work the way I envisioned it to. So, I'll comment out the following lines as well (for now). Gonna take care of that later. */
+}
+
+/* .animated-card-before {
+  position: absolute;
+  transition: 0.3s;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  50% {
+    filter: hue-rotate(350deg);
+  }
+}
+
+.card {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.tilted {
+  transform: rotate3d(1, 0, 0, 40deg);
+} */

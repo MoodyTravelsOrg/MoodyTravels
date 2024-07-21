@@ -1,54 +1,56 @@
-import React, { useContext, useEffect } from 'react';
-import './TravelMood.css';
-import { Context } from '../../context/Context.jsx';
-import TravelCategories from '../TravelCategories.jsx';
-import TravelDestinations from '../TravelDestinations.jsx';
+// import React, { useContext, useEffect } from 'react';
+// import './TravelMood.css';
+// import { Context } from '../../context/Context.jsx';
+// import TravelCategories from '../TravelCategories.jsx';
+// import TravelDestinations from '../TravelDestinations.jsx';
 
 
-// TravelMood component with all the logic for the travel mood selector
-const TravelMood = () => {
+// // TravelMood component with all the logic for the travel mood selector
+// const TravelMood = () => {
 
-  const {recommendations, selectedEmotion, selectedCategory, showCategories, showDestinations, 
-    handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick, handleBackClick} = useContext(Context)
+//   const {recommendations, selectedEmotion, selectedCategory, showCategories, showDestinations, 
+//     handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick, handleBackClick} = useContext(Context)
 
-  useEffect(() => {
-    handleGetRecommendations();
-  }, []);
+//   useEffect(() => {
+//     handleGetRecommendations();
+//   }, []);
 
   
-  return (
-    <div className="travel-mood">
-      {!showDestinations && (
-        <div className="emotions-input">
-          <h2 className='travel-title' htmlFor="emotions">How are you feeling today?</h2>
-          <div className="emotion-buttons">
-            {recommendations.map(item => (
-              <button 
-                key={item.emotion} 
-                className={`emotion-button ${selectedEmotion.emotion === item.emotion ? 'selected' : ''}`} 
-                onClick={() => handleEmotionClick(item)}
-              >
-                <span className="emoji">{item.emoji}</span>
-                {item.emotion}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-      {showCategories && !showDestinations && (
-        <TravelCategories />
-      )}
-      {showDestinations && (
-        <TravelDestinations />
-      )}
-      {/* {(showCategories || showDestinations) && (
-        <button className="back-button" onClick={handleBackClick}>Go Back</button>
-      )} */}
-    </div>
-  );
-};
+//   return (
+//     <div className="travel-mood">
+//       {!showDestinations && (
+//         <div className="emotions-input">
+//           <h2 className='travel-title' htmlFor="emotions">How are you feeling today?</h2>
+//           <div className="emotion-buttons">
+//             {recommendations.map(item => (
+//               <button 
+//                 key={item.emotion} 
+//                 className={`emotion-button ${selectedEmotion.emotion === item.emotion ? 'selected' : ''}`} 
+//                 onClick={() => handleEmotionClick(item)}
+//               >
+//                 <span className="emoji">{item.emoji}</span>
+//                 {item.emotion}
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+//       {showCategories && !showDestinations && (
+//         <TravelCategories />
+//       )}
+//       {showDestinations && (
+//         <TravelDestinations />
+//       )}
+//       {/* {(showCategories || showDestinations) && (
+//         <button className="back-button" onClick={handleBackClick}>Go Back</button>
+//       )} */}
+//     </div>
+//   );
+// };
 
-export default TravelMood;
+// export default TravelMood;
+
+// ? As per GitHub history, Alexis added this comment on the 17th of July - underneath the return statement. Just to keep it here for reference:
 
 {/* <div className="travel-mood">
       {!showCategories && (
@@ -78,3 +80,55 @@ export default TravelMood;
         <button className="back-button" onClick={handleBackClick}>Go Back</button>
       )}
 </div> */}
+
+// ? --------------------------------------------------------------------------------
+
+// ! Now, the Tailwind CSS:
+
+// TravelMood.jsx
+
+import React, { useContext, useEffect } from 'react';
+import { Context } from '../../context/Context.jsx';
+import TravelCategories from '../TravelCategories.jsx';
+import TravelDestinations from '../TravelDestinations.jsx';
+
+const TravelMood = () => {
+  const {
+    recommendations, selectedEmotion, showCategories, showDestinations, 
+    handleGetRecommendations, handleEmotionClick
+  } = useContext(Context);
+
+  useEffect(() => {
+    handleGetRecommendations();
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center gap-5 p-5 bg-white/5 rounded-3xl shadow-lg backdrop-blur-md border border-white/30 mt-16">
+      {!showDestinations && (
+        <div className="flex flex-col items-center gap-2.5">
+          <h2 className="text-4xl text-white text-center mb-4">How are you feeling today?</h2>
+          <div className="flex gap-2.5">
+            {recommendations.map(item => (
+              <button 
+                key={item.emotion} 
+                className={`p-2.5 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex flex-col items-center hover:bg-white/50 ${selectedEmotion.emotion === item.emotion ? 'bg-white/50' : ''}`} 
+                onClick={() => handleEmotionClick(item)}
+              >
+                <span className="text-4xl animate-bounce">{item.emoji}</span>
+                {item.emotion}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      {showCategories && !showDestinations && (
+        <TravelCategories />
+      )}
+      {showDestinations && (
+        <TravelDestinations />
+      )}
+    </div>
+  );
+};
+
+export default TravelMood;
