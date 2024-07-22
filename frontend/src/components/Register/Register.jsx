@@ -92,8 +92,7 @@ const Register = () => {
     email, setEmail, username, password, error, setUsername, 
     setPassword, confirmPassword, setConfirmPassword, 
     setRecaptchaToken, setProfileImage, fileInput, recaptchaRef, 
-    handleRegister, navigate 
-  } = useContext(Context);
+    handleRegister, navigate, resetInputs } = useContext(Context)
 
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
   console.log("ReCAPTCHA Site Key:", siteKey); // Debugging line
@@ -164,12 +163,14 @@ const Register = () => {
 
         <button type="submit" className="mt-5 p-2 rounded-full bg-white text-black font-bold cursor-pointer hover:bg-green-600 transition-colors duration-300">Register</button>
       </form>
-      <button 
-        onClick={() => navigate("/login")} 
+      <button type="submit" onClick={() => {
+        resetInputs()
+        navigate("/login")}}
         className="mt-5 p-2 rounded-full bg-white text-black font-bold cursor-pointer hover:bg-green-600 transition-colors duration-300 w-full"
       >
-        Have already an account? Login here
+        Already have an account? Login here
       </button>
+
     </div>
   );
 }

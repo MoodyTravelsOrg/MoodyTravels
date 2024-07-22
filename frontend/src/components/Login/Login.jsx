@@ -71,7 +71,7 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { GiDialPadlock } from "react-icons/gi";
 
 const Login = () => {
-  const { navigate, username, setUsername, password, setPassword, handleLogin, error, setError } = useContext(Context);
+  const { navigate, username, setUsername, password, setPassword, handleLogin, error, resetInputs} = useContext(Context)
 
   return (
     <div className="w-full max-w-5xl mx-auto p-5 bg-white/5 rounded-lg shadow-lg backdrop-blur-md border border-white/30 text-white">
@@ -111,9 +111,7 @@ const Login = () => {
       <div className="mt-5 text-center">
         <button
           onClick={() => {
-            setUsername("");
-            setPassword("");
-            setError("");
+            resetInputs()
             navigate("/register");
           }}
           className="p-2 rounded-full bg-white text-black font-bold cursor-pointer hover:bg-green-600 transition-colors duration-300"
