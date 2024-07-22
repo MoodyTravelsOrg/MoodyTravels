@@ -30,6 +30,9 @@ import TravelMood from "../components/TravelMood/TravelMood";
 import OurMission from "../components/OurMission";
 import HowItWorks from "../components/HowItWorks";
 
+import Carousel from "../components/Carousel";
+import LoginViaTemple from "../components/LoginViaTemple";
+
 // const Homepage = () => {
 //   return (
 //     <div className="flex flex-col justify-center items-center h-full mx-auto bg-white/5 rounded-[10px] shadow-lg backdrop-blur-[10px] border border-white/30 bg-cover bg-center bg-no-repeat">
@@ -56,6 +59,8 @@ const Homepage = () => {
     <div className="pt-28 space-y-16 pb-24">
       <OurMission />
       <HowItWorks />
+      <Carousel />
+      <LoginViaTemple />
       <TravelMood />
     </div>
   );
