@@ -8,7 +8,7 @@ const Register = () => {
   const { email, setEmail, username, password, error, setUsername, 
     setPassword, confirmPassword, setConfirmPassword, 
     setRecaptchaToken, setProfileImage, fileInput, recaptchaRef, 
-    handleRegister, navigate } = useContext(Context)
+    handleRegister, navigate, resetInputs } = useContext(Context)
 
 
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
@@ -73,7 +73,9 @@ const Register = () => {
 
         <button type="submit">Register</button>
       </form>
-      <button type="submit" onClick={() => navigate("/login")}>Have already an account login here</button>
+      <button type="submit" onClick={() => {
+        resetInputs()
+        navigate("/login")}}>Have already an account login here</button>
 
     </div>
   );

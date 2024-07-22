@@ -9,7 +9,7 @@ import { GiDialPadlock } from "react-icons/gi";
 // adding the setUserId function to the Login component
 const Login = () => {
 
-  const { navigate, username, setUsername, password, setPassword, handleLogin, error, setError} = useContext(Context)
+  const { navigate, username, setUsername, password, setPassword, handleLogin, error, resetInputs} = useContext(Context)
 
   return (
     <div className="container">
@@ -48,9 +48,7 @@ const Login = () => {
       </form>
       <div className="registered-link">
         <button onClick={() => {
-          setUsername("")
-          setPassword("")
-          setError("")
+         resetInputs()
           navigate("/register")
         }
         }>

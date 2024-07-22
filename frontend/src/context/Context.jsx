@@ -1,7 +1,7 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
-
+import defaultProfileImage from "../../public/default-profile.png"
 export const Context = createContext()
 
 function ContextProvider({ children }) {
@@ -11,7 +11,6 @@ function ContextProvider({ children }) {
   // login/register inputs
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [userImage, setUserImage] = useState(null); //! the same as profileImage, check all the functions
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
@@ -114,8 +113,6 @@ function ContextProvider({ children }) {
       setLoggedInUserData(data)
       localStorage.setItem('loggedInUserData', JSON.stringify(data));
       localStorage.setItem('userId', data.id);
-      localStorage.setItem('userImage', data.profileImage);
-
     } catch (err) {
       alert(err.message)
     }
@@ -128,11 +125,9 @@ function ContextProvider({ children }) {
     }
     const storedUserData = localStorage.getItem('loggedInUserData');
     const storedUserId = localStorage.getItem('userId');
-    const storedUserImage = localStorage.getItem('userImage');
 
-    if (storedUserId && storedUserImage && storedUserData) {
+    if (storedUserId && storedUserData) {
       setUserId(storedUserId);
-      setUserImage(storedUserImage);
       setLoggedInUserData(JSON.parse(storedUserData))
       setIsLoggedIn(true);
     }
@@ -307,7 +302,7 @@ function ContextProvider({ children }) {
       formData.append('email', email);
       formData.append('username', username);
       formData.append('password', password);
-      formData.append('profileImage', profileImage);
+      formData.append('profileImage', profileImage ? profileImage : defaultProfileImage);
       formData.append('recaptchaToken', recaptchaToken);
 
       const settings = {
@@ -444,7 +439,7 @@ console.log(profileImage);
   return (
     <Context.Provider value={{
       isLoggedIn, setIsLoggedIn, username, setUsername,
-      userId, setUserId, userImage, setUserImage, handleLogout,
+      userId, setUserId, handleLogout,
       password, setPassword, handleLogin, error, setError, setEmail,
       selectedMood, setSelectedMood,
       recommendations, setRecommendations, edit, setEdit, handleLogMood,
