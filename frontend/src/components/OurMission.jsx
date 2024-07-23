@@ -2,7 +2,7 @@ import React from "react";
 
 const OurMission = () => {
   return (
-    <div className="our-mission ml-60 mr-60 p-5 text-center bg-white/5 rounded-lg shadow-lg backdrop-blur-md border border-white/30 mt-32">
+    <div id="our-mission" className="our-mission ml-60 mr-60 p-5 text-center bg-white/5 rounded-lg shadow-lg backdrop-blur-md border border-white/30 mt-32">
       <h1 className="text-4xl mb-4 text-white text-center">
         Welcome to MoodyTravels
       </h1>

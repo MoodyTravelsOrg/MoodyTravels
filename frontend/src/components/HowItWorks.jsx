@@ -2,7 +2,7 @@ import React from 'react';
 
 const HowItWorks = () => {
   return (
-    <div className="how-it-works ml-60 mr-60 p-5 text-center bg-white/5 rounded-lg shadow-lg backdrop-blur-md border border-white/30 mt-16">
+    <div id="how-it-works" className="how-it-works ml-60 mr-60 p-5 text-center bg-white/5 rounded-lg shadow-lg backdrop-blur-md border border-white/30 mt-16">
       <h2 className="text-4xl mb-4 text-white text-center">How It Works</h2>
       <div className="text-lg text-white">
         <p className="mb-4">
