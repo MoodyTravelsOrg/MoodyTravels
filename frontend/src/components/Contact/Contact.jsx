@@ -28,6 +28,11 @@
 
 // ! Tailwind CSS:
 
+
+// https://dev.to/wilsonsiaw/tutorial-react-emailjs-36bl#:~:text=Open%20the%20terminal%20and%20make%20sure%20you%20are,check%20that%20%22emailjs-com%22%20is%20listed%20in%20the%20dependencies.
+
+// I added the code and functionalities of the contact form using emailjs i putted all the functions inside of the context  to keep the order and structure of our code( i already tested  it),  in order to visualize it and make it work you have to install first the library running on your terminal this command: "npm install emailjs-com", i used for now my dci email account but we can change it after.
+
 import React from "react";
 import { useContext } from 'react';
 import { Context } from "../../context/Context.jsx";
