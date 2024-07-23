@@ -1,7 +1,8 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
-import { json, useNavigate } from "react-router-dom";
+import { json, useNavigate} from "react-router-dom";
 import defaultProfileImage from "../../public/default-profile.png"
+
 import emailjs from "emailjs-com";
 export const Context = createContext()
 
@@ -484,6 +485,22 @@ function ContextProvider({ children }) {
         }
       );
   };
+
+
+
+  const resetForm = () => {
+    setFormData({ name: "", email: "", message: "" });
+    setErrors({});
+    setIsSubmitted(false);
+  };
+
+  const handleSuccessForm = () => {
+    setIsSubmitted(true);
+    setTimeout(() => {
+      resetForm();
+      navigate('/');
+    }, 4000);
+  };
   
 
   // function to reset all inputs when navigating to other components:
@@ -519,7 +536,7 @@ console.log(profileImage);
       showCategories, setShowCategories, showDestinations, setShowDestinations,
       handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick,
       handleBackClick, navigate, resetInputs, loggedInUserData, setLoggedInUserData,
-      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, 
+      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, resetForm, handleSuccessForm,
     }}>
 
       {children}
