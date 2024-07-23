@@ -88,7 +88,7 @@ const Navbar = () => {
   const { isLoggedIn, handleLogout, resetInputs, loggedInUserData } = useContext(Context);
 
   return (
-    <div className="fixed top-0 left-0 w-full py-5 px-[10%] bg-green-600/30 flex justify-between items-center z-50">
+    <div className="fixed top-0 left-0 w-full py-5 px-[10%] bg-green-600/40 flex justify-between items-center z-50">
       {/* Since we have a fixed Navbar "bg-transparent" was a bit problematic, so I decided to switch to "bg-green-600/30", matching the "close to nature" vibe whilst still being transparent. */}
       <Link to="/" className="text-white text-4xl font-bold" onClick={resetInputs}>MoodyTravels</Link>
       <nav className="flex gap-4">

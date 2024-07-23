@@ -40,7 +40,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat;
+  /* background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat; */
+  background: url("./assets/Jungle_bg.png") no-repeat;
   background-size: cover;
   background-position: center;
 }
