@@ -2,6 +2,7 @@ import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
 import defaultProfileImage from "../../public/default-profile.png"
+import emailjs from "emailjs-com";
 export const Context = createContext()
 
 function ContextProvider({ children }) {
@@ -36,8 +37,19 @@ function ContextProvider({ children }) {
   const [showDestinations, setShowDestinations] = useState(false);
 
   const [editField, setEditField] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
   //---------------------------------------------------------------------------------------------
+
+  // functions for the contact  form
+
+
 
   // ? All Section 2: functions to pass to the children: 
 
@@ -415,6 +427,63 @@ function ContextProvider({ children }) {
       setError(error.message);
     }
   };
+
+  // functions from the contact form component:
+
+  const validateForm = () => {
+    const errors = {};
+    const nameRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!nameRegex.test(formData.name)) {
+      errors.name = 'Name must include first and last name with letters only.';
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      errors.email = 'Invalid email format.';
+    }
+
+    if (formData.message.trim() === '') {
+      errors.message = 'Message must not be empty.';
+    } else if (formData.message.length > 500) {
+      errors.message = 'Message must not exceed 500 characters.';
+    }
+
+    return errors;
+  };
+  const handleChangeContact = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmitContact = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    emailjs
+      .sendForm(
+        "service_h9hrn3c",
+        "template_p0fwgun",
+        e.target,
+        "saxPj0YWm0tmDxrHk"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setIsSubmitted(true);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
   
 
   // function to reset all inputs when navigating to other components:
@@ -450,7 +519,7 @@ console.log(profileImage);
       showCategories, setShowCategories, showDestinations, setShowDestinations,
       handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick,
       handleBackClick, navigate, resetInputs, loggedInUserData, setLoggedInUserData,
-      editField, setEditField, handleUpdate, handleDelete
+      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, 
     }}>
 
       {children}
