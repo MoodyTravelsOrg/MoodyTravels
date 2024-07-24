@@ -37,6 +37,13 @@ function ContextProvider({ children }) {
 
   const [editField, setEditField] = useState("");
 
+
+  console.log("recommendations", recommendations)
+  console.log("selectedEmotion", selectedEmotion)
+  console.log("selectedCategory", selectedCategory)
+  
+
+
   //---------------------------------------------------------------------------------------------
 
   // ? All Section 2: functions to pass to the children: 
@@ -434,7 +441,7 @@ function ContextProvider({ children }) {
 
 
 
-console.log(profileImage);
+console.log(selectedEmotion);
 
   return (
     <Context.Provider value={{
