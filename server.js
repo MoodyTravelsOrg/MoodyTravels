@@ -9,6 +9,7 @@ import refreshTokenRouter from "./routes/refreshToken.js";
 import travelRouter from "./routes/travel.js";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
 import userRouter from "./routes/user.js"
+import testimonialsRouter from "./routes/testimonials.js";
 import resetCookiesRouter from "./routes/resetCookies.js"
 await connect(); // connect to database
 
@@ -33,7 +34,11 @@ app.use("/travel", travelRouter);
 
 app.use("/users", userRouter);
 
+app.use("/testimonials", testimonialsRouter); // Use testimonials router
+
 app.use("/resetCookies", resetCookiesRouter)
+
+
 
 // definition of the server address
 const port = process.env.PORT || 4000;

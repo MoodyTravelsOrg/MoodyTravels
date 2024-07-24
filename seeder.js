@@ -3,6 +3,7 @@ import Recommendation from "./models/Recommendation.js";
 import User from "./models/User.js";
 import { hash } from "bcrypt";
 
+
 try {
     console.log("Attempting to seed database...");
 
@@ -10,6 +11,7 @@ try {
 
     await User.deleteMany({});
     await Recommendation.deleteMany({});
+   
 
     const hashedPassword = await hash("Moody123!", 10);
 
@@ -171,8 +173,11 @@ try {
         },
     ]
 
+    
+
     await User.insertMany(mockUsers);
     await Recommendation.insertMany(recommendations);
+  
 
     console.log("Database seeded!");
 
