@@ -26,11 +26,11 @@ const Homepage = () => {
 
   return (
     <div className="pt-28 space-y-16 pb-24">
+      <TravelMood />
       <OurMission />
       <HowItWorks />
       <Carousel />
       <LoginViaTemple />
-      <TravelMood />
     </div>
   );
 };

@@ -87,12 +87,15 @@
 
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../../context/Context.jsx';
+import TravelEmotions from '../TravelEmotions.jsx';
 import TravelCategories from '../TravelCategories.jsx';
 import TravelDestinations from '../TravelDestinations.jsx';
+import MoodPreview from '../MoodPreview.jsx';
+
 
 const TravelMood = () => {
   const {
-    recommendations, selectedEmotion, showCategories, showDestinations, 
+    isLoggedIn, loggedInUserData, recommendations, selectedEmotion, showCategories, showDestinations, 
     handleGetRecommendations, handleEmotionClick
   } = useContext(Context);
 
@@ -101,30 +104,27 @@ const TravelMood = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5 ml-96 mr-96 p-5 text-center bg-white/5 rounded-3xl shadow-lg backdrop-blur-md border border-white/30 mb-24">
-      {!showDestinations && (
-        <div className="flex flex-col items-center gap-2.5">
-          <p className='text-1xl text-white'>...or start your journey without a spirit companion:</p>
-          <h2 className="text-4xl text-white text-center mb-4">So, how are you feeling today?</h2>
-          <div className="flex gap-2.5">
-            {recommendations.map(item => (
-              <button 
-                key={item.emotion} 
-                className={`p-2.5 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex flex-col items-center hover:bg-white/50 ${selectedEmotion.emotion === item.emotion ? 'bg-white/50' : ''}`} 
-                onClick={() => handleEmotionClick(item)}
-              >
-                <span className="text-4xl animate-bounce">{item.emoji}</span>
-                {item.emotion}
-              </button>
-            ))}
+    <div className="flex items-center gap-5 mt-48 ml-48 mr-48">
+      <div className="flex flex-col gap-5 p-5 text-center bg-white/5 rounded-3xl shadow-lg backdrop-blur-md border border-white/30 mb-24">
+        {isLoggedIn && (
+          <div className="text-xl text-white">
+            Welcome {loggedInUserData.username}
           </div>
-        </div>
-      )}
-      {showCategories && !showDestinations && (
-        <TravelCategories />
-      )}
-      {showDestinations && (
-        <TravelDestinations />
+        )}
+        {!showDestinations && (
+          <TravelEmotions />
+        )}
+        {showCategories && !showDestinations && (
+          <TravelCategories />
+        )}
+        {showDestinations && (
+          <TravelDestinations />
+        )}
+      </div>
+      {isLoggedIn && (
+        <aside className="mt-0">
+          <MoodPreview />
+        </aside>
       )}
     </div>
   );
