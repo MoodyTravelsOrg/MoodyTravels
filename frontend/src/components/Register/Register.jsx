@@ -110,13 +110,13 @@ const Register = () => {
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-green-800/60 shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex">
+    <div className="min-h-screen flex items-center justify-center mt-20">
+      <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex ">
         <div className="w-full md:w-1/2 p-8 order-1">
           <h2 className="text-2xl font-bold mb-8 text-white">Register</h2>
           <form onSubmit={handleRegister}>
             <div className="mb-4">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <FaUserAstronaut className="inline-block mr-2" />
                 Email
               </label>
@@ -130,7 +130,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <FaUser className="inline-block mr-2" />
                 Username
               </label>
@@ -144,7 +144,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <FaLock className="inline-block mr-2" />
                 Password
               </label>
@@ -158,7 +158,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <GiDialPadlock className="inline-block mr-2" />
                 Confirm Password
               </label>
@@ -172,7 +172,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 Profile Image
               </label>
               <input
@@ -192,7 +192,7 @@ const Register = () => {
               </div>
             )}
             {error && <p className="text-red-500 mt-2">{error}</p>}
-            <button type="submit" className="w-full bg-yellowishGreen text-white py-2 rounded mt-4">Register here</button>
+            <button type="submit" className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 rounded mt-4">Register here</button>
           </form>
           {/* <div className="mt-8 text-center">
             <p className="text-gray-700">
@@ -211,9 +211,9 @@ const Register = () => {
         </div>
         <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center order-2 bg-transparent/10">
           <div className="text-center mb-4">
-            <p className="text-yellowishGreen mb-5">Already have an account?</p>
+            <p className="text-white mb-44 text-2xl font-bold">Already have an account?</p>
             <span
-              className="text-white cursor-pointer"
+              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText px-2 py-2 rounded cursor-pointer"
               onClick={() => {
                 resetInputs();
                 navigate("/login");
@@ -223,9 +223,9 @@ const Register = () => {
             </span>
           </div>
           <img
-            src="/images/inca-mayan-design-sculpted-stones.png"
+            src="/images/Ancient-gate-CLOSED.png"
             alt="Sign Up"
-            className="w-64 mt-6"
+            className="w-80 mt-16"
           />
         </div>
       </div>

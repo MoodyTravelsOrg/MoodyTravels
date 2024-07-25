@@ -75,12 +75,12 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-yellowishGreen/60 shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex">
+      <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex">
         <div className="w-full md:w-1/2 p-8 order-2">
-          <h2 className="text-2xl font-bold mb-8">Login</h2>
+          <h2 className="text-2xl text-white font-bold mb-8">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <FaUserAstronaut className="inline-block mr-2" />
                 Username
               </label>
@@ -94,7 +94,7 @@ const Login = () => {
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700">
+              <label className="block text-white">
                 <GiDialPadlock className="inline-block mr-2" />
                 Password
               </label>
@@ -114,7 +114,7 @@ const Login = () => {
               </div>
             </div>
             {error && <p className="text-red-500 mt-2">{error}</p>}
-            <button type="submit" className="w-full bg-green-800 text-white py-2 rounded mt-4">Log In</button>
+            <button type="submit" className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 rounded mt-4">Log In</button>
           </form>
           {/* <div className="mt-8 text-center">
             <p className="text-gray-700">
@@ -133,15 +133,15 @@ const Login = () => {
         </div>
         <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center order-1 bg-transparent/10">
           <div className="text-center mb-4">
-            <p className="text-green-800">Don't have an account?</p>
+            <p className="text-2xl text-white font-bold mb-8">Don't have an account?</p>
             <span
-              className="text-white cursor-pointer"
+              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText px-2 py-2 rounded mt-4 cursor-pointer"
               onClick={() => {
                 resetInputs();
                 navigate("/register");
               }}
             >
-              Sign up
+              Register
             </span>
           </div>
           <img

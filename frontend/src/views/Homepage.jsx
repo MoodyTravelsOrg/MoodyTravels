@@ -27,10 +27,10 @@ const Homepage = () => {
 
   return (
     <div className="pt-28 space-y-16 pb-24">
+      <Carousel />
       <TravelMood />
       <OurMission />
       <HowItWorks />
-      <Carousel />
       <LoginViaTemple />
       <Testimonials />
     </div>

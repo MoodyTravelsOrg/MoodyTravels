@@ -83,7 +83,16 @@ export default {
         "pulse-border": "pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       colors: {
-        yellowishGreen: "#d3cc54",
+        // These both colors are the both primary and secondary colors of the app (for every card-element and the buttons):
+
+        yellowishGreenForBG: "rgb(211 204 84 / 0.6)",
+        yellowishGreenForTextandButtons: "#d3cc54",
+        darkGreenForBG: "rgb(22 101 52 / 0.6)",
+        darkGreenForText: "#166534",
+
+        // -----------------------------------
+        // These are just a few colors I experimented with:
+
         purple: "#3f3cbb",
         midnight: "#121063",
         metal: "#565584",
