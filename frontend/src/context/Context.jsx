@@ -501,7 +501,7 @@ function ContextProvider({ children }) {
       navigate('/');
     }, 4000);
   };
-  
+  //Functions from the testimonials component:
 
   // function to reset all inputs when navigating to other components:
   function resetInputs() {

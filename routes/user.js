@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.use(authenticateToken);
 
+
 // GET http://localhost:4000/users/:id
 router.get("/:id", getUserData);
 

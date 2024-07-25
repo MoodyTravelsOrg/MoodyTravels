@@ -7,6 +7,7 @@ import OurMission from "../components/OurMission";
 import HowItWorks from "../components/HowItWorks";
 import Carousel from "../components/Carousel";
 import LoginViaTemple from "../components/LoginViaTemple";
+import Testimonials from "../components/Testimonials";
 import { animateScroll as scroll } from "react-scroll";
 
 const Homepage = () => {
@@ -31,6 +32,7 @@ const Homepage = () => {
       <HowItWorks />
       <Carousel />
       <LoginViaTemple />
+      <Testimonials />
     </div>
   );
 };
