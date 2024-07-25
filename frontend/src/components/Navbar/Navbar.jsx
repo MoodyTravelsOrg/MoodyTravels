@@ -55,7 +55,7 @@ const Navbar = () => {
         <ScrollToLink to="our-mission" className="text-white text-lg font-medium ml-10 cursor-pointer">Our Mission</ScrollToLink>
         <ScrollToLink to="how-it-works" className="text-white text-lg font-medium ml-10 cursor-pointer">How it works</ScrollToLink>
         <Link to="/contact" className="text-white text-lg font-medium ml-10">Contact</Link>
-        {isLoggedIn && <Link to="/mood-tracker" className="text-white text-lg font-medium ml-10">MoodTracker</Link>}
+        {isLoggedIn && <Link to="/mood-log" className="text-white text-lg font-medium ml-10">Mood Log</Link>}
       </nav>
       {isLoggedIn ? (
         <div className="flex items-center gap-4">

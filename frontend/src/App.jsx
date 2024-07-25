@@ -19,7 +19,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Homepage />} />
-          <Route path="/mood-tracker" element={<MoodTracker />} />
+          <Route path="/mood-log" element={<MoodTracker />} />
           <Route path="/travel-mood" element={<TravelMood />} />
           <Route path="/destination/:name" element={<DestinationDetail />} />
           <Route path="/login" element={<Login />} />

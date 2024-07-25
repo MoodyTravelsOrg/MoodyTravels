@@ -366,10 +366,20 @@ function ContextProvider({ children }) {
   }
   // from TravelMood.jsx:
   const handleEmotionClick = (emotion) => {
-    setSelectedEmotion(emotion);
-    setShowCategories(true);
-    setSelectedCategory('');
-    setShowDestinations(false);
+    if (isLoggedIn) {
+      if (!selectedEmotion) {
+        alert("Please select an emotion first")
+      } else {
+        setShowCategories(true);
+        setSelectedCategory('');
+        setShowDestinations(false);
+      }
+    } else {
+      setSelectedEmotion(emotion);
+      setShowCategories(true);
+      setSelectedCategory('');
+      setShowDestinations(false);
+    }
   };
 
   const handleCategoryClick = () => {
