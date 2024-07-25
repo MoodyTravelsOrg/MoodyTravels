@@ -54,13 +54,7 @@ function TravelDestinations() {
           >
             <img src={destination.img} alt={destination.name} className="w-full h-40 object-cover rounded-lg mb-3" />
             <p className="text-white text-lg font-semibold mb-2">{destination.name}</p>
-            <div className="flex flex-col items-center gap-1">
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors duration-300">Tips</a>
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors duration-300">Flights</a>
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors duration-300">Accommodation</a>
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors duration-300">Guides</a>
-              <a href="" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300 transition-colors duration-300">Things to Do</a>
-            </div>
+            <strong className="text-blue-300">Unlock Travel Deals</strong>
           </div>
         ))}
       </div>

@@ -46,6 +46,13 @@ function ContextProvider({ children }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
+
+  console.log("recommendations", recommendations)
+  console.log("selectedEmotion", selectedEmotion)
+  console.log("selectedCategory", selectedCategory)
+  
+
+
   //---------------------------------------------------------------------------------------------
 
   // functions for the contact  form
@@ -520,7 +527,7 @@ function ContextProvider({ children }) {
 
 
 
-console.log(profileImage);
+console.log(selectedEmotion);
 
   return (
     <Context.Provider value={{

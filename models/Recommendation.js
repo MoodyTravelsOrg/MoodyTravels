@@ -20,7 +20,7 @@ const recommendationSchema = new Schema({
                 type: String, 
                 required: true 
             },
-            destinations: [destinationSchema] // array of subdocuments
+            destinations: []
         }
     ]
 })
