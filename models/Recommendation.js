@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose"
-import { destinationSchema } from "./Destination.js"
 
 const recommendationSchema = new Schema({
     emotion: {
