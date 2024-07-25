@@ -6,7 +6,7 @@ const HowItWorks = () => {
       <h2 className="text-4xl mb-4 text-white text-center">How It Works</h2>
       <div className="text-lg text-white">
         <p className="mb-4">
-          MoodyTravels is designed to help you find the perfect travel destination based on your current mood. Here's how it works:
+          MoodVentures is designed to help you find the perfect travel destination based on your current mood. Here's how it works:
         </p>
         <ol className="list-decimal list-inside space-y-4">
             <br /><br />
@@ -28,7 +28,7 @@ const HowItWorks = () => {
         </ol>
         <br /><br />
         <p className="mt-4">
-          Remember, MoodyTravels is not just about finding a place to visit — it's about discovering destinations that can positively influence your emotional state and overall well-being.
+          Remember, MoodVentures is not just about finding a place to visit — it's about discovering destinations that can positively influence your emotional state and overall well-being.
         </p>
       </div>
     </div>

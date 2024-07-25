@@ -50,7 +50,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full py-5 px-[10%] bg-green-600/40 flex justify-between items-center z-50">
-      <Link to="/" className="text-white text-4xl font-bold" onClick={resetInputs}>MoodyTravels</Link>
+      <Link to="/" className="text-white text-4xl font-bold" onClick={resetInputs}>MoodVentures</Link>
       <nav className="flex gap-4">
         <ScrollToLink to="our-mission" className="text-white text-lg font-medium ml-10 cursor-pointer">Our Mission</ScrollToLink>
         <ScrollToLink to="how-it-works" className="text-white text-lg font-medium ml-10 cursor-pointer">How it works</ScrollToLink>
@@ -65,7 +65,7 @@ const Navbar = () => {
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />
-            <span className="text-lg">Welcome {loggedInUserData.username}</span>
+            <span className="text-lg">{loggedInUserData.username}</span>
           </Link>
           <button className="bg-transparent border border-white text-white py-2 px-4 text-lg cursor-pointer transition-all duration-300 hover:bg-white hover:text-black" onClick={handleLogout}>Logout</button>
         </div>

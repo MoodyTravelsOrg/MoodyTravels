@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="bg-black bg-opacity-50 backdrop-blur-md px-6 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
             <div className="w-full md:w-1/4 text-center md:text-left text-white">
-              <h2 className="mb-4 text-2xl font-bold">MoodyTravels</h2>
+              <h2 className="mb-4 text-2xl font-bold">MoodVentures</h2>
               <p className="text-sm">Explore the world based on your mood. Discover the best destinations that suit your current feelings and emotions.</p>
             </div>
             <div className="w-full md:w-1/4 text-center text-white">
@@ -25,12 +25,12 @@ const Footer = () => {
             </div>
             <div className="w-full md:w-1/4 text-center md:text-right text-white">
               <h3 className="mb-4 text-xl font-semibold">Contact Info</h3>
-              <p className="text-sm mb-2">Email: support@moodytravels.com</p>
+              <p className="text-sm mb-2">Email: support@moodventures.com</p>
               <p className="text-sm">Phone: +49 00000000000</p>
             </div>
           </div>
           <div className="mt-8 text-center text-white">
-            <p className="text-sm">&copy; 2024 MoodyTravels. All Rights Reserved.</p>
+            <p className="text-sm">&copy; 2024 MoodVentures. All Rights Reserved.</p>
           </div>
         </div>
       </div>
