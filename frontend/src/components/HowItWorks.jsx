@@ -4,7 +4,7 @@ const HowItWorks = () => {
   return (
     <div
       id="how-it-works"
-      className="flex justify-center items-center min-h-screen pt-16 px-4"
+      className="flex justify-center items-center min-h-screen pt-1 px-4"
     >
       <div className="w-full max-w-6xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden group transition-all duration-300 ease-in-out hover:shadow-2xl">
         <div className="relative p-12">

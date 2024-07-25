@@ -31,8 +31,8 @@ const Homepage = () => {
       <TravelMood />
       <OurMission />
       <HowItWorks />
-      <LoginViaTemple />
       <Testimonials />
+      <LoginViaTemple />
     </div>
   );
 };

@@ -57,7 +57,7 @@ const Footer = () => {
               destinations that suit your current feelings and emotions.
             </p>
           </div>
-          <div className="w-full md:w-1/3 text-white ml-80 md:text-center">
+          <div className="w-full md:w-1/3 text-white ml-64 md:text-center">
             <h3 className="mb-4 text-2xl font-bold">Quick Links</h3>
             <ul className="list-none p-0">
               <li className="mb-2">
@@ -108,7 +108,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <div className="mt-8 text-center text-white ml-16">
+        <div className="mt-8 text-center text-white">
           <p className="text-sm">
             &copy; 2024 MoodVentures. All Rights Reserved.
           </p>
