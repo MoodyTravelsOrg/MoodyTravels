@@ -46,6 +46,16 @@ function ContextProvider({ children }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
+  const [testimonials, setTestimonials] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [hasPosted, setHasPosted] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [testimonialData, setTestimonialData] = useState({
+    username: "",
+    rating: 1,
+    comment: "",
+  });
+
 
   console.log("recommendations", recommendations)
   console.log("selectedEmotion", selectedEmotion)
@@ -509,6 +519,104 @@ function ContextProvider({ children }) {
     }, 4000);
   };
   //Functions from the testimonials component:
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API}/testimonials`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error.message);
+        }
+        const data = await response.json();
+        
+        // Sort testimonials by date or last added first
+        const sortedTestimonials = data.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setTestimonials(sortedTestimonials);
+
+        if (userId) {
+          const userTestimonial = data.find(
+            (testimonial) => testimonial.username === loggedInUserData.username
+          );
+          if (userTestimonial) {
+            setHasPosted(true);
+          }
+        }
+      } catch (error) {
+        alert("Error fetching testimonials", error);
+      }
+    };
+
+    fetchTestimonials();
+  }, [userId, loggedInUserData]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setTestimonialData({ username: "", rating: 1, comment: "" });
+      setHasPosted(false);
+    }
+  }, [isLoggedIn]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTestimonialData({ ...testimonialData, [name]: value });
+  };
+
+  const avatarOptions = [
+    "https://randomuser.me/api/portraits/lego/1.jpg",
+    "https://randomuser.me/api/portraits/lego/2.jpg",
+    "https://randomuser.me/api/portraits/lego/3.jpg",
+    "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Pic.png",
+    "https://kigali.walk21.com/wp-content/uploads/2023/10/Mesa-de-trabajo-1-e1696881708994.png",
+    "https://cdn0.iconfinder.com/data/icons/user-interface-vol-3-12/66/68-512.png",
+    "https://cdn3.iconfinder.com/data/icons/line-color-mix/66/Mix-22-512.png",
+    "https://cdn0.iconfinder.com/data/icons/seo-and-marketing-volume-1/256/100-512.png",
+    "https://cdn3.iconfinder.com/data/icons/user-interface-2463/24/user_profile_profile_personal_user_person-512.png",
+    "https://cdn0.iconfinder.com/data/icons/user-interface-vol-3-12/66/68-512.png",
+    "https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_030-account-user-profile-avatar-256.png",
+  ];
+
+  const getRandomAvatar = () => {
+    const randomIndex = Math.floor(Math.random() * avatarOptions.length);
+    return avatarOptions[randomIndex];
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const postData = {
+      rating: testimonialData.rating,
+      comment: testimonialData.comment,
+      avatar: userId ? loggedInUserData.profileImage : getRandomAvatar(),
+      username: userId ? loggedInUserData.username : testimonialData.username,
+    };
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API}/testimonials`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const newTestimonial = await response.json();
+      setTestimonials([newTestimonial, ...testimonials]);
+      setShowModal(false);
+      setTestimonialData({ username: "", rating: 1, comment: "" });
+    } catch (error) {
+      console.error("Error submitting testimonial", error);
+    }
+  };
 
   // function to reset all inputs when navigating to other components:
   function resetInputs() {
@@ -543,7 +651,16 @@ console.log(selectedEmotion);
       showCategories, setShowCategories, showDestinations, setShowDestinations,
       handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick,
       handleBackClick, navigate, resetInputs, loggedInUserData, setLoggedInUserData,
-      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, resetForm, handleSuccessForm,
+      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, resetForm, handleSuccessForm, testimonials,
+      showModal,
+      setShowModal,
+      hasPosted,
+      showAll,
+      setShowAll,
+      testimonialData,
+      setTestimonialData,
+      handleInputChange,
+      handleSubmit,
     }}>
 
       {children}
