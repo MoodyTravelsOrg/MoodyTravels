@@ -129,7 +129,7 @@
   .banner .content .model {
 
     /* background-image: url('/model.png'); */ /* * This is the old (deity) img */
-    background-image: url('../../public/images/DestinationImagesForCarousel/golden-palm-tree-SILHOUETTE_4K.png');
+    background-image: url('/images/DestinationImagesForCarousel/golden-palm-tree-SILHOUETTE_4K.png');
 
     width: 100%;
     /* height: 75vh; */ /* * ...old (deity) styling */
