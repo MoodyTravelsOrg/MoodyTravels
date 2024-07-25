@@ -33,7 +33,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_KEY = "c0e3ea64536e6ead8828cb8b24b5204f"; // Reemplaza con tu API Key de OpenWeatherMap
+const API_KEY = "c0e3ea64536e6ead8828cb8b24b5204f"; // OpenWeatherMap API key
 
 const DestinationDetail = () => {
   const location = useLocation();
