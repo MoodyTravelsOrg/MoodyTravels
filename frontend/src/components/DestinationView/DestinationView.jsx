@@ -47,10 +47,10 @@ const DestinationDetail = () => {
         <p className="text-white text-lg font-semibold mb-2">Here are some details about {destination.name}.</p>
         <div className="flex flex-col gap-1 mt-2">
           <a href="https://www.tripadvisor.com/CheapFlightsHome" target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Flights</a>
-          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=h&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Hotels</a>
-          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=e&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Restaurants</a>
-          <a href={`https://www.frommers.com/search/index.html?sp_q%3D=${destination.city}`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Guides</a>
-          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=A&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Things to Do</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}+${destination.country}&geo=1&ssrc=h&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Hotels</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}+${destination.country}&geo=1&ssrc=e&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Restaurants</a>
+          <a href={`https://www.frommers.com/search/index.html?sp_q%3D=${destination.city}%2C+${destination.country}`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Guides</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}+${destination.country}&geo=1&ssrc=A&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Things to Do</a>
 
         </div>
 
