@@ -42,14 +42,15 @@ const DestinationDetail = () => {
     <div className="flex flex-col items-center p-5 bg-white/5 rounded-2xl shadow-lg backdrop-blur-md border border-white/30 mt-16">
       <h1 className="text-4xl text-white text-center">{destination.name}</h1>
       <img src={destination.img} alt={destination.name} className="w-72 h-48 object-cover rounded-lg mt-5" />
+      <iframe src={destination.location}></iframe>
       <div className="mt-5 text-center text-white">
         <p className="text-white text-lg font-semibold mb-2">Here are some details about {destination.name}.</p>
         <div className="flex flex-col gap-1 mt-2">
-          <a href={`https://www.lonelyplanet.com/${destination.country}`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Tips</a>
           <a href="https://www.tripadvisor.com/CheapFlightsHome" target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Flights</a>
-          <a href={`https://www.tripadvisor.com/Search?q=${destination.province}&geo=1&ssrc=h&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Accommodation</a>
-          <a href={`https://www.frommers.com/search/index.html?sp_q%3D=${destination.province}`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Guides</a>
-          <a href={`https://www.tripadvisor.com/Search?q=${destination.province}&geo=1&ssrc=A&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Things to Do</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=h&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Hotels</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=e&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Restaurants</a>
+          <a href={`https://www.frommers.com/search/index.html?sp_q%3D=${destination.city}`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Guides</a>
+          <a href={`https://www.tripadvisor.com/Search?q=${destination.city}&geo=1&ssrc=A&searchNearby=false&searchSessionId=001eae3e0a5218dd.ssid&blockRedirect=true&offset=0`} target="_blank" rel="noopener noreferrer" className="text-white no-underline transition-colors duration-300 hover:text-blue-500">Things to Do</a>
 
         </div>
 
