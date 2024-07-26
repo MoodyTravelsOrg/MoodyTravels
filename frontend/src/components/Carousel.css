@@ -2,7 +2,7 @@
 @import url('https://fonts.cdnfonts.com/css/poppins');
 
 .carousel-container {
-    background-color: #03891c5f;
+    /* background-color: #03891c20; */ /* * ...old (deity) styling */
     background-image:
       repeating-linear-gradient(
         to right, transparent 0 100px,
@@ -13,7 +13,10 @@
         #25283b22 100px 101px
       );
     position: relative;
-    /* margin-bottom: 40px; */
+    margin-top: 100px;
+    margin-bottom: 40px;
+
+    box-shadow: 10px -50px 60px 0px rgb(211 204 84 / 0.6) inset;
   }
   
   .carousel-container::before {
@@ -24,7 +27,7 @@
     height: 90%;
     transform: translateX(-50%);
     content: '';
-    /* background-image: url('../../public/bg.png'); */ /* ? Haha the console said: "Files in the public directory are served at the root path". Of course they are...  */
+
     background-image: url('/bg.png');
 
     background-size: 100%;
@@ -94,8 +97,7 @@
     font-family: 'ICA Rubrik';
     font-size: 16em;
     line-height: 1em;
-    /* color: #25283B; */
-    text-shadow: 0 10px 20px #00000082; /* I tested many things and like this iteration the best */
+    text-shadow: 0 10px 20px #00000082;
     position: relative;
   }
   
@@ -110,10 +112,14 @@
   
   .banner .content .Info_about_Comp {
     font-family: Poppins;
-    text-align: right;
+    /* text-align: right; */ /* * ...old (deity) styling */
+    text-align: left;
     max-width: 500px;
     color: #fff;
-    padding-left: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    background-color: #00000092;
   }
   
   .banner .content h2 {
@@ -121,15 +127,18 @@
   }
   
   .banner .content .model {
-    /* background-image: url('../../public/model.png'); */ /* ? Same here^^ */
-    background-image: url('/model.png');
+
+    /* background-image: url('/model.png'); */ /* * This is the old (deity) img */
+    background-image: url('/images/DestinationImagesForCarousel/golden-palm-tree-SILHOUETTE_4K.png');
 
     width: 100%;
-    height: 75vh;
+    /* height: 75vh; */ /* * ...old (deity) styling */
+    height: 95vh;
     position: absolute;
     bottom: 0;
     left: 0;
-    background-size: auto 130%;
+    /* background-size: auto 130%; */ /* * ...old (deity) styling */
+    background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: top center;
     z-index: 1;
