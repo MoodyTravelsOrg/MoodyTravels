@@ -32,7 +32,7 @@ const Homepage = () => {
       <OurMission />
       <HowItWorks />
       <Testimonials />
-      <LoginViaTemple />
+      {/* <LoginViaTemple /> */} {/* We decided to get rid of that, right? */}
     </div>
   );
 };
