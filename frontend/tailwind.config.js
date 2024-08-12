@@ -101,6 +101,9 @@ export default {
         "bubble-gum": "#ff77e9",
         bermuda: "#78dcca",
       },
+      screens: {
+        'custom': '1414px', // It's my own breakpoint to achieve a better responsive design (I didn't like the default ones)
+      },
     },
   },
   plugins: [],
