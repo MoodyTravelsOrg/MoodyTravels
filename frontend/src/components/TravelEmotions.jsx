@@ -114,16 +114,16 @@ function TravelEmotions() {
   };
 
   return (
-    <div className="flex flex-col items-center py-8 px-4">
-      <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8 backdrop-blur-md">
-        <h2 className="text-5xl font-bold text-white mb-8 text-center">How are you feeling today?</h2>
+    <div className="flex flex-col items-center py-4 px-4">
+      <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden py-14 px-8 backdrop-blur-md">
+        <h2 className="text-5xl font-bold text-white mb-10 text-center">How are you feeling today?</h2>
         {isLoggedIn ? (
           <>
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {recommendations.map((item, index) => (
             <button
               key={index}
-              className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center [&>*:hover]:text-white ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-110 bg-white/50" : ""}`}
+              className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-110 bg-white/50" : ""}`}
               onClick={() => {
                 setSelectedEmotion(item);
                 handleMoodSelect(item.emotion);
@@ -134,13 +134,13 @@ function TravelEmotions() {
             </button>
           ))}
         </div>
-        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>Log today's mood</button>
-            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => handleEmotionClick(selectedEmotion)}>Want to travel with us?</button>
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>Log today's mood</button>
+            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => handleEmotionClick(selectedEmotion)}>Want to travel with us?</button>
         </div>
         </>
         ) : (
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-4">
           {recommendations.map((item) => (
             <button
               key={item.emotion}

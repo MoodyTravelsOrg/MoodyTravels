@@ -66,10 +66,10 @@ const TravelMood = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-start gap-4 mt-16 pl-24 pr-4">
-      <div className="flex-1 flex flex-col gap-5 p-8 bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden max-w-full lg:max-w-5xl mx-auto">
+      <div className="flex-1 flex flex-col p-8 bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden max-w-full lg:max-w-5xl mx-auto">
         {isLoggedIn && (
-          <div className="text-xl text-white mb-0 ml-5 underline underline-offset-8">
-            Welcome {loggedInUserData.username}
+          <div className="text-xl text-white text-center mt-5 mb-7 ml-5 underline-offset-8">
+            Welcome <span className='text-yellowishGreenForTextandButtons font-semibold'>{loggedInUserData.username}</span>!
           </div>
         )}
         {!showDestinations && (

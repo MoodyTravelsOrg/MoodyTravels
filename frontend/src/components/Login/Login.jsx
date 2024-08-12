@@ -52,7 +52,9 @@ const Login = () => {
               </div>
             </div>
             {error && <p className="text-red-500 mt-2">{error}</p>}
-            <button type="submit" className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 rounded mt-4 font-bold">Log In</button>
+            <div className="flex justify-center">
+              <button type="submit" className="bg-yellowishGreenForTextandButtons text-darkGreenForText px-8 py-3 rounded-full mt-4 font-semibold">Login</button  > 
+            </div>
           </form>
           {/* <div className="mt-8 text-center">
             <p className="text-gray-700">
@@ -73,7 +75,7 @@ const Login = () => {
           <div className="text-center mb-4">
             <p className="text-2xl text-white font-bold mb-12">Don't have an account?</p>
             <span
-              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText px-2 py-2 rounded mt-4 cursor-pointer font-bold"
+              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText px-8 py-3 rounded-full mt-4 cursor-pointer font-semibold"
               onClick={() => {
                 resetInputs();
                 navigate("/register");

@@ -138,11 +138,11 @@ const UserProfile = () => {
                 Delete Account
               </button>
               <button
-                className="mt-10 px-8 py-3 bg-green-500 text-white rounded-full hover:bg-darkGreenForBG transition duration-300 flex items-center text-lg"
+                className="mt-10 px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full hover:bg-white transition duration-300 flex items-center text-lg"
                 onClick={() => navigate("/")}
               >
-                <FaHome className="mr-2" />
-                Homepage
+                {/* <FaHome className="mr-2" /> */}
+                Back to homepage
               </button>
             </div>
           </div>
