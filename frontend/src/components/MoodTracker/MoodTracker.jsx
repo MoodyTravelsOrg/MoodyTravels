@@ -212,12 +212,12 @@ const MoodTracker = () => {
             ))}
           </div>
           <div className="flex justify-center space-x-4 mb-8">
-            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>Log Mood</button>
+            <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>Log Mood</button>
             {(!edit && loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0) && (
-              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => setEdit(!edit)}>Edit Log</button>
+              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => setEdit(!edit)}>Edit Log</button>
             )}
             {(edit && loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0) && (
-              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => setEdit(!edit)}>End Edit</button>
+              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => setEdit(!edit)}>End Edit</button>
             )}
           </div>
           <div className="bg-white/10 rounded-lg backdrop-blur-md shadow-lg p-5 my-5">

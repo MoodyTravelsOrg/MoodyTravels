@@ -139,12 +139,14 @@ const Contact = () => {
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
-              <button
-                type="submit"
-                className="w-full px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full hover:bg-white transition duration-300 flex items-center justify-center text-lg font-semibold"
-              >
-                Send Message
-              </button>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className=" px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForText rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
+                >
+                  Send Message
+                </button>
+              </div> 
             </form>
           ) : (
             <p className="text-yellowishGreenForTextandButtons text-center text-lg">Thank you for your message. We will get back to you soon.</p>

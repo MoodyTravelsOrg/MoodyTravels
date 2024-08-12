@@ -224,6 +224,9 @@ const DestinationDetail = () => {
   return (
     <div className="flex justify-center items-center py-16 px-4 mt-28">
       <div className="w-full max-w-7xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8">
+        <h1 className="text-4xl font-bold text-white text-center mb-8">
+          {destination.name}
+        </h1>
         <div className="flex flex-col items-center bg-white/10 rounded-lg backdrop-blur-md shadow-lg p-5">
           <div className="w-full flex flex-col lg:flex-row mb-8">
             <div className="lg:w-1/2 relative mb-5 lg:mb-0">
@@ -232,9 +235,9 @@ const DestinationDetail = () => {
                 alt={destination.name}
                 className="w-full h-64 lg:h-120 object-cover rounded-lg"
               />
-              <h1 className="absolute bottom-4 left-4 text-4xl text-white bg-black bg-opacity-50 px-2 py-1 rounded">
+             {/*  <h1 className="absolute bottom-4 left-4 text-4xl text-white bg-black bg-opacity-50 px-2 py-1 rounded">
                 {destination.name}
-              </h1>
+              </h1> */}
             </div>
             <div className="lg:w-1/2 flex flex-col pl-5">
               <iframe
@@ -296,7 +299,7 @@ const DestinationDetail = () => {
           </div>
           <button
             onClick={() => navigate(-1)}
-            className="text-white bg-yellowishGreenForTextandButtons hover:bg-white hover:text-darkGreenForBG rounded-full px-8 py-3 transition duration-300 mt-8"
+            className="text-darkGreenForText font-semibold bg-yellowishGreenForTextandButtons hover:bg-white rounded-full px-8 py-3 transition duration-300 mt-8"
           >
             Go Back
           </button>

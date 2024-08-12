@@ -41,13 +41,13 @@ function TravelCategories() {
 
   return (
     <div className="flex flex-col items-center py-8 px-4">
-      <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8 backdrop-blur-md">
-        <h2 className="text-5xl font-bold text-white mb-8 text-center">Do you prefer to travel to a city, beach or into nature?</h2>
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+      <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden py-14 px-8 backdrop-blur-md">
+        <h2 className="text-4xl font-bold text-white mb-10 text-center">Do you prefer to travel to a city, beach or into nature?</h2>
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {selectedEmotion.categories.map(category => (
             <div
               key={category.name}
-              className={`flex flex-col items-center bg-white/10 rounded-2xl p-5 backdrop-blur-md border-2 border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 ${selectedCategory.name === category.name ? 'border-2 border-white/70' : ''}`}
+              className={`flex flex-col items-center bg-white/20 rounded-xl p-5 backdrop-blur-md border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-110 ${selectedCategory.name === category.name ? 'scale-110 bg-white/50 border' : ''}`}
               onClick={() => setSelectedCategory(category)}
             >
               <img src={category.img} alt={category.name} className="w-24 h-24 object-cover rounded-lg" />
@@ -58,7 +58,7 @@ function TravelCategories() {
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button 
             onClick={() => handleCategoryClick()}
-            className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300"
+            className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300"
           >
             Get travel recommendations
           </button>

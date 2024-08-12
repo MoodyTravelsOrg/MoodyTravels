@@ -194,7 +194,7 @@ const Testimonials = () => {
     <div className={`relative ${showModal ? 'blur-background' : ''}`}>
       <div className="py-8 bg-darkGreenForBG bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg p-6">
         <h2 className="text-3xl font-bold text-center mb-6 text-white">
-          Our User Experiences
+          What Users Say About Us
         </h2>
         <div className="container mx-auto flex flex-wrap justify-center gap-8">
           {testimonials
@@ -239,7 +239,7 @@ const Testimonials = () => {
         {testimonials.length > 6 && (
           <div className="flex justify-center mt-4">
             <button
-              className="bg-yellowishGreenForTextandButtons text-darkGreenForBG p-4 mt-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 mt-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
               onClick={() => setShowAll(!showAll)}
             >
               {showAll ? "Show Less" : "Show More"}
@@ -254,7 +254,7 @@ const Testimonials = () => {
             </p>
           ) : (
             <button
-              className="bg-yellowishGreenForTextandButtons text-darkGreenForBG p-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
               onClick={() => setShowModal(true)}
             >
               Add Testimonial
@@ -321,17 +321,17 @@ const Testimonials = () => {
                   required
                 />
               </div>
-              <div className="flex justify-end gap-4">
+              <div className="flex justify-center gap-4">
                 <button
                   type="button"
-                  className="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+                  className="bg-red-500 text-white font-semibold hover:bg-red-600 px-8 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
                   onClick={() => setShowModal(false)}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-full px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full hover:bg-white transition duration-300 flex items-center justify-center text-lg font-semibold"
+                  className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
                 >
                   Submit
                 </button>
