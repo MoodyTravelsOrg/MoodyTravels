@@ -71,7 +71,7 @@ function MoodPreview() {
           <p className="text-white">No moods logged yet.</p>
         )}
         <div className="flex justify-center space-x-4 mt-8">
-          <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => navigate("/mood-tracker")}>Show full log</button>
+          <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => navigate("/mood-log")}>Show full log</button>
         </div>
       </div>
     </div>
