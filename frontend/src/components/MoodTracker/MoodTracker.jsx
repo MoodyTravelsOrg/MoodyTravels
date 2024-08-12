@@ -199,7 +199,7 @@ const MoodTracker = () => {
     <div className="flex justify-center items-center min-h-screen pt-36 pb-16 px-4">
       <div className="w-full max-w-4xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
         <div className="p-12">
-          <h2 className="text-5xl font-bold text-white mb-8 text-center">Mood Tracker</h2>
+          <h2 className="text-5xl font-bold text-white mb-8 text-center">Mood Log</h2>
           <div className="flex justify-center space-x-4 mb-8">
             {['happy', 'sad', 'angry', 'anxious', 'bored'].map((mood, index) => (
               <button
