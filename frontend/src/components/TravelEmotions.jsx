@@ -84,6 +84,7 @@
 import React, { useContext } from "react";
 import { Context } from "../context/Context";
 import { FaSmile, FaSadTear, FaAngry, FaMeh, FaFrown } from "react-icons/fa";
+import { FaFaceGrimace } from "react-icons/fa6";
 
 function TravelEmotions() {
   const {
@@ -97,46 +98,62 @@ function TravelEmotions() {
   } = useContext(Context);
 
   const emojiArray = {
-    happy: <FaSmile className="text-yellow-400" />,
-    sad: <FaSadTear className="text-blue-400" />,
-    angry: <FaAngry className="text-red-400" />,
-    anxious: <FaMeh className="text-green-400" />,
-    bored: <FaFrown className="text-gray-400" />,
+    happy: <FaSmile className="text-3xl text-yellow-400" />,
+    sad: <FaSadTear className="text-3xl text-blue-400" />,
+    angry: <FaAngry className="text-3xl text-red-400" />,
+    anxious: <FaFaceGrimace className="text-3xl text-green-400" />,
+    bored: <FaMeh className="text-gray-400" />,
   };
 
   const emotionHoverColors = {
-    happy: 'hover:bg-yellow-400',
-    sad: 'hover:bg-blue-400',
-    angry: 'hover:bg-red-400',
-    anxious: 'hover:bg-green-400',
-    bored: 'hover:bg-gray-400',
+    happy: 'hover:bg-yellow-400 hover:*:text-white',
+    sad: 'hover:bg-blue-400 hover:*:text-white',
+    angry: 'hover:bg-red-400 hover:*:text-white',
+    anxious: 'hover:bg-green-400 hover:*:text-white',
+    bored: 'hover:bg-gray-400 hover:*:text-white',
   };
 
   return (
     <div className="flex flex-col items-center py-8 px-4">
       <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8 backdrop-blur-md">
         <h2 className="text-5xl font-bold text-white mb-8 text-center">How are you feeling today?</h2>
+        {isLoggedIn ? (
+          <>
         <div className="flex flex-wrap justify-center gap-4 mb-8">
           {recommendations.map((item, index) => (
             <button
               key={index}
-              className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-110 bg-white/50" : ""}`}
+              className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center [&>*:hover]:text-white ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-110 bg-white/50" : ""}`}
               onClick={() => {
                 setSelectedEmotion(item);
                 handleMoodSelect(item.emotion);
               }}
             >
               {item.emotion}
-              <span className="text-3xl">{emojiArray[item.emotion]}</span>
+              {emojiArray[item.emotion]}
             </button>
           ))}
         </div>
-        {isLoggedIn && (
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
             <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>Log today's mood</button>
             <button className="bg-yellowishGreenForTextandButtons text-darkGreenForBG rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => handleEmotionClick(selectedEmotion)}>Want to travel with us?</button>
-          </div>
-        )}
+        </div>
+        </>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {recommendations.map((item) => (
+            <button
+              key={item.emotion}
+              className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-110 bg-white/50" : ""}`}
+              onClick={() => handleEmotionClick(item)}
+            >
+              {item.emotion}
+              {emojiArray[item.emotion]}
+              {/* <span className="text-3xl [&>*:hover]:text-white">{emojiArray[item.emotion]}</span> */}
+            </button>
+          ))}
+        </div>
+        ) }
       </div>
     </div>
   );
