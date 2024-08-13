@@ -168,6 +168,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../../context/Context.jsx';
 import { FaSmile, FaFrown, FaAngry, FaMeh, FaSadTear } from 'react-icons/fa';
+import { FaFaceGrimace } from "react-icons/fa6";
 
 const MoodTracker = () => {
   const {
@@ -177,22 +178,22 @@ const MoodTracker = () => {
   } = useContext(Context);
 
   const moodIcons = {
-    happy: <FaSmile className="text-yellow-400" />,
-    sad: <FaSadTear className="text-blue-400" />,
-    angry: <FaAngry className="text-red-400" />,
-    anxious: <FaMeh className="text-green-400" />,
-    bored: <FaFrown className="text-gray-400" />,
+    happy: <FaSmile className="text-3xl text-yellow-400" />,
+    sad: <FaSadTear className="text-3xl text-blue-400" />,
+    angry: <FaAngry className="text-3xl text-red-400" />,
+    anxious: <FaFaceGrimace className="text-3xl text-green-400" />,
+    bored: <FaMeh className="text-3xl text-gray-400" />,
   };
 
 // ! Attention: The fifth emotion (which is just added) is not used in the recommendations array at the moment. Nobody implemented it by now. Since I forgot to switch from the main branch
 // ! to a feature branch before changing the final styling for this comp, I will not change the array in this branch. I'm only touching the styling! We have to keep this in mind for later. Ok?
 
   const moodHoverColors = {
-    happy: 'hover:bg-yellow-400',
-    sad: 'hover:bg-blue-400',
-    angry: 'hover:bg-red-400',
-    anxious: 'hover:bg-green-400',
-    bored: 'hover:bg-gray-400',
+    happy: 'hover:bg-yellow-400 hover:*:text-white',
+    sad: 'hover:bg-blue-400 hover:*:text-white',
+    angry: 'hover:bg-red-400 hover:*:text-white',
+    anxious: 'hover:bg-green-400 hover:*:text-white',
+    bored: 'hover:bg-gray-400 hover:*:text-white',
   };
 
   return (
@@ -200,14 +201,15 @@ const MoodTracker = () => {
       <div className="w-full max-w-4xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
         <div className="p-12">
           <h2 className="text-5xl font-bold text-white mb-8 text-center">Mood Log</h2>
-          <div className="flex justify-center space-x-4 mb-8">
-            {['happy', 'sad', 'angry', 'anxious', 'bored'].map((mood, index) => (
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {['happy', 'sad', 'angry', 'anxious'/* , 'bored' */].map((mood, index) => (
               <button
                 key={index}
-                className={`bg-white/40 border-none rounded py-2 px-5 m-1 cursor-pointer transition-all duration-300 ${moodHoverColors[mood]} ${selectedMood === mood ? 'scale-110 bg-white/50' : ''}`}
+                className={`p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-3 items-center ${moodHoverColors[mood]} ${selectedMood === mood ? 'scale-110 bg-white/50' : ''}`}
                 onClick={() => handleMoodSelect(mood)}
               >
                 {mood}
+                {moodIcons[mood]}
               </button>
             ))}
           </div>
