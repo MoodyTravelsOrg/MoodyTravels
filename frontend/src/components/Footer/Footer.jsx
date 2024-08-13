@@ -83,7 +83,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-darkGreenForBG">
+    <footer className="w-full bg-green-700/40 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row justify-between items-start space-y-8 lg:space-y-0">
           <div className="w-full lg:w-1/3 text-white text-center lg:text-left">
