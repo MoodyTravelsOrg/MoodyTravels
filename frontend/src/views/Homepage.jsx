@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import TravelMood from "../components/TravelMood/TravelMood";
 import OurMission from "../components/OurMission";
 import HowItWorks from "../components/HowItWorks";
-import Carousel from "../components/Carousel";
+import HeroSection from "../components/HeroSection";
 import LoginViaTemple from "../components/LoginViaTemple";
 import Testimonials from "../components/Testimonials";
 import { animateScroll as scroll } from "react-scroll";
@@ -27,7 +27,7 @@ const Homepage = () => {
 
   return (
     <div className="pt-28 space-y-16 pb-24">
-      <Carousel />
+      <HeroSection />
       <TravelMood />
       <OurMission />
       <HowItWorks />

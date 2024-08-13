@@ -6,15 +6,8 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   min-height: 100vh;
-  /* background: url("./assets/Alternative_MoodyTravels_BG-image.jpg") no-repeat; */
-  background: url("./assets/Jungle_bg.png") no-repeat;
-  background-size: cover;
-  background-position: center;
-
+  background: url("./assets/Jungle_bg.png") no-repeat center center/cover;
   margin: 0;
   padding: 0;
 }
@@ -24,42 +17,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
-main {
-  flex: 1;
-}
-
-/*  * The following code is only for the special card-effect (the chasing lines) */
-/* ! Originally I was using "max-w-7xl" tailwind's native utility class (which corresponds to 1280px) but I had to use "hard coded" values in this case 'coz the chasing-lines-effect would not work otherwise.
-    ! Well, finally I decided to get rid of the code for this effect in the UserProfile comp. 'coz it did not work the way I envisioned it to. So, I'll comment out the following lines as well (for now). Gonna take care of that later. */
-
-/* .animated_card {
-  display: grid;
-  place-items: center;
-  position: relative;
-  max-width: 1200px; 
-}
-
-.animated-card-before {
-  position: absolute;
-  transition: 0.3s;
-  animation: animate 5s linear infinite;
-}
-
-@keyframes animate {
-  50% {
-    filter: hue-rotate(350deg);
-  }
-}
-
-.card {
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
-.tilted {
-  transform: rotate3d(1, 0, 0, 40deg);
-} */
 
 .homepage-container {
   margin-top: 4rem;
