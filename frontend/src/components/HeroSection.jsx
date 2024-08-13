@@ -40,15 +40,15 @@ const Carousel = () => {
           />
         ))}
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-8">
-        <h1 className="font-extrabold text-white animate-slide-in text-6xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-lg">
-          Come travel with us!
+      <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-16">
+        <h1 className="font-bold text-white text-center animate-slide-in text-6xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-md">
+          Come on a trip with us!
         </h1>
         <button
           onClick={() => navigate("/register")}
-          className="bg-yellowishGreenForTextandButtons hover:bg-white  text-darkGreenForBG font-bold py-3 px-6 rounded-lg shadow-md transition-transform duration-500 ease-in-out transform hover:scale-105 text-sm md:text-lg lg:text-xl"
+          className="bg-yellowishGreenForTextandButtons hover:bg-white  text-darkGreenForText font-semibold py-3 px-8 rounded-full shadow-md transition-transform duration-500 ease-in-out transform hover:scale-105 text-sm md:text-lg lg:text-xl"
         >
-          Start your Adventure
+          Start your adventure
         </button>
       </div>
     </div>
