@@ -18,76 +18,76 @@ const Register = () => {
       <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex ">
         <div className="w-full md:w-1/2 p-8 order-1">
           <h2 className="text-2xl font-bold mb-14 text-white">Register</h2>
-          <form onSubmit={handleRegister}>
+          <form className="space-y-6" onSubmit={handleRegister}>
             <div className="mb-4">
-              <label className="block text-white">
-                <FaUserAstronaut className="inline-block mr-2" />
+              <label className="block text-sm font-medium text-white mb-1">
+                {/* <FaUserAstronaut className="inline-block mr-2" /> */}
                 Email
               </label>
               <input
                 type="email"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-                placeholder="Email ID"
+                className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white">
-                <FaUser className="inline-block mr-2" />
+              <label className="block text-sm font-medium text-white mb-1">
+                {/* <FaUser className="inline-block mr-2" /> */}
                 Username
               </label>
               <input
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-                placeholder="Username"
+                className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                placeholder="Enter a username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-white">
-                <FaLock className="inline-block mr-2" />
+              <label className="block text-sm font-medium text-white mb-1">
+                {/* <FaLock className="inline-block mr-2" /> */}
                 Password
               </label>
               <input
                 type="password"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-                placeholder="Password"
+                className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-white">
-                <GiDialPadlock className="inline-block mr-2" />
+              <label className="block text-sm font-medium text-white mb-1">
+                {/* <GiDialPadlock className="inline-block mr-2" /> */}
                 Confirm Password
               </label>
               <input
                 type="password"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-                placeholder="Confirm password"
+                className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white">
+              <label className="block text-sm font-medium text-white mb-1">
                 Profile Image
               </label>
               <input
                 type="file"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
+                className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
                 onChange={(e) => setProfileImage(e.target.files[0])}
                 ref={fileInput}
               />
             </div>
             {siteKey && (
-              <div className="flex justify-center w-full mb-4">
+              <div className="flex justify-center w-full mb-4 pt-2">
                 <ReCAPTCHA
                   sitekey={siteKey}
                   onChange={(token) => setRecaptchaToken(token)}
@@ -97,7 +97,7 @@ const Register = () => {
             )}
             {error && <p className="text-red-500 mt-2">{error}</p>}
             <div className="flex justify-center">
-              <button type="submit" className="bg-yellowishGreenForTextandButtons text-darkGreenForText px-8 py-3 rounded-full mt-4 font-semibold">Register here</button>
+              <button type="submit" className="bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText px-8 py-3 rounded-full mt-2 font-semibold">Register here</button>
             </div>
           </form>
           {/* <div className="mt-8 text-center">
@@ -115,11 +115,11 @@ const Register = () => {
             </p>
           </div> */}
         </div>
-        <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center order-2 bg-transparent/10">
+        <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-start order-2 bg-transparent/10">
           <div className="text-center mb-4">
             <p className="text-white mb-52 text-2xl font-bold">Already have an account?</p>
             <span
-              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText px-8 py-3 rounded-full cursor-pointer font-semibold"
+              className="w-full bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText px-8 py-3 rounded-full cursor-pointer font-semibold"
               onClick={() => {
                 resetInputs();
                 navigate("/login");
