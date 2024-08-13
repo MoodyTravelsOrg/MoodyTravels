@@ -40,7 +40,7 @@
 
 // * New responsive navbar:
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context.jsx';
 import ScrollToLink from '../ScrollToLink';
@@ -58,8 +58,37 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+
+
+
+  const [isVisible, setIsVisible] = useState(true);
+
+
+  let lastScrollTop = 0;
+
+  const handleScroll = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop) {
+      setIsVisible(false); // Hide navbar on scroll down
+    } else {
+      setIsVisible(true); // Show navbar on scroll up
+    }
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling 
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
+
+
   return (
-    <div className="fixed top-0 left-0 w-full py-5 px-[10%] bg-green-600/40 flex justify-evenly items-center z-50">
+    <div className={`fixed top-0 left-0 w-full py-5 px-[10%] bg-green-600/40 flex justify-evenly items-center z-50 transition-transform duration-700 ease-in-out ${isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'}`}>
       <Link to="/" className="text-white text-4xl font-bold" onClick={() => { resetInputs(); closeMenu(); }}>MoodVentures</Link>
       <div className="custom:hidden">
         <button onClick={toggleMenu} className="text-white text-3xl">
