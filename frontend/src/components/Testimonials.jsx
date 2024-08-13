@@ -203,7 +203,7 @@ const Testimonials = () => {
             .map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="testimonial bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg shadow-md w-80 transition-transform duration-300 ease-in-out transform hover:scale-105"
+                className="testimonial bg-white bg-opacity-10 backdrop-blur-md p-6 rounded-lg shadow-md w-80 transition-transform duration-300 ease-in-out transform hover:scale-105 border-double border-4 border-yellowishGreenForTextandButtons"
               >
                 <div className="flex items-center mb-4">
                   <img
@@ -212,7 +212,7 @@ const Testimonials = () => {
                     className="w-12 h-12 rounded-full mr-4"
                   />
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-800">
+                    <h3 className="text-xl font-semibold text-white">
                       {testimonial.username}
                     </h3>
                     <div className="flex">
@@ -231,7 +231,7 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-600">{testimonial.comment}</p>
+                <p className="text-white/80">{testimonial.comment}</p>
               </div>
             ))}
         </div>
