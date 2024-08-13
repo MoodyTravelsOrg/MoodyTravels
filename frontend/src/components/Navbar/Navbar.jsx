@@ -40,49 +40,74 @@
 
 // * New responsive navbar:
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context.jsx';
 import ScrollToLink from '../ScrollToLink';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { MdLogout, MdEdit, MdHome } from 'react-icons/md';
+import { MdLogout, MdEdit } from 'react-icons/md';
 
 const Navbar = () => {
-  const { isLoggedIn, handleLogout, resetInputs, loggedInUserData } = useContext(Context);
+  const { isLoggedIn, handleLogout, loggedInUserData } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
   const toggleUserMenu = () => {
     setIsUserMenuOpen(!isUserMenuOpen);
+   
+   
+  };
+  
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setIsUserMenuOpen(false);
   };
 
-  let lastScrollTop = 0;
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop) {
-      setIsVisible(false);
-    } else {
+    const isMediumOrSmaller = window.matchMedia("(max-width: 768px)").matches; 
+
+    if (isMediumOrSmaller) {
+      // Always show the navbar on medium or smaller screens
       setIsVisible(true);
+    } else {
+      // Hide the navbar on scroll down for larger screens
+      if (scrollTop > 0) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
     }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    
     setIsMenuOpen(false);
     setIsUserMenuOpen(false);
   };
 
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -97,17 +122,17 @@ const Navbar = () => {
       </Link>
 
       <div className="flex items-center space-x-4">
-        <nav className={`hidden md:flex items-center space-x-6`}>
-          <ScrollToLink to="our-mission" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText">Our Mission</ScrollToLink>
-          <ScrollToLink to="how-it-works" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText">How it works</ScrollToLink>
-          <Link to="/contact" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText">Contact</Link>
+        <nav className={`hidden md:flex items-center space-x-6`} ref={menuRef}>
+          <ScrollToLink to="our-mission" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Our Mission</ScrollToLink>
+          <ScrollToLink to="how-it-works" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>How it works</ScrollToLink>
+          <Link to="/contact" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Contact</Link>
           {isLoggedIn && (
-            <Link to="/mood-log" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText">Mood Log</Link>
+            <Link to="/mood-log" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Mood Log</Link>
           )}
         </nav>
 
         {isLoggedIn ? (
-          <div className="relative">
+          <div className="relative" ref={userMenuRef}>
             <button onClick={toggleUserMenu} className="flex items-center space-x-2">
               <img
                 src={loggedInUserData.profileImage}
@@ -117,7 +142,8 @@ const Navbar = () => {
             </button>
             {isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out">
-                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded">
+                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded" onClick={toggleUserMenu
+                }>
                   <MdEdit className="mr-2" />
                   Edit Profile
                 </Link>
@@ -138,7 +164,7 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <nav className="absolute top-full left-0 w-full bg-green-700/90 backdrop-blur-md text-white flex flex-col items-center space-y-4 p-4 z-40 md:hidden transition-all duration-500 ease-in-out">
+        <nav className="absolute top-full left-0 w-full bg-green-700/90 backdrop-blur-md text-white flex flex-col items-center space-y-4 p-4 z-40 md:hidden transition-all duration-500 ease-in-out" ref={menuRef}>
           <ScrollToLink to="our-mission" className="text-lg font-medium" onClick={closeMenu}>Our Mission</ScrollToLink>
           <ScrollToLink to="how-it-works" className="text-lg font-medium" onClick={closeMenu}>How it works</ScrollToLink>
           <Link to="/contact" className="text-lg font-medium" onClick={closeMenu}>Contact</Link>
@@ -152,4 +178,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

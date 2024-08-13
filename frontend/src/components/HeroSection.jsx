@@ -41,6 +41,7 @@ const Carousel = () => {
         ))}
       </div>
       <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-16">
+        <h1 className="font-bold text-white text-center animate-slide-in text-5xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-md">Welcome to <span className="text-yellowishGreenForTextandButtons">MoodVentures</span></h1>
         <h1 className="font-bold text-white text-center animate-slide-in text-6xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-md">
           Come on a trip with us!
         </h1>
