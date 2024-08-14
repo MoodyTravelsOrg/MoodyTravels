@@ -56,13 +56,14 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setIsUserMenuOpen(false); // Cerrar el menú de usuario cuando se abre el menú principal
   };
+
   const toggleUserMenu = () => {
     setIsUserMenuOpen(!isUserMenuOpen);
-   
-   
+    setIsMenuOpen(false); // Cerrar el menú principal cuando se abre el menú de usuario
   };
-  
+
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsUserMenuOpen(false);
@@ -72,23 +73,27 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop) {
-      setIsVisible(false); // Hide navbar on scroll down
-    } else {
-      setIsVisible(true); // Show navbar on scroll up
+
+    if (scrollTop !== lastScrollTop) {
+      setIsVisible(scrollTop < lastScrollTop); // Mostrar la barra de navegación al hacer scroll hacia arriba, ocultarla al hacer scroll hacia abajo
+      closeMenu(); // Cerrar ambos menús al hacer scroll
     }
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling 
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Prevenir valores negativos de scrollTop
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target) &&
+        (menuRef.current && !menuRef.current.contains(event.target)) &&
+        (userMenuRef.current && !userMenuRef.current.contains(event.target))
+      ) {
+        closeMenu(); // Cerrar ambos menús si se hace clic fuera de ellos
+      } else if (
         userMenuRef.current &&
         !userMenuRef.current.contains(event.target)
       ) {
-        closeMenu();
+        setIsUserMenuOpen(false); // Cerrar solo el menú de usuario si se hace clic fuera de él
       }
     };
 
@@ -132,8 +137,7 @@ const Navbar = () => {
             </button>
             {isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out">
-                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded" onClick={toggleUserMenu
-                }>
+                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded" onClick={closeMenu}>
                   <MdEdit className="mr-2" />
                   Edit Profile
                 </Link>
@@ -168,3 +172,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

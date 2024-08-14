@@ -192,27 +192,27 @@ const Testimonials = () => {
 
   return (
     <div className={`relative ${showModal ? 'blur-background' : ''}`}>
-      <div className="py-8 bg-darkGreenForBG/40  backdrop-blur-md shadow-lg p-6">
-        <h2 className="text-3xl font-bold text-center mb-6 text-white">
+      <div className="py-8 bg-darkGreenForBG/40 backdrop-blur-md shadow-lg p-4 md:p-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-6 text-white">
           What Users Say About Us
         </h2>
-        <div className="container mx-auto flex flex-wrap justify-center gap-8">
+        <div className="container mx-auto flex flex-wrap justify-center gap-4 md:gap-8">
           {testimonials
             .toReversed()
             .slice(0, showAll ? testimonials.length : 6)
             .map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="testimonial bg-white bg-opacity-10 backdrop-blur-md p-6 rounded-lg shadow-md w-80 transition-transform duration-300 ease-in-out transform hover:scale-105 border-double border-4 border-yellowishGreenForTextandButtons"
+                className="testimonial bg-white bg-opacity-10 backdrop-blur-md p-4 md:p-6 rounded-lg shadow-md w-72 md:w-80 transition-transform duration-300 ease-in-out transform hover:scale-105 border-double border-4 border-yellowishGreenForTextandButtons"
               >
                 <div className="flex items-center mb-4">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.username}
-                    className="w-12 h-12 rounded-full mr-4"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full mr-3 md:mr-4"
                   />
                   <div>
-                    <h3 className="text-xl font-semibold text-white">
+                    <h3 className="text-lg md:text-xl font-semibold text-white">
                       {testimonial.username}
                     </h3>
                     <div className="flex">
@@ -231,7 +231,7 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-white/80">{testimonial.comment}</p>
+                <p className="text-white/80 text-sm md:text-base">{testimonial.comment}</p>
               </div>
             ))}
         </div>
@@ -239,7 +239,7 @@ const Testimonials = () => {
         {testimonials.length > 6 && (
           <div className="flex justify-center mt-4">
             <button
-              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 mt-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-6 md:px-8 py-2 md:py-3 mt-6 md:mt-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 "
               onClick={() => setShowAll(!showAll)}
             >
               {showAll ? "Show Less" : "Show More"}
@@ -247,14 +247,14 @@ const Testimonials = () => {
           </div>
         )}
 
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-4 md:mt-6">
           {hasPosted ? (
-            <p className="text-white text-2xl text-center max-w-xl md:max-w-md sm:max-w-xs">
+            <p className="text-white text-xl md:text-2xl text-center max-w-sm md:max-w-md">
               Thank you for your feedback! You have already submitted one.
             </p>
           ) : (
             <button
-              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+              className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-6 md:px-8 py-2 md:py-3 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 "
               onClick={() => setShowModal(true)}
             >
               Add Testimonial
@@ -265,8 +265,8 @@ const Testimonials = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-darkGreenForBG backdrop-blur-md p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-2xl font-bold mb-4 text-white">
+          <div className="bg-darkGreenForBG backdrop-blur-md p-4 md:p-6 rounded-lg shadow-lg w-80 md:w-96">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-white">
               Add Testimonial
             </h2>
             <form onSubmit={handleSubmit}>
@@ -321,17 +321,17 @@ const Testimonials = () => {
                   required
                 />
               </div>
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-2 md:gap-4">
                 <button
                   type="button"
-                  className="bg-red-500 text-white font-semibold hover:bg-red-600 px-8 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
+                  className="bg-red-500 text-white font-semibold hover:bg-red-600 px-6 md:px-8 py-2 md:py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-80"
                   onClick={() => setShowModal(false)}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold px-8 py-3 rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
+                  className="bg-yellowishGreenForTextandButtons text-darkGreenForText px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
                 >
                   Submit
                 </button>
@@ -345,3 +345,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+

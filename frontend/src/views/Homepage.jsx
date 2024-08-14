@@ -1,4 +1,4 @@
-//  ! Here I also removed the commented out code snippets, as they are no longer needed.
+
 
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -6,7 +6,6 @@ import TravelMood from "../components/TravelMood/TravelMood";
 import OurMission from "../components/OurMission";
 import HowItWorks from "../components/HowItWorks";
 import HeroSection from "../components/HeroSection";
-import LoginViaTemple from "../components/LoginViaTemple";
 import Testimonials from "../components/Testimonials";
 import { animateScroll as scroll } from "react-scroll";
 
@@ -32,7 +31,6 @@ const Homepage = () => {
       <OurMission />
       <HowItWorks />
       <Testimonials />
-      {/* <LoginViaTemple /> */} {/* We decided to get rid of that, right? */}
     </div>
   );
 };
