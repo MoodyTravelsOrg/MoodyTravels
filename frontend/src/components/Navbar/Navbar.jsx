@@ -48,10 +48,9 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdLogout, MdEdit } from 'react-icons/md';
 
 const Navbar = () => {
-  const { isLoggedIn, handleLogout, loggedInUserData } = useContext(Context);
+  const { isLoggedIn, handleLogout, loggedInUserData, isUserMenuOpen, setIsUserMenuOpen } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const userMenuRef = useRef(null);
 

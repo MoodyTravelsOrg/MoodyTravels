@@ -1,6 +1,6 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
-import { json, useNavigate} from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import defaultProfileImage from "../../public/default-profile.png"
 
 import emailjs from "emailjs-com";
@@ -56,11 +56,13 @@ function ContextProvider({ children }) {
     comment: "",
   });
 
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // dropdown menu for user profile
+
 
   console.log("recommendations", recommendations)
   console.log("selectedEmotion", selectedEmotion)
   console.log("selectedCategory", selectedCategory)
-  
+
 
 
   //---------------------------------------------------------------------------------------------
@@ -171,6 +173,7 @@ function ContextProvider({ children }) {
     setIsLoggedIn(false);
     setError("");
     clearCookies()
+    resetInputs();
     navigate('/');
   };
 
@@ -405,19 +408,19 @@ function ContextProvider({ children }) {
     e.preventDefault();
     setError("");
     // setSuccess("");
-  
+
     try {
       const formData = new FormData();
       if (username) formData.append("username", username);
       if (password) formData.append("password", password);
       if (profileImage) formData.append("profileImage", profileImage);
-  
+
       const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: "PATCH",
         credentials: "include",
         body: formData,
       });
-  
+
       if (response.ok) {
         await getUserData();
         setEditField(null);
@@ -430,7 +433,7 @@ function ContextProvider({ children }) {
       setError(error.message);
     }
   };
-  
+
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
@@ -440,13 +443,13 @@ function ContextProvider({ children }) {
         method: "DELETE",
         credentials: "include"
       });
-  
+
       if (response.ok) {
         const message = await response.json();
         alert(message.message);
         handleLogout()
         navigate("/");
-        /* window.location.reload(); */
+        resetInputs();
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
@@ -547,7 +550,7 @@ function ContextProvider({ children }) {
           throw new Error(errorData.error.message);
         }
         const data = await response.json();
-        
+
         // Sort testimonials by date or last added first
         const sortedTestimonials = data.sort((a, b) => new Date(a.date) - new Date(b.date));
         setTestimonials(sortedTestimonials);
@@ -638,6 +641,7 @@ function ContextProvider({ children }) {
     setSelectedCategory("");
     setShowCategories(false);
     setShowDestinations(false);
+    setIsUserMenuOpen(false)
   }
 
 
@@ -645,7 +649,7 @@ function ContextProvider({ children }) {
 
 
 
-console.log(selectedEmotion);
+  console.log(selectedEmotion);
 
   return (
     <Context.Provider value={{
@@ -661,7 +665,7 @@ console.log(selectedEmotion);
       showCategories, setShowCategories, showDestinations, setShowDestinations,
       handleGetRecommendations, handleEmotionClick, handleCategoryClick, handleDestinationClick,
       handleBackClick, navigate, resetInputs, loggedInUserData, setLoggedInUserData,
-      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted,setIsSubmitted,validateForm,handleChangeContact,handleSubmitContact,errors, resetForm, handleSuccessForm, testimonials,
+      editField, setEditField, handleUpdate, handleDelete, formData, setFormData, isSubmitted, setIsSubmitted, validateForm, handleChangeContact, handleSubmitContact, errors, resetForm, handleSuccessForm, testimonials,
       showModal,
       setShowModal,
       hasPosted,
@@ -670,7 +674,7 @@ console.log(selectedEmotion);
       testimonialData,
       setTestimonialData,
       handleInputChange,
-      handleSubmit,
+      handleSubmit, isUserMenuOpen, setIsUserMenuOpen
     }}>
 
       {children}
