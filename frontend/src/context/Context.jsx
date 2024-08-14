@@ -90,7 +90,7 @@ function ContextProvider({ children }) {
       const refreshSettings = {
         credentials: "include"
       }
-      const refreshResponse = await fetch("http://localhost:4000/refresh-token", refreshSettings);
+      const refreshResponse = await fetch(`${import.meta.env.VITE_API}/refresh-token`, refreshSettings);
       if (refreshResponse.ok) {
         console.log("New cookies received!")
         const secondAccessResponse = await fetch(url, settings);
@@ -107,7 +107,7 @@ function ContextProvider({ children }) {
   async function clearCookies() {
 
     try {
-      const response = await fetch("http://localhost:4000/resetCookies", {
+      const response = await fetch(`${import.meta.env.VITE_API}/resetCookies`, {
         method: "POST",
         headers: {
           "Content-Type": "application/JSON",
@@ -130,7 +130,7 @@ function ContextProvider({ children }) {
   // function to get loggedIn users data and save the data in local storage:
   const getUserData = async () => {
     try {
-      const response = await fetchWithToken(`http://localhost:4000/users/${userId}`, {
+      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ function ContextProvider({ children }) {
     } else {
       try {
 
-        const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods`, {
+        const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}/moods`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -253,7 +253,7 @@ function ContextProvider({ children }) {
   const handleDeleteMood = async (moodId) => {
     try {
 
-      const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
+      const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}/moods/${moodId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ function ContextProvider({ children }) {
       if (!selectedMood) {
         alert("Please select a mood to Replace with")
       } else {
-        const response = await fetchWithToken(`http://localhost:4000/users/${userId}/moods/${moodId}`, {
+        const response = await fetchWithToken(`${import.meta.env.VITE_API}/users/${userId}/moods/${moodId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
