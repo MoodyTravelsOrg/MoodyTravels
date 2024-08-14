@@ -69,25 +69,16 @@ const Navbar = () => {
     setIsUserMenuOpen(false);
   };
 
+  let lastScrollTop = 0;
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
-    const isMediumOrSmaller = window.matchMedia("(max-width: 768px)").matches; 
-
-    if (isMediumOrSmaller) {
-      // Always show the navbar on medium or smaller screens
-      setIsVisible(true);
+    if (scrollTop > lastScrollTop) {
+      setIsVisible(false); // Hide navbar on scroll down
     } else {
-      // Hide the navbar on scroll down for larger screens
-      if (scrollTop > 0) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      setIsVisible(true); // Show navbar on scroll up
     }
-    
-    setIsMenuOpen(false);
-    setIsUserMenuOpen(false);
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling 
   };
 
   useEffect(() => {
