@@ -192,7 +192,7 @@ const Testimonials = () => {
 
   return (
     <div className={`relative ${showModal ? 'blur-background' : ''}`}>
-      <div className="py-8 bg-darkGreenForBG bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg p-6">
+      <div className="py-8 bg-darkGreenForBG/40  backdrop-blur-md shadow-lg p-6">
         <h2 className="text-3xl font-bold text-center mb-6 text-white">
           What Users Say About Us
         </h2>
