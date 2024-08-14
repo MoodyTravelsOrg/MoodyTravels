@@ -106,7 +106,7 @@ const Navbar = () => {
     <div className={`fixed top-0 left-0 w-full py-4 px-6 bg-green-700/40 backdrop-blur-md flex justify-between items-center z-50 transition-transform duration-700 ease-in-out ${isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'}`}>
       <Link to="/" onClick={closeMenu}>
         <img
-          src="../src/assets/Logo.png"
+          src="/images/logo.png"
           alt="MoodVentures Logo"
           className="w-20 h-20 transition-transform duration-300 hover:scale-110"
         />
