@@ -48,25 +48,36 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdLogout, MdEdit } from 'react-icons/md';
 
 const Navbar = () => {
-  const { isLoggedIn, handleLogout, loggedInUserData, isUserMenuOpen, setIsUserMenuOpen } = useContext(Context);
+  const { isLoggedIn, handleLogout, loggedInUserData, isUserMenuOpen, setIsUserMenuOpen, handleLogin, username, setUsername, password, setPassword, error } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isLoginDropdownOpen, setIsLoginDropdownOpen] = useState(false);
   const menuRef = useRef(null);
   const userMenuRef = useRef(null);
+  const loginDropdownRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    setIsUserMenuOpen(false); // Cerrar el menú de usuario cuando se abre el menú principal
+    setIsUserMenuOpen(false); // close user menu if open when toggling menu
+    setIsLoginDropdownOpen(false);
   };
 
   const toggleUserMenu = () => {
     setIsUserMenuOpen(!isUserMenuOpen);
-    setIsMenuOpen(false); // Cerrar el menú principal cuando se abre el menú de usuario
+    setIsMenuOpen(false);
+    setIsLoginDropdownOpen(false);
+  };
+
+  const toggleLoginDropdown = () => {
+    setIsLoginDropdownOpen(!isLoginDropdownOpen);
+    setIsUserMenuOpen(false);
+    setIsMenuOpen(false);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsUserMenuOpen(false);
+    setIsLoginDropdownOpen(false);
   };
 
   let lastScrollTop = 0;
@@ -75,27 +86,24 @@ const Navbar = () => {
     const scrollTop = document.documentElement.scrollTop;
 
     if (scrollTop !== lastScrollTop) {
-      setIsVisible(scrollTop < lastScrollTop); // Mostrar la barra de navegación al hacer scroll hacia arriba, ocultarla al hacer scroll hacia abajo
-      closeMenu(); // Cerrar ambos menús al hacer scroll
+      setIsVisible(scrollTop < lastScrollTop); // show navbar if scrolling up, hide if scrolling down
+      closeMenu(); // Close all menus when scrolling
     }
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Prevenir valores negativos de scrollTop
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // prevent negative values
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         (menuRef.current && !menuRef.current.contains(event.target)) &&
-        (userMenuRef.current && !userMenuRef.current.contains(event.target))
+        (userMenuRef.current && !userMenuRef.current.contains(event.target)) ||
+        (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target))
       ) {
-        closeMenu(); // Cerrar ambos menús si se hace clic fuera de ellos
-      } else if (
-        userMenuRef.current &&
-        !userMenuRef.current.contains(event.target)
-      ) {
-        setIsUserMenuOpen(false); // Cerrar solo el menú de usuario si se hace clic fuera de él
-      }
-    };
+        closeMenu(); // close all menus if clicked outside
+      } 
+  
+  };
 
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
@@ -149,7 +157,39 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <Link to="/login" className="bg-yellowishGreenForTextandButtons text-gray-800 py-2 px-4 text-lg rounded-full transition-all duration-300 hover:bg-yellowishGreenForTextandButtons">Login</Link>
+          <div className="relative" ref={loginDropdownRef}>
+            <button onClick={toggleLoginDropdown} className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Login</button>
+            {isLoginDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 p-4 transition-all duration-300 ease-in-out">
+                <form onSubmit={handleLogin}>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-white mb-1">Username</label>
+                    <input
+                      type="text"
+                      className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                      placeholder="Enter your username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-white mb-1">Password</label>
+                    <input
+                      type="password"
+                      className="w-full p-2 border-none rounded-lg bg-white/30 text-white placeholder-white/50"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+                  <button type="submit" className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Login</button>
+                </form>
+              </div>
+            )}
+          </div>
         )}
 
         <button onClick={toggleMenu} className="md:hidden text-white text-3xl">
@@ -172,4 +212,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

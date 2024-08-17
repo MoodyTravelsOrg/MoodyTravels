@@ -40,16 +40,18 @@ const Carousel = () => {
           />
         ))}
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-16">
-        <h1 className="font-bold text-white text-center animate-slide-in text-5xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-lg">Welcome to <span className="text-yellowishGreenForTextandButtons">MoodVentures</span></h1>
-        <h1 className="font-bold text-white text-center animate-slide-in text-6xl md:text-7xl lg:text-8xl xl:text-9xl drop-shadow-lg">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-6 md:space-y-10 px-4 text-center">
+        <h1 className="font-bold text-white animate-slide-in text-4xl sm:text-5xl md:text-8xl lg:text-9xl xl:text-10xl drop-shadow-lg leading-tight">
+          Welcome to <span className="text-yellowishGreenForTextandButtons">MoodVentures</span>
+        </h1>
+        <h1 className="font-bold text-white animate-slide-in text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl drop-shadow-lg leading-tight">
           Come on a trip with us!
         </h1>
         <button
           onClick={() => navigate("/register")}
-          className="bg-yellowishGreenForTextandButtons hover:bg-white  text-darkGreenForText font-semibold py-3 px-8 rounded-full shadow-md transition-transform duration-500 ease-in-out transform hover:scale-105 text-sm md:text-lg lg:text-xl"
+          className="mt-6 md:mt-10 bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText font-semibold py-4 sm:py-5 px-10 sm:px-12 rounded-full shadow-md transition-transform duration-500 ease-in-out transform hover:scale-105 text-lg sm:text-xl md:text-2xl lg:text-3xl"
         >
-          Start your adventure
+        Start your adventure
         </button>
       </div>
     </div>
@@ -57,6 +59,7 @@ const Carousel = () => {
 };
 
 export default Carousel;
+
 
 
 

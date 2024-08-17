@@ -97,7 +97,7 @@ const Register = () => {
             )}
             {error && <p className="text-red-500 mt-2">{error}</p>}
             <div className="flex justify-center">
-              <button type="submit" className="bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText px-8 py-3 rounded-full mt-2 font-semibold">Register here</button>
+              <button type="submit" className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Register here</button>
             </div>
           </form>
           {/* <div className="mt-8 text-center">
@@ -119,7 +119,7 @@ const Register = () => {
           <div className="text-center mb-4">
             <p className="text-white mb-52 text-2xl font-bold">Already have an account?</p>
             <span
-              className="w-full bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText px-8 py-3 rounded-full cursor-pointer font-semibold"
+              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white"
               onClick={() => {
                 resetInputs();
                 navigate("/login");

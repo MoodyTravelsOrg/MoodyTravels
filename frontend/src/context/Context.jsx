@@ -1,7 +1,7 @@
 import React from 'react'
 import { createContext, useState, useRef, useEffect } from 'react'
 import { json, useNavigate } from "react-router-dom";
-import defaultProfileImage from "../../public/default-profile.png"
+
 
 import emailjs from "emailjs-com";
 export const Context = createContext()
@@ -335,7 +335,7 @@ function ContextProvider({ children }) {
       formData.append('email', email);
       formData.append('username', username);
       formData.append('password', password);
-      formData.append('profileImage', profileImage ? profileImage : defaultProfileImage);
+      formData.append('profileImage', profileImage);
       formData.append('recaptchaToken', recaptchaToken);
 
       const settings = {
