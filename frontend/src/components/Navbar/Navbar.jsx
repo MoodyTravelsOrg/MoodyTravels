@@ -46,19 +46,23 @@ import { Context } from '../../context/Context.jsx';
 import ScrollToLink from '../ScrollToLink';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdLogout, MdEdit } from 'react-icons/md';
+import "./Navbar.css";
 
 const Navbar = () => {
-  const { isLoggedIn, handleLogout, loggedInUserData, isUserMenuOpen, setIsUserMenuOpen, handleLogin, username, setUsername, password, setPassword, error } = useContext(Context);
+  const { isLoggedIn, handleLogout, loggedInUserData, handleLogin, username, setUsername, password, setPassword, error } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isLoginDropdownOpen, setIsLoginDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
   const menuRef = useRef(null);
   const userMenuRef = useRef(null);
   const loginDropdownRef = useRef(null);
 
+  // Toggle functions for the menus
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    setIsUserMenuOpen(false); // close user menu if open when toggling menu
+    setIsUserMenuOpen(false);
     setIsLoginDropdownOpen(false);
   };
 
@@ -74,7 +78,7 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  const closeMenu = () => {
+  const closeAllMenus = () => {
     setIsMenuOpen(false);
     setIsUserMenuOpen(false);
     setIsLoginDropdownOpen(false);
@@ -85,38 +89,38 @@ const Navbar = () => {
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
 
-    if (scrollTop !== lastScrollTop) {
-      setIsVisible(scrollTop < lastScrollTop); // show navbar if scrolling up, hide if scrolling down
-      closeMenu(); // Close all menus when scrolling
-    }
+    // Show the navbar when scrolling up and hide when scrolling down
+    setIsVisible(scrollTop < lastScrollTop);
+    closeAllMenus(); // Close all menus on scroll
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // prevent negative values
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Avoid negative values
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if the click is outside of any of the dropdowns or menus
       if (
-        (menuRef.current && !menuRef.current.contains(event.target)) &&
-        (userMenuRef.current && !userMenuRef.current.contains(event.target)) ||
-        (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target))
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        userMenuRef.current && !userMenuRef.current.contains(event.target) &&
+        loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)
       ) {
-        closeMenu(); // close all menus if clicked outside
+        closeAllMenus();
       } 
+    };
   
-  };
 
     window.addEventListener('scroll', handleScroll);
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
   return (
     <div className={`fixed top-0 left-0 w-full py-4 px-6 bg-green-700/40 backdrop-blur-md flex justify-between items-center z-50 transition-transform duration-700 ease-in-out ${isVisible ? 'transform translate-y-0' : 'transform -translate-y-full'}`}>
-      <Link to="/" onClick={closeMenu}>
+      <Link to="/" onClick={closeAllMenus}>
         <img
           src="/images/logo.png"
           alt="MoodVentures Logo"
@@ -125,12 +129,12 @@ const Navbar = () => {
       </Link>
 
       <div className="flex items-center space-x-4">
-        <nav className={`hidden md:flex items-center space-x-6`} ref={menuRef}>
-          <ScrollToLink to="our-mission" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Our Mission</ScrollToLink>
-          <ScrollToLink to="how-it-works" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>How it works</ScrollToLink>
-          <Link to="/contact" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Contact</Link>
+        <nav className="hidden md:flex items-center space-x-6" ref={menuRef}>
+          <ScrollToLink to="our-mission" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeAllMenus}>Our Mission</ScrollToLink>
+          <ScrollToLink to="how-it-works" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeAllMenus}>How it works</ScrollToLink>
+          <Link to="/contact" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeAllMenus}>Contact</Link>
           {isLoggedIn && (
-            <Link to="/mood-log" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeMenu}>Mood Log</Link>
+            <Link to="/mood-log" className="text-white text-lg font-medium py-2 px-4 hover:bg-yellowishGreenForTextandButtons rounded-full transition-colors duration-300 hover:text-darkGreenForText" onClick={closeAllMenus}>Mood Log</Link>
           )}
         </nav>
 
@@ -144,8 +148,8 @@ const Navbar = () => {
               />
             </button>
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out">
-                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded" onClick={closeMenu}>
+              <div className="menu-animate absolute right-0 mt-2 w-48 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out">
+                <Link to="/user-profile" className="flex items-center px-4 py-2 hover:bg-green-600 rounded" onClick={closeAllMenus}>
                   <MdEdit className="mr-2" />
                   Edit Profile
                 </Link>
@@ -160,7 +164,7 @@ const Navbar = () => {
           <div className="relative" ref={loginDropdownRef}>
             <button onClick={toggleLoginDropdown} className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Login</button>
             {isLoginDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-64 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 p-4 transition-all duration-300 ease-in-out">
+              <div className="menu-animate absolute right-0 mt-2 w-64 bg-green-700/90 backdrop-blur-lg text-white rounded-lg shadow-lg z-50 p-4 transition-all duration-300 ease-in-out">
                 <form onSubmit={handleLogin}>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-white mb-1">Username</label>
@@ -198,12 +202,12 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <nav className="absolute top-full left-0 w-full bg-green-700/90 backdrop-blur-md text-white flex flex-col items-center space-y-4 p-4 z-40 md:hidden transition-all duration-500 ease-in-out" ref={menuRef}>
-          <ScrollToLink to="our-mission" className="text-lg font-medium" onClick={closeMenu}>Our Mission</ScrollToLink>
-          <ScrollToLink to="how-it-works" className="text-lg font-medium" onClick={closeMenu}>How it works</ScrollToLink>
-          <Link to="/contact" className="text-lg font-medium" onClick={closeMenu}>Contact</Link>
+        <nav className="menu-animate absolute top-full left-0 w-full bg-green-700/90 backdrop-blur-md text-white flex flex-col items-center space-y-4 p-4 z-40 md:hidden transition-all duration-500 ease-in-out" ref={menuRef}>
+          <ScrollToLink to="our-mission" className="text-lg font-medium" onClick={closeAllMenus}>Our Mission</ScrollToLink>
+          <ScrollToLink to="how-it-works" className="text-lg font-medium" onClick={closeAllMenus}>How it works</ScrollToLink>
+          <Link to="/contact" className="text-lg font-medium" onClick={closeAllMenus}>Contact</Link>
           {isLoggedIn && (
-            <Link to="/mood-log" className="text-lg font-medium" onClick={closeMenu}>Mood Log</Link>
+            <Link to="/mood-log" className="text-lg font-medium" onClick={closeAllMenus}>Mood Log</Link>
           )}
         </nav>
       )}
@@ -212,3 +216,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
