@@ -100,21 +100,39 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       // Check if the click is outside of any of the dropdowns or menus
       if (
-        menuRef.current && !menuRef.current.contains(event.target) &&
-        userMenuRef.current && !userMenuRef.current.contains(event.target) &&
-        loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)
+        (menuRef.current && !menuRef.current.contains(event.target)) &&
+        (userMenuRef.current && !userMenuRef.current.contains(event.target)) &&
+        (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target))
       ) {
         closeAllMenus();
       } 
+      if (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)) {
+        setIsLoginDropdownOpen(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setIsUserMenuOpen(false);
+      }
+      
     };
-  
 
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('click', handleClickOutside);
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      document.addEventListener('scroll', closeAllMenus); // Close menus on scroll
+      document.addEventListener('click', handleClickOutside); // Close menus on click outside
+    } else {
+      window.addEventListener('scroll', handleScroll);
+      document.addEventListener('click', handleClickOutside);
+    }
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('click', handleClickOutside);
+      if (isMobile) {
+        document.removeEventListener('scroll', closeAllMenus);
+        document.removeEventListener('click', handleClickOutside);
+      } else {
+        window.removeEventListener('scroll', handleScroll);
+        document.removeEventListener('click', handleClickOutside);
+      }
     };
   }, []);
 
@@ -191,6 +209,10 @@ const Navbar = () => {
                   {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
                   <button type="submit" className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Login</button>
                 </form>
+                <div className="mt-4 text-center">
+                  <span className="text-white text-sm">Don't have an account?</span>
+                  <Link to="/register" className="text-yellowishGreenForTextandButtons font-semibold ml-2">Register</Link>
+                </div>
               </div>
             )}
           </div>
@@ -216,6 +238,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
 
 
 
