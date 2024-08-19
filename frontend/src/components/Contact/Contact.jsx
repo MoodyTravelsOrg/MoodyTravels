@@ -79,25 +79,32 @@
 
 // ! Since I had to change quite a bit of the code, I commented out the old code snippets above and left them there in case we need them later on.
 
-import React from "react";
-import { useContext } from 'react';
+import React, { useEffect, useContext } from "react";
 import { Context } from "../../context/Context.jsx";
 
 const Contact = () => {
   const { formData, isSubmitted, errors, handleChangeContact, handleSubmitContact, handleSuccessForm } = useContext(Context);
 
+  // Scroll to the top of the page when the component is mounted
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="flex justify-center items-center min-h-screen pt-16 px-4">
+    <div className="relative w-full min-h-screen flex flex-col justify-center items-center bg-darkGreenForBG/20 backdrop-blur-md transition-all duration-500 ease-in-out">
       <div className="w-full max-w-md bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
         <div className="p-8">
           <h2 className="text-4xl font-bold text-white mb-8 text-center">Contact Us</h2>
           {!isSubmitted ? (
-            <form className="space-y-6" onSubmit={(e) => {
-              handleSubmitContact(e);
-              if (!Object.keys(errors).length) { 
-                handleSuccessForm();
-              }
-            }}>
+            <form
+              className="space-y-6"
+              onSubmit={(e) => {
+                handleSubmitContact(e);
+                if (!Object.keys(errors).length) {
+                  handleSuccessForm();
+                }
+              }}
+            >
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white mb-1">Name</label>
                 <input
@@ -142,7 +149,7 @@ const Contact = () => {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className=" px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForText rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
+                  className="px-8 py-3 bg-yellowishGreenForTextandButtons text-darkGreenForText rounded-full hover:bg-white transition duration-300 flex items-center justify-center font-semibold"
                 >
                   Send Message
                 </button>
