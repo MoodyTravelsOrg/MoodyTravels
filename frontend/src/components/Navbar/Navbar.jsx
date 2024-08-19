@@ -96,6 +96,9 @@ const Navbar = () => {
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Avoid negative values
   };
 
+
+  console.log(isLoginDropdownOpen)
+  console.log(isMenuOpen)
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Check if the click is outside of any of the dropdowns or menus
@@ -109,30 +112,21 @@ const Navbar = () => {
       if (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)) {
         setIsLoginDropdownOpen(false);
       }
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setIsUserMenuOpen(false);
       }
       
     };
-
-    const isMobile = window.innerWidth < 768;
-
-    if (isMobile) {
-      document.addEventListener('scroll', closeAllMenus); // Close menus on scroll
-      document.addEventListener('click', handleClickOutside); // Close menus on click outside
-    } else {
-      window.addEventListener('scroll', handleScroll);
-      document.addEventListener('click', handleClickOutside);
-    }
-
+      window.addEventListener('scroll', handleScroll); // Close menus on scroll
+      document.addEventListener('mousedown', handleClickOutside); // Close menus on click outside
+    
     return () => {
-      if (isMobile) {
-        document.removeEventListener('scroll', closeAllMenus);
-        document.removeEventListener('click', handleClickOutside);
-      } else {
         window.removeEventListener('scroll', handleScroll);
-        document.removeEventListener('click', handleClickOutside);
-      }
+        document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
