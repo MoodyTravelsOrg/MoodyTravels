@@ -64,7 +64,7 @@ const TravelMood = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-start gap-6 mt-32 mb-12 px-4 sm:px-8 lg:px-16 w-full">
+    <div className="flex flex-col lg:flex-row justify-center items-start gap-6 mt-32 mb-60 px-4 sm:px-8 lg:px-16 w-full">
       <div className="flex-1 flex flex-col p-6 sm:p-8 bg-darkGreenForBG rounded-lg shadow-xl max-w-full lg:max-w-5xl mx-auto">
         {isLoggedIn && (
           <div className="text-lg sm:text-xl text-white text-center mt-4 sm:mt-6 mb-5 sm:mb-7 underline-offset-8">
