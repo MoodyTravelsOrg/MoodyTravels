@@ -222,7 +222,7 @@ const DestinationDetail = () => {
   ];
 
   return (
-    <div className="flex justify-center items-center py-16 px-4 mt-28">
+    <div className="flex justify-center items-center py-16 px-4 mt-20 mb-20">
       <div className="w-full max-w-7xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8">
         <h1 className="text-4xl font-bold text-white text-center mb-8">
           {destination.name}

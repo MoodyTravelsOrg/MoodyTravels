@@ -46,8 +46,8 @@ function MoodPreview() {
 
   return (
     <div className="w-full bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
-      <div className="p-8">
-        <h3 className="text-4xl font-bold text-white mb-8 text-center">Mood Log</h3>
+      <div className="p-6 sm:p-8">
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 sm:mb-8 text-center">Mood Log</h3>
         {loggedInUserData && loggedInUserData.moods && loggedInUserData.moods.length > 0 ? (
           loggedInUserData.moods.toReversed().slice(0, 5).map((entry) => {
             const date = new Date(entry.createdAt);
@@ -68,10 +68,10 @@ function MoodPreview() {
             );
           })
         ) : (
-          <p className="text-white">No moods logged yet.</p>
+          <p className="text-white text-center">No moods logged yet.</p>
         )}
-        <div className="flex justify-center space-x-4 mt-8">
-          <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300" onClick={() => navigate("/mood-log")}>Show full log</button>
+        <div className="flex justify-center space-x-4 mt-6 sm:mt-8">
+          <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300" onClick={() => navigate("/mood-log")}>Show full log</button>
         </div>
       </div>
     </div>

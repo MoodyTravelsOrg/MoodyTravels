@@ -40,23 +40,23 @@ function TravelDestinations() {
   const { selectedCategory, handleDestinationClick, handleBackClick } = useContext(Context);
 
   return (
-    <div className="w-full bg-darkGreenForBG backdrop-blur-md rounded-lg shadow-xl overflow-hidden py-14 px-8">
-      <div className="flex flex-wrap justify-center gap-5 mb-8">
+    <div className="w-full bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden py-6 sm:py-14 px-6 sm:px-8">
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mb-2 sm:mb-8 ">
         {selectedCategory.destinations.map(destination => (
           <div 
             key={destination.name} 
-            className="flex flex-col items-center bg-white/20 rounded-2xl p-5 backdrop-blur-md border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 hover:border w-full sm:w-64"
+            className="flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5  border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 hover:border w-full sm:w-64"
             onClick={() => handleDestinationClick(destination)}
           >
-            <img src={destination.img} alt={destination.name} className="w-full h-40 object-cover rounded-lg mb-3" />
-            <p className="text-white text-lg font-semibold mb-2">{destination.name}</p>
-            <strong className="text-yellowishGreenForTextandButtons mt-5">Unlock Travel Deals</strong>
+            <img src={destination.img} alt={destination.name} className="w-full h-36 sm:h-40 object-cover rounded-lg mb-2.5 sm:mb-3" />
+            <p className="text-white text-base sm:text-lg font-semibold mb-2">{destination.name}</p>
+            <strong className="text-yellowishGreenForTextandButtons mt-3 sm:mt-5">Unlock Travel Deals</strong>
           </div>
         ))}
       </div>
       <div className="flex justify-center">
         <button 
-          className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300"
+          className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
           onClick={handleBackClick}
         >
           Go Back

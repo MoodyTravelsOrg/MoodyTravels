@@ -40,25 +40,25 @@ function TravelCategories() {
   const { selectedEmotion, selectedCategory, setSelectedCategory, handleCategoryClick } = useContext(Context);
 
   return (
-    <div className="flex flex-col items-center py-8 px-4">
-      <div className="w-full max-w-3xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden py-14 px-8 backdrop-blur-md">
-        <h2 className="text-4xl font-bold text-white mb-10 text-center">Do you prefer to travel to a city, beach or into nature?</h2>
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
+    <div className="flex flex-col items-center py-6 sm:py-8 px-4 sm:px-8">
+      <div className="w-full max-w-3xl bg-darkGreenForBG/90 rounded-lg shadow-xl overflow-hidden py-12 sm:py-14 px-6 sm:px-8 ">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 sm:mb-10 text-center">Do you prefer to travel to a city, beach or into nature?</h2>
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-10">
           {selectedEmotion.categories.map(category => (
             <div
               key={category.name}
-              className={`flex flex-col items-center bg-white/20 rounded-xl p-5 backdrop-blur-md border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-110 ${selectedCategory.name === category.name ? 'scale-110 bg-white/50 border' : ''}`}
+              className={`flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5  border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 ${selectedCategory.name === category.name ? 'scale-105 bg-white/50 border' : ''}`}
               onClick={() => setSelectedCategory(category)}
             >
-              <img src={category.img} alt={category.name} className="w-24 h-24 object-cover rounded-lg" />
-              <p className="mt-2.5 text-white text-base">{category.name}</p>
+              <img src={category.img} alt={category.name} className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg" />
+              <p className="mt-2 text-white text-sm sm:text-base">{category.name}</p>
             </div>
           ))}
         </div>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button 
-            onClick={() => handleCategoryClick()}
-            className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-8 py-3 hover:bg-white transition duration-300"
+            onClick={handleCategoryClick}
+            className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
           >
             Get travel recommendations
           </button>

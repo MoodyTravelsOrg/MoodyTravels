@@ -48,7 +48,7 @@ const Carousel = () => {
           Come on a trip with us!
         </h1>
         <button
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/travel-mood")}
           className="mt-6 md:mt-10 bg-yellowishGreenForTextandButtons hover:bg-white text-darkGreenForText font-semibold py-4 sm:py-5 px-10 sm:px-12 rounded-full shadow-md transition-transform duration-500 ease-in-out transform hover:scale-105 text-lg sm:text-xl md:text-2xl lg:text-3xl"
         >
         Start your adventure
