@@ -83,9 +83,11 @@
 
 import React, { useEffect, useContext } from "react";
 import { Context } from "../../context/Context.jsx";
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
   const { formData, isSubmitted, errors, handleChangeContact, handleSubmitContact, handleSuccessForm } = useContext(Context);
+  const navigate = useNavigate();
 
   // Scroll to the top of the page when the component is mounted
   useEffect(() => {
@@ -94,7 +96,7 @@ const Contact = () => {
 
   return (
     <div className="relative w-full min-h-screen flex flex-col justify-center items-center bg-darkGreenForBG/20 backdrop-blur-md transition-all duration-500 ease-in-out">
-      <div className="w-full max-w-md bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
+      <div className="w-96 max-w-md bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
         <div className="p-8">
           <h2 className="text-4xl font-bold text-white mb-8 text-center">Contact Us</h2>
           {!isSubmitted ? (
@@ -158,7 +160,17 @@ const Contact = () => {
               </div> 
             </form>
           ) : (
-            <p className="text-yellowishGreenForTextandButtons text-center text-lg">Thank you for your message. We will get back to you soon.</p>
+            <div className="text-center">
+              <p className="text-yellowishGreenForTextandButtons text-lg mb-4">
+                Thank you for your message. We will get back to you soon.
+              </p>
+              <button
+                onClick={() => navigate('/')}
+                className="px-6 py-2 bg-yellowishGreenForTextandButtons text-darkGreenForText rounded-full hover:bg-white transition duration-300 font-semibold"
+              >
+                Go to Homepage
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -167,3 +179,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

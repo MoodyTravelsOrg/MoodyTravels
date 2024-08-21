@@ -55,8 +55,9 @@ function ContextProvider({ children }) {
     rating: 1,
     comment: "",
   });
-
+  const [success, setSuccess] = useState({ show: false, message: "" });
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // dropdown menu for user profile
+
 
 
   console.log("recommendations", recommendations)
@@ -200,7 +201,11 @@ function ContextProvider({ children }) {
         setUserId(userData.id);
         setIsLoggedIn(true);
         resetInputs();
-        navigate("/"); // This will redirect the user to the home page after successful login
+        setSuccess({
+          show: true,
+          message: `Welcome back, ${userData.username}!`,
+        });
+        setTimeout(closeModal, 3000);  // close the modal after 3 seconds
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -327,6 +332,13 @@ function ContextProvider({ children }) {
   }
 
   // from Register.jsx:
+
+  const closeModal = () => {
+    setSuccess({ show: false, message: "" });
+    resetInputs();
+    navigate("/"); // navigate to the home page after successful registration
+  };
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
@@ -366,8 +378,11 @@ function ContextProvider({ children }) {
         setRecaptchaToken("");
         setPassword("")
         setConfirmPassword("")
-        alert(`Registration successful. Welcome, ${data.username}!`);
-        navigate('/');
+        setSuccess({
+          show: true,
+          message: `Registration successful. Welcome, ${data.username}!`,
+        });
+    
 
       } else {
         const errorData = await response.json();
@@ -684,7 +699,7 @@ function ContextProvider({ children }) {
       testimonialData,
       setTestimonialData,
       handleInputChange,
-      handleSubmit, isUserMenuOpen, setIsUserMenuOpen
+      handleSubmit, isUserMenuOpen, setIsUserMenuOpen, success, closeModal
     }}>
 
       {children}

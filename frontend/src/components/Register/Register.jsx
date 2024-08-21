@@ -1,27 +1,25 @@
 import React, { useContext } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Context } from "../../context/Context.jsx";
-import { FaUserAstronaut, FaUser, FaLock } from "react-icons/fa";
-import { GiDialPadlock } from "react-icons/gi";
 
 const Register = () => {
   const { 
     email, setEmail, username, password, error, setUsername, 
     setPassword, confirmPassword, setConfirmPassword, 
     setRecaptchaToken, setProfileImage, fileInput, recaptchaRef, 
-    handleRegister, navigate, resetInputs } = useContext(Context);
+    handleRegister, success, closeModal, resetInputs, navigate 
+  } = useContext(Context);
 
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
   return (
-    <div className="min-h-screen flex items-center justify-center mt-20">
-      <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-4xl flex ">
-        <div className="w-full md:w-1/2 p-8 order-1">
-          <h2 className="text-2xl font-bold mb-14 text-white">Register</h2>
-          <form className="space-y-6" onSubmit={handleRegister}>
+    <div className="min-h-screen flex items-center justify-center mt-20 px-4">
+    <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-auto max-w-4xl flex flex-col md:flex-row">
+      <div className="w-full p-8">
+        <h2 className="text-2xl font-bold mb-8 text-white text-center md:text-left">Register</h2>
+        <form className="space-y-6" onSubmit={handleRegister}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-white mb-1">
-                {/* <FaUserAstronaut className="inline-block mr-2" /> */}
                 Email
               </label>
               <input
@@ -35,7 +33,6 @@ const Register = () => {
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-white mb-1">
-                {/* <FaUser className="inline-block mr-2" /> */}
                 Username
               </label>
               <input
@@ -47,9 +44,8 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="mb-4 relative">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-white mb-1">
-                {/* <FaLock className="inline-block mr-2" /> */}
                 Password
               </label>
               <input
@@ -61,9 +57,8 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="mb-4 relative">
+            <div className="mb-4">
               <label className="block text-sm font-medium text-white mb-1">
-                {/* <GiDialPadlock className="inline-block mr-2" /> */}
                 Confirm Password
               </label>
               <input
@@ -87,7 +82,7 @@ const Register = () => {
               />
             </div>
             {siteKey && (
-              <div className="flex justify-center w-full mb-4 pt-2">
+              <div className="flex justify-center w-full mb-4">
                 <ReCAPTCHA
                   sitekey={siteKey}
                   onChange={(token) => setRecaptchaToken(token)}
@@ -95,46 +90,54 @@ const Register = () => {
                 />
               </div>
             )}
-            {error && <p className="text-red-500 mt-2">{error}</p>}
-            <div className="flex justify-center">
-              <button type="submit" className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white">Register here</button>
+            {error && (
+              <p className="text-red-600 mt-2 text-lg text-center font-semibold bg-yellowishGreenForTextandButtons/85">
+                {error}
+              </p>
+            )}
+            <div className="flex flex-col items-center space-y-4">
+              <button
+                type="submit"
+                className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white"
+              >
+                Register here
+              </button>
+              <p className="text-white text-center">
+                Already have an account?{" "}
+                <span
+                  className="text-yellowishGreenForTextandButtons font-semibold cursor-pointer hover:underline"
+                  onClick={() => {
+                    resetInputs();
+                    navigate("/login");
+                  }}
+                >
+                  Sign in
+                </span>
+              </p>
             </div>
           </form>
-          {/* <div className="mt-8 text-center">
-            <p className="text-gray-700">
-              Already have an account?
-              <span
-                className="text-blue-500 cursor-pointer ml-1"
-                onClick={() => {
-                  resetInputs();
-                  navigate("/login");
-                }}
-              >
-                Sign in
-              </span>
-            </p>
-          </div> */}
-        </div>
-        <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-start order-2 bg-transparent/10">
-          <div className="text-center mb-4">
-            <p className="text-white mb-52 text-2xl font-bold">Already have an account?</p>
-            <span
-              className="w-full bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 text-lg font-semibold rounded-full transition-all duration-300 hover:bg-white"
-              onClick={() => {
-                resetInputs();
-                navigate("/login");
-              }}
-            >
-              Sign in
-            </span>
-          </div>
-          <img
-            src="/images/Ancient-gate-CLOSED.png"
-            alt="Sign Up"
-            className="w-80 mt-16"
-          />
         </div>
       </div>
+
+      {/* Modal de éxito */}
+      {success.show && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-md">
+          <div className="bg-slate-200/70  p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+            <h3 className="text-2xl font-bold text-darkGreenForText mb-4">
+              Registration Successful!
+            </h3>
+            <p className="text-darkGreenForText font-semibold mb-6">
+              {success.message} {/* Mostrar mensaje de éxito personalizado */}
+            </p>
+            <button
+              className="bg-yellowishGreenForTextandButtons text-darkGreenForText py-2 px-4 rounded-full font-semibold transition-all duration-300 hover:bg-darkGreenForText hover:text-white"
+              onClick={closeModal}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
