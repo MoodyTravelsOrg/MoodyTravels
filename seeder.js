@@ -18,35 +18,43 @@ try {
     const initialMoods = [
         {
             type: "happy",
-            createdAt: "2024-07-16T07:55:55.682+00:00"
+            createdAt: "2024-08-16T07:55:55.682+00:00"
         },
         {
-            type: "angry",
-            createdAt: "2024-07-17T07:55:55.682+00:00"
+            type: "bored",
+            createdAt: "2024-08-17T07:55:55.682+00:00"
         },
         {
             type: "sad",
-            createdAt: "2024-07-18T07:55:55.682+00:00"
+            createdAt: "2024-08-18T07:55:55.682+00:00"
+        },
+        {
+            type: "angry",
+            createdAt: "2024-08-19T07:55:55.682+00:00"
         },
         {
             type: "happy",
-            createdAt: "2024-07-19T07:55:55.682+00:00"
+            createdAt: "2024-08-20T07:55:55.682+00:00"
         },
         {
-            type: "anxious",
-            createdAt: "2024-07-20T07:55:55.682+00:00"
+            type: "happy",
+            createdAt: "2024-08-21T07:55:55.682+00:00"
+        },
+        {
+            type: "bored",
+            createdAt: "2024-08-22T07:55:55.682+00:00"
         },
         {
             type: "sad",
-            createdAt: "2024-07-21T07:55:55.682+00:00"
+            createdAt: "2024-08-23T07:55:55.682+00:00"
         },
         {
             type: "anxious",
-            createdAt: "2024-07-22T07:55:55.682+00:00"
+            createdAt: "2024-08-24T07:55:55.682+00:00"
         },
         {
-            type: "angry",
-            createdAt: "2024-07-23T07:55:55.682+00:00"
+            type: "happy",
+            createdAt: "2024-08-25T07:55:55.682+00:00"
         },
     ]
 
@@ -85,8 +93,8 @@ try {
         { emotion: 'happy', category: 'city', name: 'Barcelona, Catalonia, Spain', province: 'catalonia', country: 'spain', city: 'Barcelona', img: 'https://idsb.tmgrup.com.tr/ly/uploads/images/2023/04/26/269508.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109499.25282812856!2d2.0577887244742743!3d41.39263855836751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49816718e30e5%3A0x44b0fb3d4f47660a!2sBarcelona%2C%20Spain!5e1!3m2!1sen!2sde!4v1721903857759!5m2!1sen!2sde` },
     
         // Happy - Beach
-        { emotion: 'happy', category: 'beach', name: 'Bora Bora, French Polynesia', province: 'bora bora', country: 'french polynesia', city: 'Bora Bora', img: 'https://www.tahiti.com/images1/thumbs/BOBPBR-aerial7-1200x720.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d69973.47425885421!2d-151.77984881722094!3d-16.504419965248385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x76bdbd188a4a98ab%3A0x160a089e92d5ce61!2sBora%20Bora!5e1!3m2!1sen!2sde!4v1721903905423!5m2!1sen!2sde` },
-        { emotion: 'happy', category: 'beach', name: 'Maui, Hawaii, USA', province: 'hawaii', country: 'usa', city: 'Maui', img: 'https://one-million-places.com/wp-content/uploads/2015/hawaii/maui-tauchen-01.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d272890.62921281904!2d-156.50279233612258!3d20.802917053853562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x79552b4acc4c61dd%3A0xcc43e741dc113e7f!2sMaui!5e1!3m2!1sen!2sde!4v1721903963658!5m2!1sen!2sde` },
+        { emotion: 'happy', category: 'beach', name: 'Bora Bora, French Polynesia', province: 'bora bora', country: 'french polynesia', city: 'Papeete', img: 'https://www.tahiti.com/images1/thumbs/BOBPBR-aerial7-1200x720.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d69973.47425885421!2d-151.77984881722094!3d-16.504419965248385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x76bdbd188a4a98ab%3A0x160a089e92d5ce61!2sBora%20Bora!5e1!3m2!1sen!2sde!4v1721903905423!5m2!1sen!2sde` },
+        { emotion: 'happy', category: 'beach', name: 'Maui, Hawaii, USA', province: 'hawaii', country: 'usa', city: 'Hana', img: 'https://one-million-places.com/wp-content/uploads/2015/hawaii/maui-tauchen-01.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d272890.62921281904!2d-156.50279233612258!3d20.802917053853562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x79552b4acc4c61dd%3A0xcc43e741dc113e7f!2sMaui!5e1!3m2!1sen!2sde!4v1721903963658!5m2!1sen!2sde` },
         { emotion: 'happy', category: 'beach', name: 'Maldives, Maldives', province: 'maldives', country: 'maldives', city: 'Maldives', img: 'https://afar.brightspotcdn.com/dims4/default/dd4ced2/2147483647/strip/true/crop/3000x1592+0+323/resize/1440x764!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2Fb2%2Ff4%2F9a1ebe3f427f8e5eb937f8df8998%2Ftravelguides-maldives-videomediastudioeurope-shutterstock.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4663873.631244438!2d70.59871165089955!3d3.108797620590664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x24b599bfaafb7bbd%3A0x414509e181956289!2sMaldives!5e1!3m2!1sen!2sde!4v1721904057525!5m2!1sen!2sde` },
     
         // Happy - Nature
@@ -95,7 +103,7 @@ try {
         { emotion: 'happy', category: 'nature', name: 'Kyoto, Japan', province: 'kyoto', country: 'japan', city: 'Kyoto', img: 'https://media.shermanstravel.com/952x460_kyoto_istock.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238841.27321815!2d135.55406177189707!3d35.098084694240896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001a8d6cd3cc3f1%3A0xc0961d366bbb1d3d!2sKyoto%2C%20Japan!5e1!3m2!1sen!2sde!4v1721904300615!5m2!1sen!2sde` },
     
         // Sad - City
-        { emotion: 'sad', category: 'city', name: 'Cotswolds, South West, England', province: 'south west', country: 'england', city: 'Cotswolds', img: 'https://media.istockphoto.com/id/177096616/de/foto/traditionelle-cotswold-village-england.jpg?s=612x612&w=0&k=20&c=y_HUgnmnUGl1Py9OP5nRIrj_5QG_p0Hs4RHvoqF5Kgw=', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d723313.0591680884!2d-2.5728243808227824!3d51.72467753057116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48713cffa23f0605%3A0x168c89ba4309ff2a!2sCotswolds%2C%20UK!5e1!3m2!1sen!2sde!4v1721904365059!5m2!1sen!2sde` },
+        { emotion: 'sad', category: 'city', name: 'Cotswolds, South West, England', province: 'south west', country: 'england', city: 'Cheltenham', img: 'https://media.istockphoto.com/id/177096616/de/foto/traditionelle-cotswold-village-england.jpg?s=612x612&w=0&k=20&c=y_HUgnmnUGl1Py9OP5nRIrj_5QG_p0Hs4RHvoqF5Kgw=', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d723313.0591680884!2d-2.5728243808227824!3d51.72467753057116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48713cffa23f0605%3A0x168c89ba4309ff2a!2sCotswolds%2C%20UK!5e1!3m2!1sen!2sde!4v1721904365059!5m2!1sen!2sde` },
         { emotion: 'sad', category: 'city', name: 'Tuscany, Italy', province: 'tuscany', country: 'italy', city: 'Tuscany', img: 'https://cdn.contexttravel.com/image/upload/w_1500,q_60/v1637596147/blog/Tuscany%20Itinerary:%206%20Fully%20Planned%20Days%20with%20Context/tuscany_itinerary_hero.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1698289.7195598746!2d9.709990072725386!3d43.34761477818472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d42b531080347b%3A0xbac6c3ba5b2059ab!2sTuscany%2C%20Italy!5e1!3m2!1sen!2sde!4v1721904430824!5m2!1sen!2sde` },
         { emotion: 'sad', category: 'city', name: 'Mendocino, California, USA', province: 'california', country: 'usa', city: 'Mendocino', img: 'https://media.audleytravel.com/-/media/images/home/canada-and-the-usa/usa/places/istock_70194807_usa_mendocino_california_1028664_letterbox.jpg?q=79&w=1920&h=685', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28232.950584839185!2d-123.84673460357658!3d39.31151068484219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8081b26b3c56eb33%3A0xd60f97f241c0b33b!2sMendocino%2C%20CA%2C%20USA!5e1!3m2!1sen!2sde!4v1721904496973!5m2!1sen!2sde` },
     
@@ -105,7 +113,7 @@ try {
         { emotion: 'sad', category: 'beach', name: 'Maldives', province: 'maldives', country: 'maldives', city: 'Maldives', img: 'https://media-cdn.tripadvisor.com/media/photo-s/28/b5/c1/a7/water-villa-aerial.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4663873.631244438!2d70.59871165089955!3d3.108797620590664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x24b599bfaafb7bbd%3A0x414509e181956289!2sMaldives!5e1!3m2!1sen!2sde!4v1721904057525!5m2!1sen!2sde` },
     
         // Sad - Nature
-        { emotion: 'sad', category: 'nature', name: 'Banff National Park, Alberta, Canada', province: 'alberta', country: 'canada', city: 'Banff National Park', img: 'https://i.natgeofe.com/n/b8ab1b48-40cc-4c24-8584-2c9af818b19b/02-banff-national-park-canada_3x2.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182374.45070948018!2d-115.913959415756!3d51.3370734332838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5377662b8c929195%3A0xc09de268accad7e6!2sBanff%20National%20Park!5e1!3m2!1sen!2sde!4v1721904854594!5m2!1sen!2sde` },
+        { emotion: 'sad', category: 'nature', name: 'Banff National Park, Alberta, Canada', province: 'alberta', country: 'canada', city: 'Banff', img: 'https://i.natgeofe.com/n/b8ab1b48-40cc-4c24-8584-2c9af818b19b/02-banff-national-park-canada_3x2.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182374.45070948018!2d-115.913959415756!3d51.3370734332838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5377662b8c929195%3A0xc09de268accad7e6!2sBanff%20National%20Park!5e1!3m2!1sen!2sde!4v1721904854594!5m2!1sen!2sde` },
         { emotion: 'sad', category: 'nature', name: 'Iceland', province: 'iceland', country: 'iceland', city: 'Iceland', img: 'https://lp-cms-production.imgix.net/2020-11/500pxRF_66022803.jpg?w=1920&auto=format&q=75', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981719.893998854!2d-24.517430536384758!3d64.77081506088771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d22b52a3eb6043%3A0x6f8a0434e5c1459a!2sIceland!5e1!3m2!1sen!2sde!4v1721904903930!5m2!1sen!2sde` },
         { emotion: 'sad', category: 'nature', name: 'Lake District, North West, England', province: 'north west', country: 'england', city: 'Lake District', img: 'https://media.timeout.com/images/106068187/750/422/image.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d169829.44705948193!2d-3.147113516750283!3d54.425313547173104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487c9526cec17a19%3A0xad3b72a75b00fe8e!2sLake%20District!5e1!3m2!1sen!2sde!4v1721905031177!5m2!1sen!2sde` },
     
@@ -121,7 +129,7 @@ try {
     
         // Angry - Nature
         { emotion: 'angry', category: 'nature', name: 'Iceland (Hot Springs)', province: 'iceland', country: 'iceland', city: 'Iceland', img: 'https://e498rczdjg6.exactdn.com/wp-content/uploads/2020/04/Optimized-Laugavallalaug.jpeg?strip=all&lossy=1&ssl=1', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981719.893998854!2d-24.517430536384758!3d64.77081506088771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d22b52a3eb6043%3A0x6f8a0434e5c1459a!2sIceland!5e1!3m2!1sen!2sde!4v1721905369785!5m2!1sen!2sde` },
-        { emotion: 'angry', category: 'nature', name: 'Himalayas, Annapurna Region, Nepal (Trekking)', province: 'annapurna region', country: 'nepal', city: 'Annapurna Region', img: 'https://www.geodiscoverytours.com/wp-content/uploads/2021/09/Annapurna-Region-in-Nepal-1.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27000234.29841758!2d-39.18202284490047!3d43.73137499741718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a11d72767d77e7%3A0xfa42a61add96a781!2sAnnapurna%20Umrundung%20Trekking!5e1!3m2!1sen!2sde!4v1721905556535!5m2!1sen!2sde` },
+        { emotion: 'angry', category: 'nature', name: 'Himalayas, Annapurna Region, Nepal (Trekking)', province: 'annapurna region', country: 'nepal', city: 'Ghandruk', img: 'https://www.geodiscoverytours.com/wp-content/uploads/2021/09/Annapurna-Region-in-Nepal-1.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27000234.29841758!2d-39.18202284490047!3d43.73137499741718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a11d72767d77e7%3A0xfa42a61add96a781!2sAnnapurna%20Umrundung%20Trekking!5e1!3m2!1sen!2sde!4v1721905556535!5m2!1sen!2sde` },
         { emotion: 'angry', category: 'nature', name: 'Patagonia, Santa Cruz, Argentina', province: 'santa cruz', country: 'argentina', city: 'Patagonia', img: 'https://www.exoticca.com/uk/magazine/wp-content/uploads/2021/06/perito-moreno-BLOG-patagonia.png', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6119319.558036606!2d-74.91419195031524!3d-49.07515025014954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb6fbfdc37f535f%3A0xe4b90d77fdc8237c!2sSanta%20Cruz%20Province%2C%20Argentina!5e1!3m2!1sen!2sde!4v1721905621465!5m2!1sen!2sde` },
     
         // Anxious - City
@@ -132,12 +140,12 @@ try {
         // Anxious - Beach
         { emotion: 'anxious', category: 'beach', name: 'Bali, Indonesia', province: 'bali', country: 'indonesia', city: 'Bali', img: 'https://media.cntraveler.com/photos/6400e9ec3b1e3f0df75c5c44/16:9/w_2580,c_limit/Green%20Bowl%20Beach,%20Bali,%20Indonesia_2AGYRXP.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577497.4985726783!2d114.7419238135445!3d-8.455333472062913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd141d3e8100fa1%3A0x24910fb14b24e690!2sBali%2C%20Indonesia!5e1!3m2!1sen!2sde!4v1721905850502!5m2!1sen!2sde` },
         { emotion: 'anxious', category: 'beach', name: 'Cancun, Quintana Roo, Mexico', province: 'quintana roo', country: 'mexico', city: 'Cancun', img: 'https://images.odigoo.com/cb6a1e9c-21c6-4165-9ba7-db9263d832a1/images/posts/everything-about-beaches-in-cancun/webp/meta-everything-about-beaches-in-cancun-ghss.webp', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d136155.07891364346!2d-86.9388049634462!3d21.121378332736622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4c2b05aef653db%3A0xce32b73c625fcd8a!2sCanc%C3%BAn%2C%20Quintana%20Roo%2C%20Mexico!5e1!3m2!1sen!2sde!4v1721905895607!5m2!1sen!2sde` },
-        { emotion: 'anxious', category: 'beach', name: 'Amalfi Coast, Campania, Italy', province: 'campania', country: 'italy', city: 'Amalfi Coast', img: 'https://www.celebritycruises.com/blog/content/uploads/2022/08/amalfi-coast-beaches-minori-beach-minori--1024x652.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1730.7577783850763!2d14.601491588950928!3d40.63339964285143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b95adc34c71a1%3A0x4ce8cf14c94f4cdc!2sAmalfi%20Coast!5e1!3m2!1sen!2sde!4v1721905943161!5m2!1sen!2sde` },
+        { emotion: 'anxious', category: 'beach', name: 'Amalfi Coast, Campania, Italy', province: 'campania', country: 'italy', city: 'Atrani', img: 'https://www.celebritycruises.com/blog/content/uploads/2022/08/amalfi-coast-beaches-minori-beach-minori--1024x652.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1730.7577783850763!2d14.601491588950928!3d40.63339964285143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b95adc34c71a1%3A0x4ce8cf14c94f4cdc!2sAmalfi%20Coast!5e1!3m2!1sen!2sde!4v1721905943161!5m2!1sen!2sde` },
     
         // Anxious - Nature
         { emotion: 'anxious', category: 'nature', name: 'Sedona, Arizona, USA', province: 'arizona', country: 'usa', city: 'Sedona', img: 'https://www.pinkadventuretours.com/Media/2872/scenic-sedona-sunset-600x400.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59888.26765879208!2d-111.83633797997118!3d34.854371453310684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872da132f942b00d%3A0x5548c523fa6c8efd!2sSedona%2C%20AZ%2086336%2C%20USA!5e1!3m2!1sen!2sde!4v1721906011655!5m2!1sen!2sde` },
-        { emotion: 'anxious', category: 'nature', name: 'Big Sur, California, USA', province: 'california', country: 'usa', city: 'Big Sur', img: 'https://images.squarespace-cdn.com/content/v1/526f5bfce4b0c67dab63847d/54013157-bc1c-40b5-80f6-529b5fde5652/Scott-Davenport-US-California-Big-Sur-Area-2022-04-13-0279-Staircase+And+Bridge+On+Pfeiffer+Falls+Trail.jpg?format=1500w', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235172.92646373695!2d-121.98298666826616!3d36.331494819652235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808de8a7780e4d77%3A0x37e8d859caefac61!2sBig%20Sur%2C%20CA%2C%20USA!5e1!3m2!1sen!2sde!4v1721906048845!5m2!1sen!2sde` },
-        { emotion: 'anxious', category: 'nature', name: 'Swiss Alps, Canton of Bern, Switzerland', province: 'canton of bern', country: 'switzerland', city: 'Swiss Alps', img: 'https://w0.peakpx.com/wallpaper/25/579/HD-wallpaper-swiss-alps-river-switzerland-alps-hill.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12545.212324826996!2d8.550778375550777!3d46.56010508780602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478576eb2f97f733%3A0x41140a31bc0c273!2sSwiss%20Alps!5e1!3m2!1sen!2sde!4v1721906099404!5m2!1sen!2sde` },
+        { emotion: 'anxious', category: 'nature', name: 'Big Sur, California, USA', province: 'california', country: 'usa', city: 'Carmel-by-the-Sea', img: 'https://images.squarespace-cdn.com/content/v1/526f5bfce4b0c67dab63847d/54013157-bc1c-40b5-80f6-529b5fde5652/Scott-Davenport-US-California-Big-Sur-Area-2022-04-13-0279-Staircase+And+Bridge+On+Pfeiffer+Falls+Trail.jpg?format=1500w', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235172.92646373695!2d-121.98298666826616!3d36.331494819652235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808de8a7780e4d77%3A0x37e8d859caefac61!2sBig%20Sur%2C%20CA%2C%20USA!5e1!3m2!1sen!2sde!4v1721906048845!5m2!1sen!2sde` },
+        { emotion: 'anxious', category: 'nature', name: 'Swiss Alps, Canton of Bern, Switzerland', province: 'canton of bern', country: 'switzerland', city: 'Blatten', img: 'https://w0.peakpx.com/wallpaper/25/579/HD-wallpaper-swiss-alps-river-switzerland-alps-hill.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12545.212324826996!2d8.550778375550777!3d46.56010508780602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478576eb2f97f733%3A0x41140a31bc0c273!2sSwiss%20Alps!5e1!3m2!1sen!2sde!4v1721906099404!5m2!1sen!2sde` },
     
         // Bored - City
         { emotion: 'bored', category: 'city', name: 'New York, USA', province: 'new york', country: 'usa', city: 'New York City', img: 'https://i.natgeofe.com/k/5b396b5e-59e7-43a6-9448-708125549aa1/new-york-statue-of-liberty.jpg', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d442651.54495919513!2d-74.30931762486182!3d40.69701931501766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e1!3m2!1sen!2sde!4v1721906141614!5m2!1sen!2sde` },
@@ -151,8 +159,8 @@ try {
     
         // Bored - Nature
         { emotion: 'bored', category: 'nature', name: 'Grand Canyon, Arizona, USA', province: 'arizona', country: 'usa', city: 'Grand Canyon', img: 'https://npf-prod.imgix.net/uploads/shutterstock_97706066_1.jpg?auto=compress%2Cformat&crop=focalpoint&fit=crop&fp-x=0.5&fp-y=0.5&h=900&q=80&w=1600', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59008.07125094925!2d-112.19328561801191!3d36.045833852530976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8733174f95ffe325%3A0xb8ccc2749a229ea1!2sGrand%20Canyon%20Village%2C%20AZ%2086023%2C%20USA!5e1!3m2!1sen!2sde!4v1721906405959!5m2!1sen!2sde` },
-        { emotion: 'bored', category: 'nature', name: 'Yellowstone National Park, Wyoming, USA', province: 'wyoming', country: 'usa', city: 'Yellowstone National Park', img: 'https://www.visittheusa.de/sites/default/files/styles/hero_l/public/images/hero_media_image/2016-10/Yellowstone.jpg?h=2a29b199&itok=OpHn5jav', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d831653.8145259059!2d-111.17340753696816!3d44.58389838313212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5351e55555555555%3A0xaca8f930348fe1bb!2sYellowstone%20National%20Park!5e1!3m2!1sen!2sde!4v1721906450944!5m2!1sen!2sde` },
-        { emotion: 'bored', category: 'nature', name: 'Yosemite National Park, California, USA', province: 'california', country: 'usa', city: 'Yosemite National Park', img: 'https://i.natgeofe.com/n/f14f6c30-8d11-4e33-a5e9-05f1b50bdde3/yosemite-national-park-california_16x9.jpg?w=1200', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13419340.523909409!2d-121.07870731703866!3d44.08856490410992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sYosemite%20National%20Park!5e1!3m2!1sen!2sde!4v1721906539773!5m2!1sen!2sde` }
+        { emotion: 'bored', category: 'nature', name: 'Yellowstone National Park, Wyoming, USA', province: 'wyoming', country: 'usa', city: 'Gardiner', img: 'https://www.visittheusa.de/sites/default/files/styles/hero_l/public/images/hero_media_image/2016-10/Yellowstone.jpg?h=2a29b199&itok=OpHn5jav', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d831653.8145259059!2d-111.17340753696816!3d44.58389838313212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5351e55555555555%3A0xaca8f930348fe1bb!2sYellowstone%20National%20Park!5e1!3m2!1sen!2sde!4v1721906450944!5m2!1sen!2sde` },
+        { emotion: 'bored', category: 'nature', name: 'Yosemite National Park, California, USA', province: 'california', country: 'usa', city: 'Yosemite', img: 'https://i.natgeofe.com/n/f14f6c30-8d11-4e33-a5e9-05f1b50bdde3/yosemite-national-park-california_16x9.jpg?w=1200', location: `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13419340.523909409!2d-121.07870731703866!3d44.08856490410992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8096f09df58aecc5%3A0x2d249c2ced8003fe!2sYosemite%20National%20Park!5e1!3m2!1sen!2sde!4v1721906539773!5m2!1sen!2sde` }
     ];
     
     
@@ -230,6 +238,27 @@ try {
         },
         {
             emotion: "anxious",
+            emoji: "😟",
+            categories: [
+                 {
+                    name: "city",
+                    img: "https://wallpapercave.com/wp/wp3594884.jpg",
+                    destinations: filterDestination(destinations, "anxious", "city"),
+                },
+                {
+                    name: "beach", 
+                    img: "https://th.bing.com/th/id/R.4e8d81070377c62b6f70f19f5dbd29dc?rik=NSSVLX43YmM7dA&riu=http%3a%2f%2fwww.hdwallpaper.nu%2fwp-content%2fuploads%2f2015%2f07%2f4e8d81070377c62b6f70f19f5dbd29dc.jpg&ehk=zPd2CAORkHzF7J%2bglwU5cPkVXjoWrX4tVVKWPaE0z0c%3d&risl=1&pid=ImgRaw&r=0",
+                    destinations: filterDestination(destinations, "anxious", "beach"),
+                },
+                {
+                    name: "nature",
+                    img: "https://th.bing.com/th/id/OIP.xHAa7hfT7gXHVAVusTytogHaD-?rs=1&pid=ImgDetMain",
+                    destinations: filterDestination(destinations, "anxious", "nature"),
+                },
+            ]
+        },
+        {
+            emotion: "bored",
             emoji: "😟",
             categories: [
                  {
