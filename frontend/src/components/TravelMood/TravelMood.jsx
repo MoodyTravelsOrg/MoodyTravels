@@ -61,12 +61,15 @@ const TravelMood = () => {
 
   useEffect(() => {
     handleGetRecommendations();
+    window.scrollTo(0, 0);
   }, []);
+
 
   // Scroll to the top of the page when the component is mounted
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-start gap-6 mt-32 mb-60 px-4 sm:px-8 lg:px-16 w-full">

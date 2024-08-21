@@ -57,7 +57,12 @@ function TravelDestinations() {
       <div className="flex justify-center">
         <button 
           className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
-          onClick={handleBackClick}
+          onClick={()=>{handleBackClick(); 
+            
+            window.scrollTo({
+            top: 1500,
+            behavior: 'smooth'
+          });}}
         >
           Go Back
         </button>

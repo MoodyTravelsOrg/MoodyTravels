@@ -37,7 +37,7 @@ import { useContext } from 'react';
 import { Context } from '../context/Context.jsx';
 
 function TravelCategories() {
-  const { selectedEmotion, selectedCategory, setSelectedCategory, handleCategoryClick } = useContext(Context);
+  const { selectedEmotion, setSelectedEmotion, selectedCategory, setSelectedCategory, handleCategoryClick, setShowCategories, setShowDestinations } = useContext(Context);
 
   return (
     <div className="flex flex-col items-center py-6 sm:py-8 px-4 sm:px-8">
@@ -56,12 +56,33 @@ function TravelCategories() {
           ))}
         </div>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <button 
-            onClick={handleCategoryClick}
+          <button
+            onClick={()=>{handleCategoryClick(); window.scrollTo({
+              top: 900,
+              behavior: 'smooth'
+            });}}
             className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
           >
             Get travel recommendations
           </button>
+
+          <button
+            onClick={() => {setShowCategories(false); setSelectedEmotion({
+              emotion: "",
+              emoji: "",
+              categories: []
+            });
+          
+            window.scrollTo({
+              top: 900,
+              behavior: 'smooth'
+            });
+          }}
+            className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
+          >
+            Cancel
+          </button>
+
         </div>
       </div>
     </div>

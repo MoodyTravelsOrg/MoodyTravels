@@ -199,7 +199,12 @@ function ContextProvider({ children }) {
         const userData = await response.json();
         setUserId(userData.id);
         setIsLoggedIn(true);
+        resetInputs();
         navigate("/"); // This will redirect the user to the home page after successful login
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       } else {
         const errorData = await response.json();
         throw new Error(errorData.error.message);
@@ -241,6 +246,11 @@ function ContextProvider({ children }) {
         }
         await getUserData();
         setSelectedMood(null);
+        setSelectedEmotion({
+          emotion: "",
+          emoji: "",
+          categories: []
+        })
         setEdit(false);
       } catch (err) {
         setSelectedMood(null);

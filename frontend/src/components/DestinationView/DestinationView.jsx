@@ -193,6 +193,10 @@ const DestinationDetail = () => {
     fetchWeather();
   }, [destination]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const links = [
     {
       text: "Flights",
