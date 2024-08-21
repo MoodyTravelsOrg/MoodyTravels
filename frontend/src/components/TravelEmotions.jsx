@@ -40,7 +40,7 @@
 //                 handleMoodSelect(item.emotion);
 //               }}
 //             >
-              
+
 //               {item.emotion}
 //               <span className="text-3xl">{emojiArray[index]}</span> 
 //             </button>
@@ -57,7 +57,7 @@
 
 //           </div>
 //         </>
-        
+
 //       ) : (
 //         <div className="flex gap-2.5">
 //           {recommendations.map((item) => (
@@ -138,7 +138,13 @@ function TravelEmotions() {
               <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300" onClick={handleLogMood}>
                 Log today's mood
               </button>
-              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300" onClick={() => handleEmotionClick(selectedEmotion)}>
+              <button className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300" onClick={() => {
+                handleEmotionClick(selectedEmotion); 
+                window.scrollTo({
+                  top: 1500,
+                  behavior: 'smooth'
+                });
+              }}>
                 Want to travel with us?
               </button>
             </div>
@@ -149,7 +155,11 @@ function TravelEmotions() {
               <button
                 key={item.emotion}
                 className={`p-3 sm:p-4 rounded-lg border-none bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-2 sm:gap-3 items-center ${emotionHoverColors[item.emotion]} ${selectedEmotion === item ? "scale-105 bg-white/50" : ""}`}
-                onClick={() => handleEmotionClick(item)}
+                onClick={() => {handleEmotionClick(item); 
+                  window.scrollTo({
+                  top: 1300,
+                  behavior: 'smooth'
+                });}}
               >
                 {emojiArray[item.emotion]}
                 <span className="text-base sm:text-lg">{item.emotion}</span>

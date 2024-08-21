@@ -80,11 +80,15 @@
 // ! Since I had to change quite a bit of the code, I commented out the old code snippets above and left them there in case we need them later on.
 
 import React from "react";
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from "../../context/Context.jsx";
 
 const Contact = () => {
   const { formData, isSubmitted, errors, handleChangeContact, handleSubmitContact, handleSuccessForm } = useContext(Context);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex justify-center items-center min-h-screen pt-16 px-4">

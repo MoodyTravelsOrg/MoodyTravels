@@ -165,7 +165,7 @@
 
 // export default MoodTracker;
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context } from '../../context/Context.jsx';
 import { FaSmile, FaAngry, FaMeh, FaSadTear } from 'react-icons/fa';
 import { FaFaceGrimace } from "react-icons/fa6";
@@ -189,6 +189,9 @@ const MoodTracker = () => {
     bored: 'hover:bg-gray-400 hover:text-white',
   };
 
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+  })
   return (
     <div className="flex justify-center items-center min-h-screen pt-28 pb-16 px-4">
       <div className="w-full max-w-4xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
