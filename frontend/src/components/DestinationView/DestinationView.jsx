@@ -152,13 +152,15 @@
 
 // * New Styling:
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Context } from '../../context/Context';
 
 const API_KEY = "c0e3ea64536e6ead8828cb8b24b5204f"; // OpenWeatherMap API key
 
 const DestinationDetail = () => {
+  const { handleBackClick } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
   const { destination } = location.state;
@@ -193,8 +195,18 @@ const DestinationDetail = () => {
     fetchWeather();
   }, [destination]);
 
+  // Store scroll position when component is mounted
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollY = window.scrollY;
+    return () => {
+      window.history.replaceState({ scrollY }, '');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.history.state?.scrollY !== undefined) {
+      window.scrollTo(0, window.history.state.scrollY);
+    }
   }, []);
 
   const links = [
@@ -226,37 +238,29 @@ const DestinationDetail = () => {
   ];
 
   return (
-    <div className="flex justify-center items-center py-16 px-4 mt-20 mb-20">
-      <div className="w-full max-w-7xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden p-8">
+    <div className="flex flex-col items-center py-8 px-4 mt-28 mb-10">
+      <div className="w-full max-w-5xl bg-darkGreenForBG rounded-lg shadow-xl p-6">
         <h1 className="text-4xl font-bold text-white text-center mb-8">
           {destination.name}
         </h1>
-        <div className="flex flex-col items-center bg-white/10 rounded-lg backdrop-blur-md shadow-lg p-5">
-          <div className="w-full flex flex-col lg:flex-row mb-8">
-            <div className="lg:w-1/2 relative mb-5 lg:mb-0">
-              <img
-                src={destination.img}
-                alt={destination.name}
-                className="w-full h-64 lg:h-120 object-cover rounded-lg"
-              />
-             {/*  <h1 className="absolute bottom-4 left-4 text-4xl text-white bg-black bg-opacity-50 px-2 py-1 rounded">
-                {destination.name}
-              </h1> */}
-            </div>
-            <div className="lg:w-1/2 flex flex-col pl-5">
-              <iframe
-                src={destination.location}
-                className="w-full h-64 rounded-lg mb-5"
-                title={`${destination.name} location`}
-              ></iframe>
+        <div className="flex flex-col lg:flex-row">
+          <div className="lg:w-3/4 flex flex-col">
+            <img
+              src={destination.img}
+              alt={destination.name}
+              className="w-full h-full object-cover rounded-lg mb-6 lg:mb-0 lg:max-h-[50vh]"
+            />
+            <div className="flex flex-col lg:flex-row gap-4 mt-4 w-full">
               {weather && (
-                <div className="w-full">
-                  <h2 className="text-2xl text-white text-center mb-5">Weather</h2>
-                  <div className="flex flex-row flex-wrap justify-center gap-4">
+                <div className="lg:w-1/2 bg-darkGreenForBG border-2 border-yellowishGreenForTextandButtons p-4 rounded-lg shadow-sm">
+                  <h2 className="text-2xl text-white text-center mb-5">
+                    Weather
+                  </h2>
+                  <div className="grid grid-cols-1 gap-4">
                     {weather.map((day, index) => (
                       <div
                         key={index}
-                        className="text-center text-white p-3 bg-darkGreenForBG border-2 border-yellowishGreenForTextandButtons rounded-lg shadow-sm w-full sm:w-1/2"
+                        className="text-center text-white p-3 bg-darkGreenForBG rounded-lg"
                       >
                         <p className="font-semibold">
                           {new Date(day.dt_txt).toLocaleDateString()}
@@ -276,33 +280,39 @@ const DestinationDetail = () => {
                   </div>
                 </div>
               )}
+              <iframe
+                src={destination.location}
+                className="lg:w-1/2 h-64 rounded-lg border-yellowishGreenForTextandButtons border-2"
+                title={`${destination.name} location`}
+              ></iframe>
             </div>
           </div>
-          <div className="mt-5 text-center text-white">
-            <p className="text-white text-lg font-semibold mb-8 mt-4 bg-darkGreenForBG border-2 border-yellowishGreenForTextandButtons rounded-lg">
-              Here are some details about {destination.name}.
-            </p>
-            <div className="flex flex-row flex-wrap justify-center gap-4 mt-2">
+          <div className="lg:w-1/3 lg:pl-6">
+            <div className="flex flex-col gap-4 mb-6">
               {links.map((link, index) => (
                 <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white no-underline transition transform hover:scale-105"
+                  className="text-white no-underline transition transform hover:scale-105 hover:bg-yellowishGreenForTextandButtons hover:text-darkGreenForText flex items-center gap-4 p-2 bg-white/30 rounded-lg "
                   key={index}
                 >
                   <img
                     src={link.img}
                     alt={link.text}
-                    className="w-40 h-24 object-cover rounded-lg mb-1"
+                    className="w-16 h-16 object-cover rounded-lg"
                   />
                   <p className="text-lg">{link.text}</p>
                 </a>
               ))}
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(-1, { state: { scrollY: window.scrollY } });
+            }}
             className="text-darkGreenForText font-semibold bg-yellowishGreenForTextandButtons hover:bg-white rounded-full px-8 py-3 transition duration-300 mt-8"
           >
             Go Back
@@ -314,3 +324,6 @@ const DestinationDetail = () => {
 };
 
 export default DestinationDetail;
+
+
+

@@ -33,8 +33,10 @@
 
 // * New Styling:
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../context/Context.jsx';
+
+
 
 function TravelDestinations() {
   const { selectedCategory, handleDestinationClick, handleBackClick } = useContext(Context);
@@ -45,12 +47,12 @@ function TravelDestinations() {
         {selectedCategory.destinations.map(destination => (
           <div 
             key={destination.name} 
-            className="flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5  border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 hover:border w-full sm:w-64"
+            className="flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5  border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105  w-full sm:w-64"
             onClick={() => handleDestinationClick(destination)}
           >
             <img src={destination.img} alt={destination.name} className="w-full h-36 sm:h-40 object-cover rounded-lg mb-2.5 sm:mb-3" />
             <p className="text-white text-base sm:text-lg font-semibold mb-2">{destination.name}</p>
-            <strong className="text-yellowishGreenForTextandButtons mt-3 sm:mt-5">Unlock Travel Deals</strong>
+            <strong className="text-yellowishGreenForTextandButtons">Unlock Travel Deals</strong>
           </div>
         ))}
       </div>

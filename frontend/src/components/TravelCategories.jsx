@@ -36,6 +36,11 @@
 import { useContext } from 'react';
 import { Context } from '../context/Context.jsx';
 
+window.scrollTo({
+  top: 10,
+  behavior: 'smooth'
+});
+
 function TravelCategories() {
   const { selectedEmotion, setSelectedEmotion, selectedCategory, setSelectedCategory, handleCategoryClick, setShowCategories, setShowDestinations } = useContext(Context);
 
@@ -58,7 +63,7 @@ function TravelCategories() {
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
             onClick={()=>{handleCategoryClick(); window.scrollTo({
-              top: 900,
+              top: 10,
               behavior: 'smooth'
             });}}
             className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
@@ -74,7 +79,7 @@ function TravelCategories() {
             });
           
             window.scrollTo({
-              top: 900,
+              top: 20,
               behavior: 'smooth'
             });
           }}
