@@ -198,7 +198,7 @@ const MoodTracker = () => {
         <div className="p-8 sm:p-12">
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 sm:mb-8 text-center">Mood Log</h2>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-            {['happy', 'sad', 'angry', 'anxious'].map((mood, index) => (
+            {['happy', 'sad', 'angry', 'anxious', 'bored'].map((mood, index) => (
               <button
                 key={index}
                 className={`p-3 sm:p-4 rounded-lg bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-2 sm:gap-3 items-center ${moodHoverColors[mood]} ${selectedMood === mood ? 'scale-105 bg-white/50' : ''}`}
