@@ -22,11 +22,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-sm sm:max-w-md lg:max-w-4xl flex flex-col lg:flex-row">
-        {/* Left Section */}
-        <div className="w-full lg:w-1/2 p-6 lg:p-8">
-          <h2 className="text-xl sm:text-2xl text-white font-bold mb-6 lg:mb-12 text-center lg:text-left">
+    <div className="min-h-screen flex items-center justify-center p-4 mt-20">
+      <div className="bg-darkGreenForBG shadow-lg rounded-lg overflow-hidden w-full max-w-sm sm:max-w-md lg:max-w-lg flex flex-col">
+        {/* Sección del formulario */}
+        <div className="w-full p-6 lg:p-8">
+          <h2 className="text-xl sm:text-2xl text-white font-bold mb-6 lg:mb-12 text-center">
             Login
           </h2>
           <form onSubmit={handleLogin}>
@@ -115,6 +115,7 @@ const Login = () => {
 };
 
 export default Login;
+
 
 
 
