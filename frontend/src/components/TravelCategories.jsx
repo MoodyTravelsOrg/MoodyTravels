@@ -63,7 +63,7 @@ function TravelCategories() {
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
             onClick={()=>{handleCategoryClick(); window.scrollTo({
-              top: 10,
+              top: 1000,
               behavior: 'smooth'
             });}}
             className="bg-yellowishGreenForTextandButtons text-darkGreenForText font-semibold rounded-full px-6 sm:px-8 py-2.5 sm:py-3 hover:bg-white transition duration-300"
