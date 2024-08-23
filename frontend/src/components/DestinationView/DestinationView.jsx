@@ -204,9 +204,10 @@ const DestinationDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (window.history.state?.scrollY !== undefined) {
-      window.scrollTo(0, window.history.state.scrollY);
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }, []);
 
   const links = [

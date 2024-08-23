@@ -176,6 +176,10 @@ function ContextProvider({ children }) {
     clearCookies()
     resetInputs();
     navigate('/');
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    })
   };
 
   // The handleLogin function is created to handle the login process. The fetch request is made to the login endpoint with the username and password in the body. If the response is ok, the user data is stored in the state. If the response is not ok, an error message is thrown.

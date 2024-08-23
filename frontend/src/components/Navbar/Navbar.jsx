@@ -61,6 +61,7 @@ const Navbar = () => {
     error,
     success,
     closeModal,
+    resetInputs
   } = useContext(Context);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -153,7 +154,7 @@ const Navbar = () => {
         isVisible ? "transform translate-y-0" : "transform -translate-y-full"
       }`}
     >
-      <Link to="/" onClick={closeAllMenus}>
+      <Link to="/" onClick={()=> {closeAllMenus(); resetInputs()}}>
         <img
           src="/images/logo.png"
           alt="MoodVentures Logo"
