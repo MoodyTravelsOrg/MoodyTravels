@@ -105,11 +105,11 @@ function TravelEmotions() {
   };
 
   const emotionHoverStyles = {
-    happy: "hover:bg-yellow-400 hover:text-white",
-    sad: "hover:bg-blue-400 hover:text-white",
-    angry: "hover:bg-red-400 hover:text-white",
-    anxious: "hover:bg-green-400 hover:text-white",
-    bored: "hover:bg-gray-400 hover:text-white",
+    happy: "hover:bg-yellow-400 hover:*:text-white",
+    sad: "hover:bg-blue-400 hover:*:text-white",
+    angry: "hover:bg-red-400 hover:*:text-white",
+    anxious: "hover:bg-green-400 hover:*:text-white",
+    bored: "hover:bg-gray-400 hover:*:text-white",
   };
 
   return (
@@ -123,18 +123,19 @@ function TravelEmotions() {
             <button
               key={index}
               className={`flex flex-col items-center p-3 rounded-lg bg-white/20 text-white transition-all duration-300 ${
-                selectedEmotion === item ? "scale-105 bg-opacity-75" : "hover:scale-105"
+                selectedEmotion === item ? "scale-105 bg-white/50" : "hover:scale-105 "
               } ${emotionHoverStyles[item.emotion]}`}
               onClick={() => {
                 setSelectedEmotion(item);
                 handleMoodSelect(item.emotion);
               }}
             >
-              <span className={`transition-colors ${selectedEmotion === item ? "text-white" : ""}`}>
+              {/* <span className={`transition-colors ${selectedEmotion === item ? "*:text-white" : ""}`}>
                 {React.cloneElement(emojiArray[item.emotion], {
                   className: `${emojiArray[item.emotion].props.className} ${selectedEmotion === item ? "text-white" : ""}`,
                 })}
-              </span>
+              </span> */}
+              {emojiArray[item.emotion]}
               <span className="mt-2 text-sm sm:text-base lg:text-lg transition-colors">
                 {item.emotion}
               </span>

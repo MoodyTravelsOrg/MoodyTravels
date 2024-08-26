@@ -174,19 +174,19 @@ const MoodTracker = () => {
   const { selectedMood, edit, setEdit, handleLogMood, handleDeleteMood, handleMoodSelect, handleReplaceMood, loggedInUserData } = useContext(Context);
 
   const moodIcons = {
-    happy: <FaSmile className="text-3xl sm:text-4xl text-yellow-400" />,
-    sad: <FaSadTear className="text-3xl sm:text-4xl text-blue-400" />,
-    angry: <FaAngry className="text-3xl sm:text-4xl text-red-400" />,
-    anxious: <FaFaceGrimace className="text-3xl sm:text-4xl text-green-400" />,
-    bored: <FaMeh className="text-3xl sm:text-4xl text-gray-400" />,
+    happy: <FaSmile className="text-yellow-400 text-2xl sm:text-3xl" />,
+    sad: <FaSadTear className="text-blue-400 text-2xl sm:text-3xl" />,
+    angry: <FaAngry className="text-red-400 text-2xl sm:text-3xl" />,
+    anxious: <FaFaceGrimace className="text-green-400 text-2xl sm:text-3xl" />,
+    bored: <FaMeh className="text-gray-400 text-2xl sm:text-3xl" />,
   };
 
   const moodHoverColors = {
-    happy: 'hover:bg-yellow-400 hover:text-white',
-    sad: 'hover:bg-blue-400 hover:text-white',
-    angry: 'hover:bg-red-400 hover:text-white',
-    anxious: 'hover:bg-green-400 hover:text-white',
-    bored: 'hover:bg-gray-400 hover:text-white',
+    happy: 'hover:bg-yellow-400 hover:*:text-white',
+    sad: 'hover:bg-blue-400 hover:*:text-white',
+    angry: 'hover:bg-red-400 hover:*:text-white',
+    anxious: 'hover:bg-green-400 hover:*:text-white',
+    bored: 'hover:bg-gray-400 hover:*:text-white',
   };
 
   useEffect(()=>{
@@ -197,15 +197,19 @@ const MoodTracker = () => {
       <div className="w-full max-w-4xl bg-darkGreenForBG rounded-lg shadow-xl overflow-hidden">
         <div className="p-8 sm:p-12">
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 sm:mb-8 text-center">Mood Log</h2>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
             {['happy', 'sad', 'angry', 'anxious', 'bored'].map((mood, index) => (
               <button
                 key={index}
-                className={`p-3 sm:p-4 rounded-lg bg-white/30 text-white cursor-pointer transition-all duration-300 flex gap-2 sm:gap-3 items-center ${moodHoverColors[mood]} ${selectedMood === mood ? 'scale-105 bg-white/50' : ''}`}
+                className={`flex flex-col items-center p-3 rounded-lg bg-white/30 text-white transition-all duration-300 ${moodHoverColors[mood]} ${selectedMood === mood ? 'scale-105 bg-white/50' : ''}`}
                 onClick={() => handleMoodSelect(mood)}
               >
-                {mood.charAt(0).toUpperCase() + mood.slice(1)}
                 {moodIcons[mood]}
+                <span className="mt-2 text-sm sm:text-base lg:text-lg transition-colors">
+                  {mood/* .charAt(0).toUpperCase() + mood.slice(1) */}
+                </span>
+                
+                
               </button>
             ))}
           </div>

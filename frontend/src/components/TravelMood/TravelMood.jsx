@@ -5,10 +5,9 @@
 // import TravelDestinations from '../TravelDestinations.jsx';
 // import MoodPreview from '../MoodPreview.jsx';
 
-
 // const TravelMood = () => {
 //   const {
-//     isLoggedIn, loggedInUserData, recommendations, selectedEmotion, showCategories, showDestinations, 
+//     isLoggedIn, loggedInUserData, recommendations, selectedEmotion, showCategories, showDestinations,
 //     handleGetRecommendations, handleEmotionClick
 //   } = useContext(Context);
 
@@ -46,17 +45,21 @@
 // export default TravelMood;
 
 // * New Styling:
-import React, { useContext, useEffect } from 'react';
-import { Context } from '../../context/Context.jsx';
-import TravelEmotions from '../TravelEmotions.jsx';
-import TravelCategories from '../TravelCategories.jsx';
-import TravelDestinations from '../TravelDestinations.jsx';
-import MoodPreview from '../MoodPreview.jsx';
+import React, { useContext, useEffect } from "react";
+import { Context } from "../../context/Context.jsx";
+import TravelEmotions from "../TravelEmotions.jsx";
+import TravelCategories from "../TravelCategories.jsx";
+import TravelDestinations from "../TravelDestinations.jsx";
+import MoodPreview from "../MoodPreview.jsx";
 
 const TravelMood = () => {
   const {
-    isLoggedIn, loggedInUserData, showCategories, showDestinations, 
-    handleGetRecommendations, 
+    isLoggedIn,
+    loggedInUserData,
+    showCategories,
+    showDestinations,
+    handleGetRecommendations,
+    navigate,
   } = useContext(Context);
 
   useEffect(() => {
@@ -64,19 +67,33 @@ const TravelMood = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
   // Scroll to the top of the page when the component is mounted
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-
   return (
     <div className="flex flex-col lg:flex-row justify-center items-start gap-6 mt-32 mb-60 px-4 sm:px-8 lg:px-16 w-full">
       <div className="flex-1 flex flex-col p-6 sm:p-8 bg-darkGreenForBG rounded-lg shadow-xl max-w-full lg:max-w-5xl mx-auto">
-        {isLoggedIn && (
-          <div className="text-lg sm:text-xl text-white text-center mt-4 sm:mt-6 mb-5 sm:mb-7 underline-offset-8">
-            Welcome <span className='text-yellowishGreenForTextandButtons font-semibold'>{loggedInUserData.username}</span>!
+        {isLoggedIn ? (
+          <div className="text-lg sm:text-xl text-white text-center mt-4 sm:mt-6 mb-2 sm:mb-2 underline-offset-8">
+            Welcome{" "}
+            <span className="text-yellowishGreenForTextandButtons font-semibold">
+              {loggedInUserData.username}
+            </span>
+            !
+          </div>
+        ) : (
+          <div className="text-lg sm:text-xl text-white text-center mt-4 sm:mt-6 mb-2 sm:mb-2 underline-offset-8">
+            <span
+              className="text-yellowishGreenForTextandButtons font-semibold cursor-pointer hover:underline"
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Create an account
+            </span>
+            {" "}to unlock extra features!
           </div>
         )}
         {!showDestinations && <TravelEmotions />}

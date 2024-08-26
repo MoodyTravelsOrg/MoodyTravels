@@ -52,7 +52,7 @@ function TravelCategories() {
           {selectedEmotion.categories.map(category => (
             <div
               key={category.name}
-              className={`flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5  border-yellowishGreenForTextandButtons transition-transform duration-300 cursor-pointer hover:scale-105 ${selectedCategory.name === category.name ? 'scale-105 bg-white/50 border' : ''}`}
+              className={`flex flex-col items-center bg-white/20 rounded-xl p-4 sm:p-5 transition-transform duration-300 cursor-pointer hover:scale-105 ${selectedCategory.name === category.name ? 'scale-105 bg-white/50' : ''}`}
               onClick={() => setSelectedCategory(category)}
             >
               <img src={category.img} alt={category.name} className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg" />

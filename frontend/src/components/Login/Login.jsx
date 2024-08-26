@@ -77,7 +77,7 @@ const Login = () => {
               <p className="text-white text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <span
-                  className="text-yellowishGreenForTextandButtons font-semibold cursor-pointer hover:underline"
+                  className="text-yellowishGreenForTextandButtons font-semibold cursor-pointer hover:underline underline-offset-8"
                   onClick={() => {
                     resetInputs();
                     navigate("/Register");

@@ -254,14 +254,14 @@ const DestinationDetail = () => {
             <div className="flex flex-col lg:flex-row gap-4 mt-4 w-full">
               {weather && (
                 <div className="lg:w-1/2 bg-darkGreenForBG border-2 border-yellowishGreenForTextandButtons p-4 rounded-lg shadow-sm">
-                  <h2 className="text-2xl text-white text-center mb-5">
+                  <h2 className="text-2xl text-white text-center font-semibold mb-5">
                     Weather
                   </h2>
                   <div className="grid grid-cols-1 gap-4">
                     {weather.map((day, index) => (
                       <div
                         key={index}
-                        className="text-center text-white p-3 bg-darkGreenForBG rounded-lg"
+                        className="text-center text-white p-3 rounded-lg"
                       >
                         <p className="font-semibold">
                           {new Date(day.dt_txt).toLocaleDateString()}
