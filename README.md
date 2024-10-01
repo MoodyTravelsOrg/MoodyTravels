@@ -1,6 +1,7 @@
 # MoodVentures
 
 Your Journey to Emotional Well-Being Begins Here
+
 MoodVentures is designed to balance your mental health with everyday life by combining mood tracking with personalized travel recommendations.
 
 Your mood shapes your travel experiences. By logging your emotions and recognizing your mood patterns, we suggest destinations that resonate with your current needs.
@@ -21,3 +22,7 @@ Track Your Journey: Continue logging your moods before, during, and after your t
 
 
 ![MoodVentures](https://github.com/user-attachments/assets/84f929ab-24b8-4f2e-aeb7-43627ab5d196)
+
+Built as a final project at DCI Digital Career Institute
+
+August 2024
